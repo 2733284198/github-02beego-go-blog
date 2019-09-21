@@ -63,3 +63,52 @@ func (c *BaseController) Prepare(){
 	c.Data["T"] = time.Now()
 }
 
+/*********************** 日志 *********************************/
+
+type LogData struct {
+	Code		int   		`json:"code"`
+	Ip		Ip       	`json:"data"`
+}
+
+type Ip struct {
+	Area              string   `json:"area"`
+	City              string   `json:"city"`
+	Region			  string   `json:"region"`
+}
+
+func (c *BaseController) Log(page string)  {
+
+	ip := c.Ctx.Input.IP()
+	/*
+	resp, err := http.Get("http://ip.taobao.com/service/getIpInfo.php?ip="+ip)
+
+	var city string
+	if err == nil{
+
+		readAll, err := ioutil.ReadAll(resp.Body)
+		if err == nil{
+			var data LogData
+			json.Unmarshal(readAll, &data)
+			city = data.Ip.City
+		}
+
+	}
+
+	defer resp.Body.Close()
+	*/
+	userAgent := c.Ctx.Input.UserAgent()
+
+	url := c.Ctx.Input.URI()
+	o := orm.NewOrm()
+	var log = admin.Log{
+		Ip:    			ip,
+		//City:     		city,
+		UserAgent:    	userAgent,
+		Page:			page,
+		Uri:			url,
+	}
+	o.Insert(&log)
+
+}
+
+
