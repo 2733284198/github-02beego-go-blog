@@ -43,6 +43,15 @@ func (c *BaseController) Layout() {
 	nqrs = nqrs.OrderBy("-Pv")
 	nqrs.Limit(5).All(&articlesReadSort,"Id","Title","Pv")
 	c.Data["ArticlesReadSort"] = articlesReadSort
+	
+	// 最新评论
+        review := new(admin.Review)
+        var reviewData []*admin.Review
+        nqrw := o.QueryTable(review)
+        nqrw = nqrw.Filter("status", 1)
+        nqrw = nqrw.OrderBy("-Id")
+        nqrw.Limit(5).All(&reviewData,"Review","ArticleId")
+        c.Data["Review"] = reviewData
 }
 
 func (c *BaseController) Menu()  {
