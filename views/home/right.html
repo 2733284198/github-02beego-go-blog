@@ -57,7 +57,20 @@
                 </ul>
             </div>
         </div>
-
-
+    </div><div id="sidebar_review" class="sidebar-block">
+        <div class="catListView">
+            <h3 class="catListTitle diyBg">最新评论</h3>
+            <div id="TopViewPostsBlock">
+                <ul style="word-break:break-all">
+                    {{range $k,$v := $.Review}}
+                        <li>
+                            <a title="{{$v.Review}}" href="/detail/{{$v.ArticleId}}.html">
+                                {{$v.Review}}
+                            </a>
+                        </li>
+                    {{end}}
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
