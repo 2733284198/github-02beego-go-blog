@@ -5,6 +5,7 @@ import (
 	"leechan.inline/controllers/admin"
 	"leechan.inline/controllers/common"
 	"leechan.inline/controllers/home"
+	"leechan.inline/controllers/wechat"
 )
 
 func init() {
@@ -64,6 +65,10 @@ func init() {
 	// 文件上传
 	beego.Router("/uploads.html", &common.UploadsController{}, "Post:Uploads")
 
+
+	// 公众号
+	beego.Router("/wechat", &wechat.MainController{},"Get:Hello;Post:Hello")
+	beego.Router("/wechat/create/menu", &wechat.MenuController{},"Get:CreateMenu;Post:CreateMenu")
 
 
 }
