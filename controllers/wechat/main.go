@@ -1,104 +1,27 @@
 package wechat
 
 import (
+	"crypto/sha1"
+	"encoding/hex"
 	"fmt"
 	"github.com/silenceper/wechat"
 	"github.com/silenceper/wechat/message"
+	"sort"
 )
 
 type MainController struct {
 	BaseController
 }
 
-func (c *MainController) Hello() {
+/**
+ * 验证 服务器
+ */
+func (c *MainController) CheckToken() {
 
-	wc := wechat.NewWechat(config)
-
-	log.Infoln(config)
-
-	// 传入request和responseWriter
-	server := wc.GetServer(c.Ctx.Request, c.Ctx.ResponseWriter)
-	//设置接收消息的处理方法
-	server.SetMessageHandler(func(msg message.MixMessage) *message.Reply {
-		log.Infoln(msg)
-		return ResponseMsgType(msg)
-
-		//text := message.Reply{}.MsgData
-		/*switch msg.MsgType {
-			//文本消息
-			case message.MsgTypeText:
-				//回复消息：演示回复用户发送的消息
-				text := message.NewText(msg.Content)
-				return &message.Reply{MsgType: message.MsgTypeText, MsgData: text}
-
-				//图片消息
-			case message.MsgTypeImage:
-				//do something
-				text := message.NewText(msg.Content)
-				return &message.Reply{MsgType: message.MsgTypeText, MsgData: text}
-
-				//语音消息
-			case message.MsgTypeVoice:
-				//do something
-				text := message.NewText(msg.Content)
-				return &message.Reply{MsgType: message.MsgTypeText, MsgData: text}
-
-				//视频消息
-			case message.MsgTypeVideo:
-				//do something
-				text := message.NewText(msg.Content)
-				return &message.Reply{MsgType: message.MsgTypeText, MsgData: text}
-
-				//小视频消息
-			case message.MsgTypeShortVideo:
-				text := message.NewText(msg.Content)
-				return &message.Reply{MsgType: message.MsgTypeText, MsgData: text}
-				//do something
-
-				//地理位置消息
-			case message.MsgTypeLocation:
-				text := message.NewText(msg.Content)
-				return &message.Reply{MsgType: message.MsgTypeText, MsgData: text}
-				//do something
-
-				//链接消息
-			case message.MsgTypeLink:
-				//do something
-				text := message.NewText(msg.Content)
-				return &message.Reply{MsgType: message.MsgTypeText, MsgData: text}
-
-				//事件推送消息
-			case message.MsgTypeEvent:
-
-				text := message.NewText(msg.Content)
-				return &message.Reply{MsgType: message.MsgTypeText, MsgData: text}
-
-			default:
-				text := message.NewText(msg.Content)
-				return &message.Reply{MsgType: message.MsgTypeText, MsgData: text}
-		}*/
-
-		//return &message.Reply{MsgType: message.MsgTypeText, MsgData: text}
-	})
-
-	//处理消息接收以及回复
-	err := server.Serve()
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	//发送回复的消息
-	server.Send()
-
-
-
-
-
-
-	/*signature := c.GetString("signature")
+	signature := c.GetString("signature")
 	timestamp := c.GetString("timestamp")
 	nonce := c.GetString("nonce")
-	token := "b8cf671eaa1a270a9b53ddb894dd9029"
+	token := "xxxxxxx"
 	echostr := c.GetString("echostr")
 
 	var tempArray  = []string{token, timestamp, nonce}
@@ -119,31 +42,26 @@ func (c *MainController) Hello() {
 			c.ServeJSON()
 			c.StopRun()
 		}
-		//fmt.Print(echostr)
 	} else {
 		c.Data["json"] = "验证失败"
 		c.ServeJSON()
 		c.StopRun()
-		//fmt.Println("验证失败")
-	}*/
+	}
+}
 
 
-	/*c.Data["json"] = echostr
-	c.ServeJSON()
-	c.StopRun()*/
-	//配置微信参数
-	/*c.EnableRender = false
+func (c *MainController) Hello() {
+
 	wc := wechat.NewWechat(config)
 
+	log.Infoln(config)
+
 	// 传入request和responseWriter
-	server := wc.GetServer(ctx.Request, ctx.ResponseWriter)
+	server := wc.GetServer(c.Ctx.Request, c.Ctx.ResponseWriter)
 	//设置接收消息的处理方法
 	server.SetMessageHandler(func(msg message.MixMessage) *message.Reply {
-
-
-		//回复消息：演示回复用户发送的消息
-		text := message.NewText(msg.Content)
-		return &message.Reply{MsgType: message.MsgTypeText, MsgData: text}
+		log.Infoln(msg)
+		return ResponseMsgType(msg)
 	})
 
 	//处理消息接收以及回复
@@ -153,5 +71,5 @@ func (c *MainController) Hello() {
 		return
 	}
 	//发送回复的消息
-	server.Send()*/
+	server.Send()
 }

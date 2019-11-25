@@ -67,7 +67,7 @@ func init() {
 
 
 	// 公众号
-	beego.Router("/wechat", &wechat.MainController{},"Get:Hello;Post:Hello")
+	beego.Router("/wechat", &wechat.MainController{},"Get:CheckToken;Post:Hello")
 	beego.Router("/wechat/create/menu", &wechat.MenuController{},"Get:CreateMenu;Post:CreateMenu")
 
 
