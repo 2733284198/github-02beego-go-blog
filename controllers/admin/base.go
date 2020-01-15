@@ -2,7 +2,7 @@ package admin
 
 import (
 	"github.com/astaxie/beego"
-	"leechan.inline/models/admin"
+	"go-blog/models/admin"
 	"time"
 )
 

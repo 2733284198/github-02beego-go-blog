@@ -3,7 +3,7 @@ package home
 import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
-	"leechan.inline/models/admin"
+	"go-blog/models/admin"
 	"time"
 )
 

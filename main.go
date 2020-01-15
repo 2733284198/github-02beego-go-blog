@@ -7,8 +7,8 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/sirupsen/logrus"
 	"html/template"
-	_ "leechan.inline/routers"
-	"leechan.inline/utils"
+	_ "go-blog/routers"
+	"go-blog/utils"
 )
 
 var TplFuncMap = make(template.FuncMap)

@@ -4,8 +4,8 @@ import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	"github.com/astaxie/beego/validation"
-	"leechan.inline/models/admin"
-	"leechan.inline/utils"
+	"go-blog/models/admin"
+	"go-blog/utils"
 	"time"
 )
 

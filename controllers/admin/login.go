@@ -2,8 +2,8 @@ package admin
 
 import (
 	"github.com/astaxie/beego"
-	"leechan.inline/models/admin"
-	"leechan.inline/utils"
+	"go-blog/models/admin"
+	"go-blog/utils"
 )
 
 type LoginController struct {

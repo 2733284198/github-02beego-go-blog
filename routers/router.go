@@ -2,10 +2,10 @@ package routers
 
 import (
 	"github.com/astaxie/beego"
-	"leechan.inline/controllers/admin"
-	"leechan.inline/controllers/common"
-	"leechan.inline/controllers/home"
-	"leechan.inline/controllers/wechat"
+	"go-blog/controllers/admin"
+	"go-blog/controllers/common"
+	"go-blog/controllers/home"
+	"go-blog/controllers/wechat"
 )
 
 func init() {

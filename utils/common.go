@@ -5,7 +5,7 @@ import (
 	"crypto/md5"
 	"encoding/hex"
 	"errors"
-	"leechan.inline/models/admin"
+	"go-blog/models/admin"
 	"reflect"
 	"strconv"
 )

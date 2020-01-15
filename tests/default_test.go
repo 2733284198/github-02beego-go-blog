@@ -1,7 +1,7 @@
 package test
 
 import (
-	_ "leechan.inline/routers"
+	_ "go-blog/routers"
 	"net/http"
 	"net/http/httptest"
 	"path/filepath"
