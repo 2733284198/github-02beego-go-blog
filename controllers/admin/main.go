@@ -10,7 +10,7 @@ import (
 type Log struct {
 	Num 	int
 	Date 	string
-	Ip 		string
+	Ip 		[]string
 }
 
 type MainController struct {
@@ -37,10 +37,23 @@ func (c *MainController) Welcome() {
 	var pvSlice []int
 	var uvSlice []int
 
+	var keys []string
+
 	for _,v := range log {
 		//utils.StringToTime(v["create"])
 		// 获取日期
 		var key = utils.StringToTime(v["create"]).Format("2006-01-02")
+
+		var flag = true
+		for _,k := range keys {
+			if k == key {
+				flag = false
+			}
+		}
+		if flag {
+			keys = append(keys,key)
+		}
+
 
 		// 统计pv
 		pvTemp := pv[key]
@@ -49,22 +62,25 @@ func (c *MainController) Welcome() {
 		}
 		// 统计uv
 		uvTemp := uv[key]
-		if uvTemp.Ip != v["ip"].(string) {
+		var uvFlag = true
+		for _,k := range uvTemp.Ip {
+			if k == v["ip"] {
+				uvFlag = false
+			}
+		}
+		if uvFlag {
 			uv[key] = Log{
-				Num:uvTemp.Num + 1,
+				Num: uvTemp.Num + 1,
+				Ip:  append(uvTemp.Ip, v["ip"].(string)),
 			}
 		}
 
 	}
 
-
-	for k,v := range pv {
+	for _,k := range keys{
 		dateSlice = append(dateSlice,k)
-		pvSlice = append(pvSlice,v.Num)
-	}
-
-	for _,v := range uv {
-		uvSlice = append(uvSlice,v.Num)
+		pvSlice = append(pvSlice,pv[k].Num)
+		uvSlice = append(uvSlice,uv[k].Num)
 	}
 
 	c.Data["Date"] = dateSlice
