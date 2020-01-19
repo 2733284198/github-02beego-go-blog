@@ -119,7 +119,7 @@
                 {
                     type : 'category',
                     boundaryGap : false,
-                    data : ['周一','周二','周三','周四','周五','周六','周日']
+                    data : {{$.Date}}
                 }
             ],
             yAxis : [
@@ -132,14 +132,14 @@
                     name:'PV',
                     type:'line',
                     areaStyle: {normal: {}},
-                    data:[120, 132, 101, 134, 90, 230, 210],
+                    data:{{$.Pv}},
                     smooth: true
                 },
                 {
                     name:'UV',
                     type:'line',
                     areaStyle: {normal: {}},
-                    data:[45, 182, 191, 234, 290, 330, 310],
+                    data:{{$.Uv}},
                     smooth: true,
 
                 }

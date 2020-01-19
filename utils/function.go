@@ -3,6 +3,7 @@ package utils
 import (
 	"strconv"
 	"strings"
+	"time"
 )
 
 func IndexForOne(i int, p, limit int64) int64 {
@@ -23,4 +24,11 @@ func IndexDecrOne(i interface{}) int64 {
 
 func StringReplace(str,old,new string) string {
 	return  strings.Replace(str,old,new,-1)
+}
+
+func StringToTime(date interface{}) time.Time{
+	timeLayout := "2006-01-02 15:04:05"
+	loc, _ := time.LoadLocation("Local")
+	ret, _ := time.ParseInLocation(timeLayout, date.(string), loc)
+	return ret
 }
