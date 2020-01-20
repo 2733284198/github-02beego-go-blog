@@ -4,12 +4,12 @@
         <div id="blog-news">
             <div id="profile_block">
                 姓名：
-                <a title="陈立（花名：猴子）" href="javascript:;">
+                <a title="{{$.name}}" href="javascript:;">
                     {{$.name}}
                 </a>
                 <br>
                 简介：
-                <a href="javascript:;" title="纯码农，擅长PHP，GO等语言">
+                <a href="javascript:;" title="{{$.remark}}">
                     {{$.remark}}
                 </a>
                 <br>
@@ -27,7 +27,7 @@
     <div id="sidebar_categories">
 
         <div id="sidebar_postarchive" class="catListPostArchive sidebar-block">
-            <h3 class="catListTitle diyBg">随笔档案</h3>
+            <h3 class="catListTitle diyBg">随笔档案({{$.DateCount}})</h3>
             <ul>
                 {{range $k,$v := $.DateTimeKey}}
                     <li>
@@ -59,7 +59,7 @@
         </div>
     </div><div id="sidebar_review" class="sidebar-block">
         <div class="catListView">
-            <h3 class="catListTitle diyBg">最新评论</h3>
+            <h3 class="catListTitle diyBg">最新评论({{$.ReviewCount}})</h3>
             <div id="TopViewPostsBlock">
                 <ul style="word-break:break-all">
                     {{range $k,$v := $.Review}}

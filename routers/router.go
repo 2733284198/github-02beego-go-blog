@@ -10,7 +10,7 @@ import (
 
 func init() {
 
-	// 后天站点设置
+	// 站点设置
 	beego.Router("/admin/setting", &admin.SettingController{}, "get:Add")
 	beego.Router("/admin/setting/save", &admin.SettingController{}, "post:Save")
 

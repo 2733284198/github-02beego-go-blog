@@ -21,6 +21,7 @@ func (c *BaseController) Layout() {
 	nqs := o.QueryTable(articleTime)
 	nqs = nqs.Filter("status", 1)
 	nqs.OrderBy("-Created").RelatedSel().All(&articlesTime,"Created")
+	count,_ := nqs.Count()
 	var datetime = make(map[string]int64)
 	var dateTimeKey []string
 	for _,v := range articlesTime  {
@@ -34,6 +35,7 @@ func (c *BaseController) Layout() {
 	}
 	c.Data["DateTime"] = datetime
 	c.Data["DateTimeKey"] = dateTimeKey
+	c.Data["DateCount"] = count
 
 	// 阅读排序
 	articleReadSort := new(admin.Article)
@@ -51,6 +53,8 @@ func (c *BaseController) Layout() {
     nqrw = nqrw.Filter("status", 1)
     nqrw = nqrw.OrderBy("-Id")
     nqrw.Limit(5).All(&reviewData,"Review","ArticleId")
+	reviewCount ,_ := nqrw.Count()
+	c.Data["ReviewCount"] = reviewCount
     c.Data["Review"] = reviewData
 }
 
