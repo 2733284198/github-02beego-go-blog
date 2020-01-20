@@ -45,13 +45,13 @@ func (c *BaseController) Layout() {
 	c.Data["ArticlesReadSort"] = articlesReadSort
 	
 	// 最新评论
-        review := new(admin.Review)
-        var reviewData []*admin.Review
-        nqrw := o.QueryTable(review)
-        nqrw = nqrw.Filter("status", 1)
-        nqrw = nqrw.OrderBy("-Id")
-        nqrw.Limit(5).All(&reviewData,"Review","ArticleId")
-        c.Data["Review"] = reviewData
+    review := new(admin.Review)
+    var reviewData []*admin.Review
+    nqrw := o.QueryTable(review)
+    nqrw = nqrw.Filter("status", 1)
+    nqrw = nqrw.OrderBy("-Id")
+    nqrw.Limit(5).All(&reviewData,"Review","ArticleId")
+    c.Data["Review"] = reviewData
 }
 
 func (c *BaseController) Menu()  {
@@ -70,6 +70,14 @@ func (c *BaseController) Menu()  {
 func (c *BaseController) Prepare(){
 	c.Data["bgClass"] = "bgColor"
 	c.Data["T"] = time.Now()
+
+	o := orm.NewOrm()
+	var setting []*admin.Setting
+	o.QueryTable(new(admin.Setting)).All(&setting)
+
+	for _,v := range setting{
+		c.Data[v.Name] = v.Value
+	}
 }
 
 /*********************** 日志 *********************************/

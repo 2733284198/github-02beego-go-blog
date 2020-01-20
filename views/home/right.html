@@ -5,17 +5,17 @@
             <div id="profile_block">
                 姓名：
                 <a title="陈立（花名：猴子）" href="javascript:;">
-                    陈立（花名：猴子）
+                    {{$.name}}
                 </a>
                 <br>
                 简介：
                 <a href="javascript:;" title="纯码农，擅长PHP，GO等语言">
-                    纯码农，擅长PHP，GO等语言
+                    {{$.remark}}
                 </a>
                 <br>
                 <div style="text-align: center;margin-top: 20px">
                     <a href="javascript:;">
-                        <img width="80%" src="/static/images/weixin.jpg">
+                        <img width="80%" src="{{$.image}}">
                     </a>
                 </div>
                 <br>

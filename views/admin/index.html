@@ -26,7 +26,7 @@
         <!-- 顶部开始 -->
         <div class="container">
             <div class="logo">
-                <a href="/">{{config "String" "title" "LeeChan'Blog"}}</a></div>
+                <a href="/admin">{{config "String" "title" "LeeChan'Blog"}}</a></div>
             <div class="left_open">
                 <a><i title="展开左侧栏" class="iconfont">&#xe699;</i></a>
             </div>
@@ -76,6 +76,19 @@
         <div class="left-nav">
             <div id="side-nav">
                 <ul id="nav">
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="站点设置">&#xe723;</i>
+                            <cite>站点设置</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a onclick="xadmin.add_tab('站点设置','{{urlfor "admin.SettingController.Add"}}')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>站点设置</cite></a>
+                            </li>
+                        </ul>
+                    </li>
                     <li>
                         <a href="javascript:;">
                             <i class="iconfont left-nav-li" lay-tips="文章管理">&#xe723;</i>

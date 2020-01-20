@@ -93,6 +93,11 @@ CREATE TABLE `user` (
   `status` int(11) DEFAULT '1' COMMENT '状态'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `setting` (
+  `name` varchar(255) NOT NULL DEFAULT '' COMMENT '标题',
+  `value` text NOT NULL COMMENT '详情',
+  PRIMARY KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 --
 -- 转储表的索引
 --
