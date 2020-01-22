@@ -23,6 +23,8 @@ func init() {
 	beego.Router("/admin/article/delete", &admin.ArticleController{}, "Post:Delete")
 	beego.Router("/admin/article/update", &admin.ArticleController{}, "Post:Update")
 	beego.Router("/admin/article/add", &admin.ArticleController{}, "get:Add")
+	beego.Router("/admin/article/top", &admin.ArticleController{}, "Post:Top")
+
 	// 后台分类模块
 	beego.Router("/admin/cate", &admin.CateController{}, "get:List;post:Save")
 	beego.Router("/admin/cate/add", &admin.CateController{}, "get:Add")

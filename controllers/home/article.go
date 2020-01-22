@@ -121,7 +121,7 @@ func (c *ArticleController) List() {
 
 
 	// 获取数据
-	_, err = qs.OrderBy("-id","-pv").RelatedSel().Limit(limit).Offset(offset).All(&articles)
+	_, err = qs.OrderBy("-recommend","-id","-pv").RelatedSel().Limit(limit).Offset(offset).All(&articles)
 	if err != nil {
 		panic(err)
 	}

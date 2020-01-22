@@ -91,6 +91,7 @@ func (c *ArticleController) List() {
 	c.Data["Data"] = &articles
 	c.Data["Paginator"] = utils.GenPaginator(page, limit, count)
 	c.Data["StatusText"] = admin.Status
+	c.Data["RecommendText"] = admin.Recommend
 
 	c.TplName = "admin/article-list.html"
 }
@@ -289,6 +290,44 @@ func (c *ArticleController) Delete() {
 			response["id"] = id
 		} else {
 			response["msg"] = "删除失败！"
+			response["code"] = 500
+			response["err"] = err.Error()
+		}
+	} else {
+		response["msg"] = "删除失败！"
+		response["code"] = 500
+		response["err"] = "ID 不能为空！"
+	}
+
+	c.Data["json"] = response
+	c.ServeJSON()
+	c.StopRun()
+}
+
+
+func (c *ArticleController) Top() {
+	id, _ := c.GetInt("id", 0)
+
+	response := make(map[string]interface{})
+
+
+	o := orm.NewOrm()
+	article := admin.Article{Id: id}
+	if o.Read(&article) == nil {
+
+		recommend := article.Recommend
+		if recommend == 0 {
+			article.Recommend = 1
+		}else{
+			article.Recommend = 0
+		}
+
+		if _, err := o.Update(&article); err == nil {
+			response["msg"] = "操作成功！"
+			response["code"] = 200
+			response["id"] = id
+		} else {
+			response["msg"] = "操作失败！"
 			response["code"] = 500
 			response["err"] = err.Error()
 		}

@@ -86,6 +86,9 @@
                         {{dateformat $vlaue.Created "2006-01-02 15:04:05"}} {{$vlaue.User.Name}} 阅读 ({{$vlaue.Pv}}) 评论 ({{$vlaue.Review}})
                         <span style="margin-left: 5px">标签：</span><a href="javascript:;">{{$vlaue.Tag}}</a>
                         <span style="margin-left: 5px">分类：</span><a href="javascript:;">{{$vlaue.Category.Name}}</a>
+                        {{if eq $vlaue.Recommend 1}}
+                        <span><a href="javascript:;" style="color: #FF5722">顶置</a></span>
+                        {{end}}
                     </div>
                     <div class="clear"></div>
                 </div>

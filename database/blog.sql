@@ -13,6 +13,8 @@ CREATE TABLE `article` (
   `review` int(11) DEFAULT '0' COMMENT '评论'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+ALTER TABLE `article` ADD `recommend` INT(4) NOT NULL DEFAULT '0' COMMENT '是否顶置，0否；1是，默认否';
+
 -- --------------------------------------------------------
 
 --

@@ -67,6 +67,7 @@
                                         <th>状态</th>
                                         <th>PV</th>
                                         <th>作者</th>
+                                        <th>是否推荐</th>
                                         <th>操作</th></tr>
                                 </thead>
                                 <tbody>
@@ -80,6 +81,11 @@
                                         <td>{{index $.StatusText $value.Status}}</td>
                                         <td>{{$value.Pv}}</td>
                                         <td>{{$value.User.Name}}</td>
+                                        <td>
+                                            <input type="checkbox" id="{{$value.Id}}" {{if eq $value.Recommend 1}}checked{{end}} name="recommend" lay-skin="switch" lay-filter="recommend" lay-text="{{index $.RecommendText $value.Recommend}}|{{index $.RecommendText $value.Recommend}}">
+                                            {{/*{{index $.RecommendText $value.Recommend}}*/}}
+                                        </td>
+
                                         <td class="td-manage">
                                             <a title="查看" onclick="xadmin.open('编辑','{{urlfor "admin.ArticleController.Put"}}?id={{$value.Id}}','','',true)" href="javascript:;">
                                                 <i class="layui-icon">&#xe63c;</i></a>
@@ -114,6 +120,7 @@
         layui.use(['laydate', 'form','laypage'],
             function() {
                 var laydate = layui.laydate;
+                var form = layui.form;
                 //执行一个laydate实例
                 laydate.render({
                     elem: '#start' //指定元素
@@ -124,47 +131,27 @@
                     elem: '#end' //指定元素
                     ,format:'yyyy-MM-dd HH:mm:ss'
                 });
+
+
+                //监听指定开关
+                form.on('switch(recommend)', function(data){
+
+                    //layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+                    //console.log($(this).attr("id"));
+                    $.ajax({
+                        url:'/admin/article/top',
+                        type:'post',
+                        data:'id='+$(this).attr("id"),
+                        success:function (data) {
+                            //发异步删除数据
+                            window.location.reload();
+
+                        }
+                    });
+
+                });
             }
         );
-
-        function reset_form() {
-            $("#form").find('input,select,input[type=hidden]').each(function() {
-                console.log($(this).val());
-                console.log($(this));
-                $(this).val('123');
-             });
-        }
-
-        /*用户-停用*/
-        function member_stop(obj, id) {
-            layer.confirm('确认要停用吗？',
-            function(index) {
-
-                if ($(obj).attr('title') == '启用') {
-
-                    //发异步把用户状态进行更改
-                    $(obj).attr('title', '停用');
-                    $(obj).find('i').html('&#xe62f;');
-
-                    $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
-                    layer.msg('已停用!', {
-                        icon: 5,
-                        time: 1000
-                    });
-
-                } else {
-                    $(obj).attr('title', '启用');
-                    $(obj).find('i').html('&#xe601;');
-
-                    $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
-                    layer.msg('已启用!', {
-                        icon: 5,
-                        time: 1000
-                    });
-                }
-
-            });
-        }
 
         /*删除*/
         function member_del(obj, id) {
