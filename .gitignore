@@ -1,1 +1,2 @@
-.idea
+.idea/*
+conf/app.conf
