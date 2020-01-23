@@ -21,7 +21,7 @@ func (c *MainController) CheckToken() {
 	signature := c.GetString("signature")
 	timestamp := c.GetString("timestamp")
 	nonce := c.GetString("nonce")
-	token := "xxxxxxx"
+	token := token
 	echostr := c.GetString("echostr")
 
 	var tempArray  = []string{token, timestamp, nonce}
