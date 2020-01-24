@@ -12,7 +12,6 @@ import (
 )
 
 var TplFuncMap = make(template.FuncMap)
-
 func init() {
 	conf, err := config.NewConfig("ini", "conf/app.conf")
 
@@ -25,7 +24,6 @@ func init() {
 	dbHost := conf.String("db::dbHost")
 	dbPort := conf.String("db::dbPort")
 	dbName := conf.String("db::dbName")
-
 	dbStr := dbUser + ":" + dbPass + "@tcp(" + dbHost + ":" + dbPort + ")/" + dbName+ "?charset=utf8&loc=Asia%2FShanghai"
 	orm.RegisterDriver("mysql", orm.DRMySQL)
 
@@ -35,6 +33,7 @@ func init() {
 	beego.AddFuncMap("IndexAddOne",utils.IndexAddOne)
 	beego.AddFuncMap("IndexDecrOne",utils.IndexDecrOne)
 	beego.AddFuncMap("StringReplace",utils.StringReplace)
+	beego.AddFuncMap("TimeStampToTime",utils.TimeStampToTime)
 
 }
 

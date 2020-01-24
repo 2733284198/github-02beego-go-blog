@@ -100,6 +100,23 @@ CREATE TABLE `setting` (
   `value` text NOT NULL COMMENT '详情',
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `wechat_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `openid` varchar(32) NOT NULL COMMENT 'open ID',
+  `nickname` varchar(255) DEFAULT NULL COMMENT '用户名',
+  `sex` int(11) DEFAULT '0' COMMENT '性别',
+  `city` varchar(32) DEFAULT NULL COMMENT '城市',
+  `country` varchar(32) DEFAULT NULL COMMENT '国家',
+  `province` varchar(32) DEFAULT NULL COMMENT '省份',
+  `language` varchar(32) DEFAULT NULL COMMENT '语种',
+  `headimgurl` varchar(255) DEFAULT NULL COMMENT '头像',
+  `subscribe_time` int(11) DEFAULT NULL COMMENT '订阅时间',
+  `created` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
 --
 -- 转储表的索引
 --

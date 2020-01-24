@@ -32,3 +32,7 @@ func StringToTime(date interface{}) time.Time{
 	ret, _ := time.ParseInLocation(timeLayout, date.(string), loc)
 	return ret
 }
+
+func TimeStampToTime (timeStamp int32) time.Time{
+	return time.Unix(int64(timeStamp), 0)
+}
