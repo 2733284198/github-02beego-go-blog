@@ -132,7 +132,7 @@ func (c *ArticleController) List() {
 	// Menu
 	c.Menu()
 	c.Layout()
-
+	c.Log("list")
 	c.TplName = "home/list.html"
 }
 
@@ -158,6 +158,7 @@ func (c *ArticleController) Detail() {
 	
 	c.Menu()
 	c.Layout()
+	c.Log("detail")
 	c.TplName = "home/detail.html"
 }
 

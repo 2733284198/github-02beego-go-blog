@@ -50,6 +50,7 @@ func (c *MessageController) Get() {
 
 	c.Menu()
 	c.Layout()
+	c.Log("message")
 	c.TplName = "home/message.html"
 }
 

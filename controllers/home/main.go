@@ -5,6 +5,7 @@ type MainController struct {
 }
 
 func (c *MainController) Get() {
+	c.Log("index")
 	c.TplName = "home/index.html"
 }
 
