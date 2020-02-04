@@ -5,53 +5,71 @@ import (
 	"go-blog/controllers/admin"
 	"go-blog/controllers/common"
 	"go-blog/controllers/home"
+	"go-blog/controllers/installer"
 	"go-blog/controllers/wechat"
+	"go-blog/filter"
 )
 
 func init() {
 
-	// 站点设置
-	beego.Router("/admin/setting", &admin.SettingController{}, "get:Add")
-	beego.Router("/admin/setting/save", &admin.SettingController{}, "post:Save")
+	beego.InsertFilter("*",beego.BeforeExec,filter.Installer)
 
-	// 后台文章模块
+
+	adminNs := beego.NewNamespace("/admin",
+		beego.NSInclude(&admin.MenuController{}),
+		// 站点设置
+		beego.NSRouter("/setting", &admin.SettingController{}, "get:Add"),
+		beego.NSRouter("/setting/save", &admin.SettingController{}, "post:Save"),
+		beego.NSRouter("/notice", &admin.SettingController{}, "get:Notice"),
+		beego.NSRouter("/notice/save", &admin.SettingController{}, "post:NoticeSave"),
+
+
+		// 后台文章模块
+		beego.NSRouter("/welcome", &admin.MainController{}, "get:Welcome"),
+		beego.NSRouter("/article", &admin.ArticleController{}, "get:List;post:Save"),
+		beego.NSRouter("/article/edit", &admin.ArticleController{}, "get:Put"),
+		beego.NSRouter("/article/delete", &admin.ArticleController{}, "Post:Delete"),
+		beego.NSRouter("/article/update", &admin.ArticleController{}, "Post:Update"),
+		beego.NSRouter("/article/add", &admin.ArticleController{}, "get:Add"),
+		beego.NSRouter("/article/top", &admin.ArticleController{}, "Post:Top"),
+
+		// 后台分类模块
+		beego.NSRouter("/cate", &admin.CateController{}, "get:List;post:Save"),
+		beego.NSRouter("/cate/add", &admin.CateController{}, "get:Add"),
+		beego.NSRouter("/cate/edit", &admin.CateController{}, "get:Put"),
+		beego.NSRouter("/cate/delete", &admin.CateController{}, "Post:Delete"),
+		beego.NSRouter("/cate/update", &admin.CateController{}, "Post:Update"),
+		// 后台登录
+		beego.NSRouter("/login", &admin.LoginController{}, "Get:Sign;Post:Login"),
+
+		// 后台评论
+		beego.NSRouter("/review", &admin.ReviewController{}, "get:List"),
+		beego.NSRouter("/review/edit", &admin.ReviewController{}, "Get:Put"),
+		beego.NSRouter("/review/delete", &admin.ReviewController{}, "Post:Delete"),
+		beego.NSRouter("/review/update", &admin.ReviewController{}, "Post:Update"),
+
+
+		// 后台友情链接
+		beego.NSRouter("/link", &admin.LinkController{}, "get:List"),
+		// 后台留言
+		beego.NSRouter("/message", &admin.MessageController{}, "get:List"),
+
+		// 后台留言模块
+		beego.NSRouter("/message/update", &admin.MessageController{}, "Post:Update"),
+		beego.NSRouter("/message/edit", &admin.MessageController{}, "Get:Put"),
+		beego.NSRouter("/message/delete", &admin.MessageController{}, "Post:Delete"),
+	)
+
+	beego.AddNamespace(adminNs)
+	// 公众号
+	beego.Router("/wechat", &wechat.MainController{},"Get:CheckToken;Post:Hello")
+	beego.Router("/wechat/create/menu", &wechat.MenuController{},"Get:CreateMenu;Post:CreateMenu")
+	beego.Router("/wechat/user/get", &wechat.UserController{},"Get:GetUser")
+	beego.Router("/wechat/user/list", &wechat.UserController{},"Get:List")
+	beego.Router("/wechat/addnews", &wechat.MaterialController{},"Get:AddNews")
+
 	beego.Router("/", &home.MainController{})
 	beego.Router("/admin", &admin.MainController{}, "get:Index")
-	beego.Router("/admin/welcome", &admin.MainController{}, "get:Welcome")
-	beego.Router("/admin/article", &admin.ArticleController{}, "get:List;post:Save")
-	beego.Router("/admin/article/edit", &admin.ArticleController{}, "get:Put")
-	beego.Router("/admin/article/delete", &admin.ArticleController{}, "Post:Delete")
-	beego.Router("/admin/article/update", &admin.ArticleController{}, "Post:Update")
-	beego.Router("/admin/article/add", &admin.ArticleController{}, "get:Add")
-	beego.Router("/admin/article/top", &admin.ArticleController{}, "Post:Top")
-
-	// 后台分类模块
-	beego.Router("/admin/cate", &admin.CateController{}, "get:List;post:Save")
-	beego.Router("/admin/cate/add", &admin.CateController{}, "get:Add")
-	beego.Router("/admin/cate/edit", &admin.CateController{}, "get:Put")
-	beego.Router("/admin/cate/delete", &admin.CateController{}, "Post:Delete")
-	beego.Router("/admin/cate/update", &admin.CateController{}, "Post:Update")
-	// 后台登录
-	beego.Router("/admin/login", &admin.LoginController{}, "Get:Sign;Post:Login")
-
-	// 后台评论
-	beego.Router("/admin/review", &admin.ReviewController{}, "get:List")
-	beego.Router("/admin/review/edit", &admin.ReviewController{}, "Get:Put")
-	beego.Router("/admin/review/delete", &admin.ReviewController{}, "Post:Delete")
-	beego.Router("/admin/review/update", &admin.ReviewController{}, "Post:Update")
-
-
-	// 后台友情链接
-	beego.Router("/admin/link", &admin.LinkController{}, "get:List")
-	// 后台留言
-	beego.Router("/admin/message", &admin.MessageController{}, "get:List")
-
-	// 后台留言模块
-	beego.Router("/admin/message/update", &admin.MessageController{}, "Post:Update")
-	beego.Router("/admin/message/edit", &admin.MessageController{}, "Get:Put")
-	beego.Router("/admin/message/delete", &admin.MessageController{}, "Post:Delete")
-
-
 	// 前台列表
 	beego.Router("/list.html", &home.ArticleController{}, "get:List")
 	// 前台详情
@@ -67,15 +85,11 @@ func init() {
 	beego.Router("article/review", &home.ArticleController{}, "Post:Review")
 	beego.Router("article/review/:id([0-9]+).html", &home.ArticleController{}, "Get:ReviewList")
 
-
 	// 文件上传
 	beego.Router("/uploads.html", &common.UploadsController{}, "Post:Uploads")
 
+	// 安装
+	beego.Router("/installer", &installer.InstallController{},"Get:CheckEnv")
+	beego.Router("/installer/create", &installer.InstallController{},"Get:Install")
 
-	// 公众号
-	beego.Router("/wechat", &wechat.MainController{},"Get:CheckToken;Post:Hello")
-	beego.Router("/wechat/create/menu", &wechat.MenuController{},"Get:CreateMenu;Post:CreateMenu")
-	beego.Router("/wechat/user/get", &wechat.UserController{},"Get:GetUser")
-	beego.Router("/wechat/user/list", &wechat.UserController{},"Get:List")
-	beego.Router("/wechat/addnews", &wechat.MaterialController{},"Get:AddNews")
 }

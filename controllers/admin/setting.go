@@ -74,3 +74,45 @@ func (c *SettingController) Save() {
 	c.ServeJSON()
 	c.StopRun()
 }
+
+func (c *SettingController) Notice() {
+
+	o := orm.NewOrm()
+	var setting admin.Setting
+	o.QueryTable(new(admin.Setting)).Filter("name", "notice").One(&setting)
+	c.Data["Notice"] = setting.Value
+	c.TplName = "admin/notice.html"
+}
+
+func (c *SettingController) NoticeSave() {
+
+	response := make(map[string]interface{})
+
+	notice := c.GetString("notice")
+
+	o := orm.NewOrm()
+	err := o.Begin()
+	_,err = o.Delete(&admin.Setting{Name: "notice"})
+
+	num, err := o.Insert(&admin.Setting{Name:"notice",Value:notice})
+
+	if err != nil {
+		err = o.Rollback()
+	} else {
+		err = o.Commit()
+	}
+
+	if err != nil {
+		response["msg"] = "操作失败！"
+		response["code"] = 500
+		response["err"] = err.Error()
+	}else{
+		response["msg"] = "操作成功！"
+		response["code"] = 200
+		response["id"] = num
+	}
+
+	c.Data["json"] = response
+	c.ServeJSON()
+	c.StopRun()
+}

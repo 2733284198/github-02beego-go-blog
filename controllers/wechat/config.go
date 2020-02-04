@@ -1,18 +1,22 @@
 package wechat
 
 import (
+	"github.com/astaxie/beego"
 	"github.com/silenceper/wechat"
 	"github.com/silenceper/wechat/cache"
 	"github.com/sirupsen/logrus"
 )
 
-var redisCache = cache.NewRedis(&cache.RedisOpts{Host: "127.0.0.1:6379"})
-var token = "b8cf671eaa1a270a9b53ddb894dd9029"
+var redisCache = cache.NewRedis(&cache.RedisOpts{
+	Host: beego.AppConfig.String("redis::rHost")+":"+beego.AppConfig.String("redis::rPort"),
+})
+var token = beego.AppConfig.String("wechat::Token")
+
 var config = &wechat.Config{
-	AppID:          "wx0e1f405eb29b0f5b",
-	AppSecret:      "6ca99c66a90afbc6c6d536243083c7ff",
+	AppID:          beego.AppConfig.String("wechat::AppID"),
+	AppSecret:      beego.AppConfig.String("wechat::AppSecret"),
 	Token:          token,
-	EncodingAESKey: "gF0kTc4xNXTYESNxCeRcusV7Vnze52H4AIaC3RIy19u",
+	EncodingAESKey: beego.AppConfig.String("wechat::EncodingAESKey"),
 	Cache:			redisCache,
 }
 

@@ -4,6 +4,7 @@ import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	"go-blog/models/admin"
+	"go-blog/utils"
 	"time"
 )
 
@@ -60,15 +61,16 @@ func (c *BaseController) Layout() {
 
 func (c *BaseController) Menu()  {
 
-	o := orm.NewOrm()
+	var fields []string
+	var sortby []string
+	var order []string
+	var query = make(map[string]string)
+	var limit int64 = 10
+	var offset int64
 
-	category := new(admin.Category)
-	var categorys []*admin.Category
-	cqs := o.QueryTable(category)
-	cqs = cqs.Filter("status", 1)
-	cqs = cqs.Filter("pid", 0)
-	cqs.OrderBy("-sort").All(&categorys)
-	c.Data["Menu"] = categorys
+	menu , _  := admin.GetAllMenu(query,fields,sortby,order,offset,limit)
+	data := utils.MenuData(menu,0,0)
+	c.Data["Menu"] = data
 
 }
 func (c *BaseController) Prepare(){
@@ -82,6 +84,8 @@ func (c *BaseController) Prepare(){
 	for _,v := range setting{
 		c.Data[v.Name] = v.Value
 	}
+
+
 }
 
 /*********************** 日志 *********************************/

@@ -130,3 +130,58 @@ func CategoryTreeR(allCate []*admin.Category, pid int, level int) []CateTree {
 func SubString(str string,len int) string  {
 	return string([]rune(str)[:len])
 }
+
+
+
+type MenuTree struct {
+	Id    int
+	Title  string
+	Pid   int
+	Sort  int
+	Level int
+	Url   string
+	Target string
+	Son   []MenuTree
+}
+
+func MenuTreeR(allCate []interface{}, pid int, level int) []MenuTree {
+	var arr []MenuTree
+	for _, v := range allCate {
+		v1 := v.(admin.Menu)
+		if pid == v1.Pid {
+			ctree := MenuTree{}
+			ctree.Id = v1.Id
+			ctree.Pid = v1.Pid
+			ctree.Title = v1.Title
+			ctree.Sort = v1.Sort
+			ctree.Level = level
+			ctree.Url = v1.Url
+			ctree.Target = v1.Target
+			arr = append(arr, ctree)
+			sonCate := MenuTreeR(allCate, v1.Id, level+1)
+			arr = append(arr, sonCate...)
+		}
+	}
+	return arr
+}
+
+func MenuData(allCate []interface{}, pid int, level int) []MenuTree {
+	var arr []MenuTree
+	for _, v := range allCate {
+		v1 := v.(admin.Menu)
+		if pid == v1.Pid {
+			ctree := MenuTree{}
+			ctree.Id = v1.Id
+			ctree.Pid = v1.Pid
+			ctree.Title = v1.Title
+			ctree.Sort = v1.Sort
+			ctree.Level = level
+			ctree.Url = v1.Url
+			ctree.Target = v1.Target
+			sonCate := MenuData(allCate, v1.Id, level+1)
+			ctree.Son = sonCate
+			arr = append(arr, ctree)
+		}
+	}
+	return arr
+}

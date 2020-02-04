@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="/static/css/menu.css" />
 <div id="header">
     <div class="header-bg">
         <div id="blogTitle">
@@ -19,28 +20,32 @@
     <div id="navigator" class="diyBg">
 
         <ul id="navList">
-            <li>
-                <a id="blog_nav_myhome" class="menu" href="/">
-                    首页
-                </a>
-            </li>
             {{range $k ,$v := $.Menu}}
                 <li>
-                    <a id="blog_nav_contact" class="menu" href="/list.html?c={{$v.Id}}">
-                        {{$v.Name}}
+                    <a target="{{$v.Target}}" id="blog_nav_contact" class="menu" href="{{$v.Url}}">
+                        {{$v.Title}}
                     </a>
+                    <ul>
+                        {{range $kk,$vv := $v.Son}}
+                            <li>
+                                <a target="{{$vv.Target}}" class="menu" href="{{$vv.Url}}">{{$vv.Title}}</a>
+                            </li>
+
+                        {{end}}
+                    </ul>
                 </li>
             {{end}}
-            <li>
-                <a id="blog_nav_contact" class="menu" href="/message.html">
-                    留言
-                </a>
-            </li>
-            {{/*<li>
-                <a id="blog_nav_contact" class="menu" href="javascript:;">
-                    订阅</a>
-            </li>*/}}
         </ul>
     </div><!--end: navigator 博客导航栏 -->
 </div>
+<script src="/static/js/jquery-2.2.0.min.js"></script>
+<script>
+    $(function () {
+        $("#navList li ul").hover(function () {
+            $(this).siblings(":first").addClass("firstMenu").css("color","#000");
+        },function () {
+            $(this).siblings(":first").removeClass("firstMenu").css("color","#fff");
+        })
+    })
+</script>
 <!--end: header 头部 -->

@@ -6,12 +6,10 @@ import (
 	"github.com/astaxie/beego/orm"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/sirupsen/logrus"
-	"html/template"
 	_ "go-blog/routers"
 	"go-blog/utils"
 )
 
-var TplFuncMap = make(template.FuncMap)
 func init() {
 	conf, err := config.NewConfig("ini", "conf/app.conf")
 
@@ -34,7 +32,6 @@ func init() {
 	beego.AddFuncMap("IndexDecrOne",utils.IndexDecrOne)
 	beego.AddFuncMap("StringReplace",utils.StringReplace)
 	beego.AddFuncMap("TimeStampToTime",utils.TimeStampToTime)
-
 }
 
 func main() {

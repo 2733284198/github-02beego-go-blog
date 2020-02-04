@@ -83,9 +83,27 @@
                             <i class="iconfont nav_right">&#xe697;</i></a>
                         <ul class="sub-menu">
                             <li>
+                                <a onclick="xadmin.add_tab('站点公告','{{urlfor "admin.SettingController.Notice"}}')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>站点公告</cite></a>
+                            </li>
+                            <li>
                                 <a onclick="xadmin.add_tab('站点设置','{{urlfor "admin.SettingController.Add"}}')">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>站点设置</cite></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="导航管理">&#xe723;</i>
+                            <cite>导航管理</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a onclick="xadmin.add_tab('前台导航','{{urlfor "admin.MenuController.GetAll"}}?sortby=sort&order=asc')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>前台导航</cite></a>
                             </li>
                         </ul>
                     </li>

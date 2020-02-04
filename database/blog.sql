@@ -116,6 +116,15 @@ CREATE TABLE `wechat_user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+CREATE TABLE `menu` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '栏目名称',
+  `target` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '链接打开方式',
+  `url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '链接URL',
+  `sort` int(11) DEFAULT '100' COMMENT '排序',
+  `pid` int(11) DEFAULT '0' COMMENT '顶级栏目',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 --
 -- 转储表的索引
