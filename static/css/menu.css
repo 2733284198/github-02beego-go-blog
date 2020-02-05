@@ -4,12 +4,16 @@
 #navList a:hover {
     text-shadow: 3px 3px 3px #000 !important;
 }
+
+#navList li ul{
+    position: absolute;
+}
+
 #navList li ul li{
     background-color: #fff;
     z-index: 9999;
     display: none;
-    float: left;
-    position: absolute;
+    float: none;
 }
 #navList li ul li a{
     color: #0C0C0C !important;

@@ -38,12 +38,37 @@ https://github.com/1920853199/go-blog.git
 4. 修改项目配置信息
 
 ```
-#main.go
+#conf/app.conf
 
-func init() {
-	orm.RegisterDriver("mysql", orm.DRMySQL)
-	orm.RegisterDataBase("default", "mysql", "xxxx:xxxxxx@tcp(127.0.0.1:3306)/blog?charset=utf8&loc=Asia%2FShanghai")
-}
+appname = go-blog
+httpport = 8088
+runmode = dev
+EnableAdmin = false
+sessionon = true
+url = 127.0.0.1:8088
+
+limit = 10
+title = Go Blog
+autograph = 如今的我，谈不上幸福，也谈不上不幸。
+
+[db]
+dbUser = root
+dbPass = root
+dbHost = 127.0.0.1
+dbPort = 3306
+dbName = blog
+
+[redis]
+rHost = 127.0.0.1
+rPort = 6379
+
+[wechat]
+AppID = xxxxxxx
+AppSecret = xxxxxxx
+Token = xxxxxxx
+EncodingAESKey = xxxxxxx
+
+
 ```
 
 5. 在bo-blog 根目录下执行bee run ，访问 http://127.0.0.1:8888 即可

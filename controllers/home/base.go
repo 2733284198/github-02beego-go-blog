@@ -70,6 +70,9 @@ func (c *BaseController) Menu()  {
 
 	menu , _  := admin.GetAllMenu(query,fields,sortby,order,offset,limit)
 	data := utils.MenuData(menu,0,0)
+	/*c.Data["json"] = data
+	c.ServeJSON()
+	c.StopRun()*/
 	c.Data["Menu"] = data
 
 }
@@ -84,8 +87,6 @@ func (c *BaseController) Prepare(){
 	for _,v := range setting{
 		c.Data[v.Name] = v.Value
 	}
-
-
 }
 
 /*********************** 日志 *********************************/

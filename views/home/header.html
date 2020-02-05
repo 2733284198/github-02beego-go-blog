@@ -30,7 +30,6 @@
                             <li>
                                 <a target="{{$vv.Target}}" class="menu" href="{{$vv.Url}}">{{$vv.Title}}</a>
                             </li>
-
                         {{end}}
                     </ul>
                 </li>
@@ -41,10 +40,19 @@
 <script src="/static/js/jquery-2.2.0.min.js"></script>
 <script>
     $(function () {
+
+        $("#navList li").hover(function () {
+            $(this).children("ul").show()
+        },function () {
+            $(this).children("li").hide()
+        })
+
         $("#navList li ul").hover(function () {
             $(this).siblings(":first").addClass("firstMenu").css("color","#000");
+            $(this).show()
         },function () {
             $(this).siblings(":first").removeClass("firstMenu").css("color","#fff");
+            $(this).hide()
         })
     })
 </script>
