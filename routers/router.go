@@ -85,6 +85,7 @@ func init() {
 	// 评论保存
 	beego.Router("article/review", &home.ArticleController{}, "Post:Review")
 	beego.Router("article/review/:id([0-9]+).html", &home.ArticleController{}, "Get:ReviewList")
+	beego.Router("article/like", &home.ArticleController{}, "Post:Like")
 
 	// 文件上传
 	beego.Router("/uploads.html", &common.UploadsController{}, "Post:Uploads")

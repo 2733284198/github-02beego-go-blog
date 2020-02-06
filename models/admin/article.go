@@ -21,10 +21,11 @@ type Article struct {
 	Desc     string    `orm:"type(text)"`
 	Created  time.Time `orm:"auto_now_add;type(datetime)"`
 	Updated  time.Time `orm:"auto_now;type(datetime)"`
-	Status   int       `orm:"default(1)"`
-	Pv       int       `orm:"default(0)"`
-	Review   int	   `orm:"default(0)"`
-	Recommend int		`orm:"default(0)"`
+	Status   	int       `orm:"default(1)"`
+	Pv       	int       `orm:"default(0)"`
+	Review   	int	   `orm:"default(0)"`
+	Recommend 	int		`orm:"default(0)"`
+	Like		int  	`orm:"default(0)"`
 	User     *User     `orm:"rel(fk)"`
 	Category *Category `orm:"rel(one)"`
 }

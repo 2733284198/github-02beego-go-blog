@@ -321,3 +321,54 @@ func (c *ArticleController) ReviewList()  {
 	c.StopRun()
 
 }
+
+func (c *ArticleController) Like()  {
+
+	id,_ := c.GetInt("id")
+	/*c.Data["json"] = c.Input()
+	c.ServeJSON()
+	c.StopRun()*/
+
+	response := make(map[string]interface{})
+
+	o := orm.NewOrm()
+
+	article := admin.Article{Id: id}
+	if o.Read(&article) == nil {
+		article.Like = article.Like + 1
+
+		valid := validation.Validation{}
+		valid.Required(article.Id, "Id")
+		if valid.HasErrors() {
+			// 如果有错误信息，证明验证没通过
+			// 打印错误信息
+			for _, err := range valid.Errors {
+				//log.Println(err.Key, err.Message)
+				response["msg"] = "Error."
+				response["code"] = 500
+				response["err"] = err.Key + " " + err.Message
+				c.Data["json"] = response
+				c.ServeJSON()
+				c.StopRun()
+			}
+		}
+
+		if _, err := o.Update(&article); err == nil {
+			response["msg"] = "Success."
+			response["code"] = 200
+			response["like"] = article.Like
+		} else {
+			response["msg"] = "Error."
+			response["code"] = 500
+			response["err"] = err.Error()
+		}
+	} else {
+		response["msg"] = "Error."
+		response["code"] = 500
+		response["err"] = "ID 不能为空！"
+	}
+
+	c.Data["json"] = response
+	c.ServeJSON()
+	c.StopRun()
+}

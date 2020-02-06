@@ -66,6 +66,7 @@
                                         <th>修改时间</th>
                                         <th>状态</th>
                                         <th>PV</th>
+                                        <th>点赞</th>
                                         <th>作者</th>
                                         <th>是否推荐</th>
                                         <th>操作</th></tr>
@@ -80,6 +81,7 @@
                                         <td>{{$value.Updated}}</td>
                                         <td>{{index $.StatusText $value.Status}}</td>
                                         <td>{{$value.Pv}}</td>
+                                        <th>{{$value.Like}}</th>
                                         <td>{{$value.User.Name}}</td>
                                         <td>
                                             <input type="checkbox" id="{{$value.Id}}" {{if eq $value.Recommend 1}}checked{{end}} name="recommend" lay-skin="switch" lay-filter="recommend" lay-text="{{index $.RecommendText $value.Recommend}}|{{index $.RecommendText $value.Recommend}}">

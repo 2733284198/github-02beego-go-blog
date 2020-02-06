@@ -14,7 +14,7 @@ CREATE TABLE `article` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `article` ADD `recommend` INT(4) NOT NULL DEFAULT '0' COMMENT '是否顶置，0否；1是，默认否';
-
+ALTER TABLE `article` ADD COLUMN `like`  int(11) NOT NULL DEFAULT 0 COMMENT '点赞数量' AFTER `recommend`;
 -- --------------------------------------------------------
 
 --
