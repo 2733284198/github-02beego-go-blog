@@ -7,12 +7,12 @@ import (
 	"go-blog/controllers/home"
 	"go-blog/controllers/installer"
 	"go-blog/controllers/wechat"
-	"go-blog/filter"
 )
 
 func init() {
 
-	beego.InsertFilter("*",beego.BeforeExec,filter.Installer)
+	// 安装功能
+	//beego.InsertFilter("*",beego.BeforeExec,filter.Installer)
 
 
 	adminNs := beego.NewNamespace("/admin",
