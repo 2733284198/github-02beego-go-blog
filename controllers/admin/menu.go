@@ -7,13 +7,11 @@ import (
 	"go-blog/utils"
 	"strconv"
 	"strings"
-
-	"github.com/astaxie/beego"
 )
 
 // MenuController operations for Menu
 type MenuController struct {
-	beego.Controller
+	BaseController
 }
 
 // URLMapping ...

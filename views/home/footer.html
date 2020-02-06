@@ -15,7 +15,9 @@
     <span>
         <div>
             友情链接：
-            <a href="http://www.laruence.com/" target="_blank" style="color: #FFFFFF">风雪之隅</a>
+            {{range $k ,$v := $.Link}}
+                <a href="{{$v.Url}}" target="_blank" style="color: #FFFFFF">{{$v.Title}}</a>
+            {{end}}
         </div>
     </span>
     <span>

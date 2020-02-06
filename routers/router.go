@@ -16,7 +16,10 @@ func init() {
 
 
 	adminNs := beego.NewNamespace("/admin",
-		beego.NSInclude(&admin.MenuController{}),
+		beego.NSInclude(
+			&admin.MenuController{},
+			&admin.LinkController{},
+			),
 		// 站点设置
 		beego.NSRouter("/setting", &admin.SettingController{}, "get:Add"),
 		beego.NSRouter("/setting/save", &admin.SettingController{}, "post:Save"),
@@ -48,9 +51,6 @@ func init() {
 		beego.NSRouter("/review/delete", &admin.ReviewController{}, "Post:Delete"),
 		beego.NSRouter("/review/update", &admin.ReviewController{}, "Post:Update"),
 
-
-		// 后台友情链接
-		beego.NSRouter("/link", &admin.LinkController{}, "get:List"),
 		// 后台留言
 		beego.NSRouter("/message", &admin.MessageController{}, "get:List"),
 
@@ -58,6 +58,7 @@ func init() {
 		beego.NSRouter("/message/update", &admin.MessageController{}, "Post:Update"),
 		beego.NSRouter("/message/edit", &admin.MessageController{}, "Get:Put"),
 		beego.NSRouter("/message/delete", &admin.MessageController{}, "Post:Delete"),
+
 	)
 
 	beego.AddNamespace(adminNs)

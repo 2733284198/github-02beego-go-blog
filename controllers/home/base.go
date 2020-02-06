@@ -75,6 +75,9 @@ func (c *BaseController) Menu()  {
 	c.StopRun()*/
 	c.Data["Menu"] = data
 
+	link , _  := admin.GetAllLink(query,fields,sortby,order,offset,limit)
+	c.Data["Link"] = link
+
 }
 func (c *BaseController) Prepare(){
 	c.Data["bgClass"] = "bgColor"
