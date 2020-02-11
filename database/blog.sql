@@ -95,6 +95,9 @@ CREATE TABLE `user` (
   `status` int(11) DEFAULT '1' COMMENT '状态'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO `user` VALUES (1, 'user', 'a68741c461294364dcf47cbd5309ba41', '491126240@qq.com', '2020-2-11 12:22:55', 1);
+
+
 CREATE TABLE `setting` (
   `name` varchar(255) NOT NULL DEFAULT '' COMMENT '标题',
   `value` text NOT NULL COMMENT '详情',

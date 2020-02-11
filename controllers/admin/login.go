@@ -11,10 +11,6 @@ type LoginController struct {
 }
 
 func (ctl *LoginController) Sign()  {
-	/*str := utils.PasswordMD5("2014gaokao","admin")
-	ctl.Data["json"] = str
-	ctl.ServeJSON()
-	ctl.StopRun()*/
 	ctl.TplName = "admin/login.html"
 }
 func (ctl *LoginController) Login() {
