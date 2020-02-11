@@ -130,10 +130,8 @@ func (c *ArticleController) List() {
 
 
 	// Menu
-	c.Menu()
-	c.Layout()
 	c.Log("article")
-	c.TplName = "home/list.html"
+	c.TplName = "home/" + beego.AppConfig.String("view") + "/list.html"
 }
 
 // 详情
@@ -155,11 +153,9 @@ func (c *ArticleController) Detail() {
 	c.StopRun()*/
 
 	c.Data["Data"] = &articles[0]
-	
-	c.Menu()
-	c.Layout()
+
 	c.Log("detail")
-	c.TplName = "home/detail.html"
+	c.TplName = "home/" + beego.AppConfig.String("view") + "/detail.html"
 }
 
 // 统计访问量

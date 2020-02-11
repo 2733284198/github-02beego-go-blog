@@ -79,6 +79,7 @@ func (c *BaseController) Menu()  {
 	c.Data["Link"] = link
 
 }
+
 func (c *BaseController) Prepare(){
 	c.Data["bgClass"] = "bgColor"
 	c.Data["T"] = time.Now()
@@ -96,6 +97,10 @@ func (c *BaseController) Prepare(){
 
 	c.Data["PV"] = pv
 	c.Data["UV"] = uv
+
+	c.Layout()
+	c.Menu()
+
 }
 
 /*********************** 日志 *********************************/

@@ -48,10 +48,8 @@ func (c *MessageController) Get() {
 	c.Data["StatusText"] = admin.Status
 
 
-	c.Menu()
-	c.Layout()
 	c.Log("message")
-	c.TplName = "home/message.html"
+	c.TplName = "home/" + beego.AppConfig.String("view") + "/message.html"
 }
 
 func (c *MessageController) Save() {

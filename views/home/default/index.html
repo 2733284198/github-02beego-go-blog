@@ -1,0 +1,192 @@
+{{template "home/default/header.html" .}}
+<div id="main">
+
+        <div class="main-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="title">
+                            {{$.title}}
+                        </div>
+                        <div class="desc">
+                            {{$.tag}}
+                        </div>
+                        <div class="actions">
+                            <a href="javascript:;" class="btn btn-lg btn-info">了解更多</a>
+                            <a href="javascript:;" class="btn btn-lg btn-success">立即开始</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row home-box">
+                <div class="col-md-8">
+                    <h2>快速开始</h2>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="markdown">
+
+                                <p>下载安装</p>
+                                <pre lang="bash"><code>go get github.com/astaxie/beego</code></pre>
+                                <p>创建文件 <code>hello.go</code></p>
+                                <pre lang="go"><code>package main<br><br>import "github.com/astaxie/beego"<br><br>func main() {<br>    beego.Run()<br>}</code></pre>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="markdown">
+
+                                <p>编译运行</p>
+                                <pre lang="bash"><code>go build -o hello hello.go<br>./hello</code></pre>
+                                <p>浏览效果</p>
+                                <p>打开浏览器并访问 <code>http://localhost:8080</code></p>
+                                <p>恭喜！您已经成功构建了第一个 beego 项目。</p>
+                                <p>请查阅 <a href="/docs">开发文档</a> 以进行深入学习。</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="home-box">
+                        <h2>延伸阅读</h2>
+                        <div class="well markdown">
+                            <ul class="list-unstyled">
+
+                                <li><i class="icon-angle-right"></i> <a
+                                        href="/docs/mvc/controller/router.md">控制器路由设置</a></li>
+                                <li><i class="icon-angle-right"></i> <a href="/docs/mvc/model/overview.md">ORM 入门</a>
+                                </li>
+                                <li><i class="icon-angle-right"></i> <a href="/docs/mvc/view/view.md">模板处理</a></li>
+                                <li><i class="icon-angle-right"></i> <a href="/docs/examples/">官方开发示例</a></li>
+                                <li><i class="icon-angle-right"></i> <a href="/docs/module/">可选高级模块</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row home-box">
+                <div class="col-md-12">
+                    <h2>系统特性</h2>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <th>支持服务</th>
+                                    <th>开源版本</th>
+                                    <th>收费版本</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>站点访问PV/UV统计</td>
+                                        <td><i class="fa fa-check font-green" aria-hidden="true"></i></td>
+                                        <td><i class="fa fa-check font-green" aria-hidden="true"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>站点公告</td>
+                                        <td><i class="fa fa-check font-green" aria-hidden="true"></i></td>
+                                        <td><i class="fa fa-check font-green" aria-hidden="true"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>站点设置</td>
+                                        <td><i class="fa fa-check font-green" aria-hidden="true"></i></td>
+                                        <td><i class="fa fa-check font-green" aria-hidden="true"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>导航管理</td>
+                                        <td><i class="fa fa-check font-green" aria-hidden="true"></i></td>
+                                        <td><i class="fa fa-check font-green" aria-hidden="true"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>文章管理</td>
+                                        <td><i class="fa fa-check font-green" aria-hidden="true"></i></td>
+                                        <td><i class="fa fa-check font-green" aria-hidden="true"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>文章归档</td>
+                                        <td><i class="fa fa-check font-green" aria-hidden="true"></i></td>
+                                        <td><i class="fa fa-check font-green" aria-hidden="true"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>文章点赞</td>
+                                        <td><i class="fa fa-check font-green" aria-hidden="true"></i></td>
+                                        <td><i class="fa fa-check font-green" aria-hidden="true"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>文章评论回复</td>
+                                        <td><i class="fa fa-check font-green" aria-hidden="true"></i></td>
+                                        <td><i class="fa fa-check font-green" aria-hidden="true"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>分类管理</td>
+                                        <td><i class="fa fa-check font-green" aria-hidden="true"></i></td>
+                                        <td><i class="fa fa-check font-green" aria-hidden="true"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>留言回复</td>
+                                        <td><i class="fa fa-check font-green" aria-hidden="true"></i></td>
+                                        <td><i class="fa fa-check font-green" aria-hidden="true"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>添加友链</td>
+                                        <td><i class="fa fa-check font-green" aria-hidden="true"></i></td>
+                                        <td><i class="fa fa-check font-green" aria-hidden="true"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>公众号用户管理</td>
+                                        <td><i class="fa fa-check font-green" aria-hidden="true"></i></td>
+                                        <td><i class="fa fa-check font-green" aria-hidden="true"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>公众号素材管理</td>
+                                        <td><i class="fa fa-check font-green" aria-hidden="true"></i></td>
+                                        <td><i class="fa fa-check font-green" aria-hidden="true"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>公众号用户管理</td>
+                                        <td><i class="fa fa-check font-green" aria-hidden="true"></i></td>
+                                        <td><i class="fa fa-check font-green" aria-hidden="true"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>公众号自定义回复</td>
+                                        <td><i class="fa fa-check font-green" aria-hidden="true"></i></td>
+                                        <td><i class="fa fa-check font-green" aria-hidden="true"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>公众号文章推送</td>
+                                        <td><i class="fa fa-check font-green" aria-hidden="true"></i></td>
+                                        <td><i class="fa fa-check font-green" aria-hidden="true"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>其他功能</td>
+                                        <td><i class="fa fa-times font-red" aria-hidden="true"></i></td>
+                                        <td><i class="fa fa-check font-green" aria-hidden="true"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>技术支持</td>
+                                        <td><i class="fa fa-times font-red" aria-hidden="true"></i></td>
+                                        <td><i class="fa fa-check font-green" aria-hidden="true"></i></td>
+                                    </tr>
+                                    <tr>
+                                        <td>收费标准</td>
+                                        <td>免费</td>
+                                        <td>￥99</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">本产品未经授权不得商用。收费版本只收技术服务费用，如需自定义系统功能联系我微信：QJWZYDSZ</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{{template "home/default/footer.html" .}}
