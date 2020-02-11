@@ -90,6 +90,12 @@ func (c *BaseController) Prepare(){
 	for _,v := range setting{
 		c.Data[v.Name] = v.Value
 	}
+
+	pv,_ := o.QueryTable(new(admin.Log)).Count()
+	uv,_ := o.QueryTable(new(admin.Log)).GroupBy("ip").Count()
+
+	c.Data["PV"] = pv
+	c.Data["UV"] = uv
 }
 
 /*********************** 日志 *********************************/
