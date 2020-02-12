@@ -12,7 +12,7 @@ import (
 func init() {
 
 	// 安装功能
-	//beego.InsertFilter("*",beego.BeforeExec,filter.Installer)
+	// beego.InsertFilter("*",beego.BeforeExec,filter.Installer)
 
 
 	adminNs := beego.NewNamespace("/admin",
