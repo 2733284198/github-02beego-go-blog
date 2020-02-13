@@ -27,41 +27,41 @@
                         <div class="col-md-6">
                             <div class="markdown">
 
-                                <p>下载安装</p>
+                                <p style="margin-top: 10px">下载安装</p>
                                 <pre lang="bash"><code>https://github.com/1920853199/go-blog.git</code></pre>
-                                <p>创建数据库，导入数据库文件</p>
-                                <p>修改配置</p>
+                                <p style="margin-top: 10px">创建数据库，导入数据库文件</p>
+                                <p style="margin-top: 10px">修改配置</p>
                                 <pre lang="go">
                                     <code>
-                                        #conf/app.conf<br>
-                                        appname = go-blog<br>
-                                        httpport = 8088<br>
-                                        runmode = dev<br>
-                                        EnableAdmin = false<br>
-                                        sessionon = true<br>
-                                        url = 127.0.0.1:8088<br>
-                                        view = default<br><br>
+#conf/app.conf
+appname = go-blog
+httpport = 8088
+runmode = dev
+EnableAdmin = false
+sessionon = true
+url = 127.0.0.1:8088
+view = default
 
-                                        limit = 10<br>
-                                        title = Go Blog<br>
-                                        autograph = 如今的我，谈不上幸福，也谈不上不幸。<br><br>
+limit = 10
+title = Go Blog
+autograph = 如今的我，谈不上幸福，也谈不上不幸。
 
-                                        [db]<br>
-                                        dbUser = root<br>
-                                        dbPass = root<br>
-                                        dbHost = 127.0.0.1<br>
-                                        dbPort = 3306<br>
-                                        dbName = blog<br><br>
+[db]
+dbUser = root
+dbPass = root
+dbHost = 127.0.0.1
+dbPort = 3306
+dbName = blog
 
-                                        [redis]<br>
-                                        rHost = 127.0.0.1<br>
-                                        rPort = 6379<br><br>
+[redis]
+rHost = 127.0.0.1
+rPort = 6379
 
-                                        [wechat]<br>
-                                        AppID = xxxxxxx<br>
-                                        AppSecret = xxxxxxx<br>
-                                        Token = xxxxxxx<br>
-                                        EncodingAESKey = xxxxxxx<br>
+[wechat]
+AppID = xxxxxxx
+AppSecret = xxxxxxx
+Token = xxxxxxx
+EncodingAESKey = xxxxxxx
                                     </code>
                                 </pre>
 
