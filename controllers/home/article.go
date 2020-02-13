@@ -154,8 +154,31 @@ func (c *ArticleController) Detail() {
 
 	c.Data["Data"] = &articles[0]
 
+
+	if  beego.AppConfig.String("view") == "default" {
+		var listData = make(map[string][]*admin.Article)
+		var list []*admin.Article
+		_, err = o.QueryTable(article).Filter("status", 1).Filter("User__Name__isnull", false).Filter("Category__Name__isnull", false).OrderBy("-recommend", "-id", "-pv").RelatedSel().All(&list, "id", "title")
+
+		for _,v := range list{
+			listData[v.Category.Name] = append(listData[v.Category.Name],v)
+		}
+		c.Data["List"] = &listData
+		articleId, _ := strconv.Atoi(id)
+		c.Data["ArticleId"] = articleId
+		/*c.Data["json"]= &listData
+		c.ServeJSON()
+		c.StopRun()*/
+
+	}
+
 	c.Log("detail")
-	c.TplName = "home/" + beego.AppConfig.String("view") + "/detail.html"
+
+	if viewType == "single"{
+		c.TplName = "home/" + beego.AppConfig.String("view") + "/doc.html"
+	}else {
+		c.TplName = "home/" + beego.AppConfig.String("view") + "/detail.html"
+	}
 }
 
 // 统计访问量
