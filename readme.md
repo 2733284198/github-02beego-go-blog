@@ -21,26 +21,21 @@
 
 新功能：
 1. 素材管理
-1. 自定义菜单
-2. 消息群发
-3. 关键词回复
+2. 自定义菜单
+3. 消息群发
+4. 关键词回复
 
 ### Install 
-1. 先下载安装Beego
 
-```
-go get github.com/astaxie/beego
-```
-
-2. 把go-blog项目拉到本地beego项目的src目录下
+1. 把Go Blog项目拉到本地
 
 ```
 https://github.com/1920853199/go-blog.git
 ```
 
-3. 导入数据库，数据库文件/database/blog.sql
+2. 新建数据库，导入数据库文件，数据库文件/database/blog.sql
 
-4. 修改项目配置信息
+3. 修改项目配置信息
 
 ```
 #conf/app.conf
@@ -51,6 +46,7 @@ runmode = dev
 EnableAdmin = false
 sessionon = true
 url = 127.0.0.1:8088
+view = default
 
 limit = 10
 title = Go Blog
@@ -76,6 +72,38 @@ EncodingAESKey = xxxxxxx
 
 ```
 
-5. 在bo-blog 根目录下执行bee run ，访问 http://127.0.0.1:8888 即可
+4. 在bo-blog 根目录下执行bee run ，访问 http://127.0.0.1:8888 即可
 
-6. 守护进程模式运行 可以了解PM2的相关信息，配置可查看start.sh 文件
+5. 守护进程模式运行 可以了解PM2的相关信息，配置可查看start.sh 文件
+
+6. nginx代理示例
+
+```
+server {
+        listen 80;
+        server_name go-blog.cn;
+        root    /home/data/go-blog;
+
+        location ~ \.(txt|xml)$ {
+                root /home/data/go-blog;
+        }
+
+        location / {
+            proxy_pass http://127.0.0.1:8889;
+            #proxy_redirect off;
+            proxy_http_version    1.1;
+            proxy_cache_bypass    $http_upgrade;
+            proxy_set_header Upgrade            $http_upgrade;
+            proxy_set_header Connection         "upgrade";
+            proxy_set_header Host               $host;
+            proxy_set_header X-Real-IP          $remote_addr;
+            proxy_set_header X-Forwarded-For    $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto  $scheme;
+            proxy_set_header X-Forwarded-Host   $host;
+            proxy_set_header X-Forwarded-Port   $server_port;
+        }
+
+        access_log    /home/wwwlogs/go-blog.access.log;
+}
+
+```
