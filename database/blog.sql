@@ -95,8 +95,6 @@ CREATE TABLE `user` (
   `status` int(11) DEFAULT '1' COMMENT '状态'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `user` VALUES (1, 'user', 'a68741c461294364dcf47cbd5309ba41', '491126240@qq.com', '2020-2-11 12:22:55', 1);
-
 
 CREATE TABLE `setting` (
   `name` varchar(255) NOT NULL DEFAULT '' COMMENT '标题',
@@ -218,3 +216,21 @@ ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID';
 COMMIT;
 
+INSERT INTO `user` VALUES (1, 'user', '5c0b8081c10ad236fa004adfe685867f', '491126240@qq.com', '2020-2-11 12:22:55', 1);
+
+INSERT INTO `article` (`id`, `user_id`, `title`, `category_id`, `tag`, `remark`, `desc`, `pv`, `created`, `updated`, `status`, `review`, `recommend`, `like`) VALUES
+(1, 1, '这是我的第一篇博客', 1, '博客，Go Blog', '这是我的第一篇博客', '## 这是我的第一篇博客', 1, '2020-02-12 23:07:52', '2020-02-13 05:03:22', 1, 0, 0, 0);
+
+INSERT INTO `category` (`id`, `name`, `pid`, `sort`, `status`) VALUES
+(1, '随笔', 0, 100, 1);
+
+INSERT INTO `menu` (`id`, `title`, `target`, `url`, `sort`, `pid`) VALUES
+(1, '首页', 'none', '/', 100, 0);
+
+INSERT INTO `setting` (`name`, `value`) VALUES
+('image', '/static/uploads/2020021121190681.png'),
+('name', 'Go Blog'),
+('notice', '欢迎来到使用 Go Blog 。'),
+('remark', '一个使用 Beego 开发的博客系统'),
+('tag', '一个使用 Beego 开发的博客系统'),
+('title', 'Go Blog');
