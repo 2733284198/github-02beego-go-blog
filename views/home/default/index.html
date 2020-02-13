@@ -28,7 +28,7 @@
                             <div class="markdown">
 
                                 <p style="margin-top: 10px">下载安装</p>
-                                <pre style="margin-top: 10px" lang="bash"><code>https://github.com/1920853199/go-blog.git</code></pre>
+                                <pre style="margin-top: 10px" lang="bash"><code>git clone https://github.com/1920853199/go-blog.git</code></pre>
                                 <p style="margin-top: 10px">创建数据库，导入数据库文件</p>
                                 <p style="margin-top: 10px">修改配置 conf/app.conf</p>
                                 <pre style="margin-top: 10px" lang="go">
@@ -45,16 +45,16 @@ limit = 10
 title = Go Blog
 autograph = 如今的我，谈不上幸福，也谈不上不幸。
 
-[db]
-dbUser = root
-dbPass = root</code></pre>
+[db]</code></pre>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="markdown">
                                 <p>
                                     <pre style="margin-top: 10px" lang="go">
-<code>dbHost = 127.0.0.1
+<code>dbUser = root
+dbPass = root
+dbHost = 127.0.0.1
 dbPort = 3306
 dbName = blog
 
