@@ -218,14 +218,19 @@ COMMIT;
 
 INSERT INTO `user` VALUES (1, 'user', '5c0b8081c10ad236fa004adfe685867f', '491126240@qq.com', '2020-2-11 12:22:55', 1);
 
-INSERT INTO `article` (`id`, `user_id`, `title`, `category_id`, `tag`, `remark`, `desc`, `pv`, `created`, `updated`, `status`, `review`, `recommend`, `like`) VALUES
-(1, 1, '这是我的第一篇博客', 1, '博客，Go Blog', '这是我的第一篇博客', '## 这是我的第一篇博客', 1, '2020-02-12 23:07:52', '2020-02-13 05:03:22', 1, 0, 0, 0);
-
 INSERT INTO `category` (`id`, `name`, `pid`, `sort`, `status`) VALUES
 (1, '随笔', 0, 100, 1);
 
+INSERT INTO `article` (`id`, `user_id`, `title`, `category_id`, `tag`, `remark`, `desc`, `pv`, `created`, `updated`, `status`, `review`, `recommend`, `like`) VALUES
+(1, 1, '这是我的第一篇博客', 1, '博客，Go Blog', '这是我的第一篇博客', '## 这是我的第一篇博客', 1, '2020-02-12 23:07:52', '2020-02-13 05:03:22', 1, 0, 0, 0);
+
 INSERT INTO `menu` (`id`, `title`, `target`, `url`, `sort`, `pid`) VALUES
 (1, '首页', 'none', '/', 100, 0);
+
+INSERT INTO `link` (`id`, `title`, `url`, `sort`) VALUES
+(1, 'Go Blog', 'http://go-blog.cn', 100);
+INSERT INTO `link` (`id`, `title`, `url`, `sort`) VALUES
+(2, 'LeeChan\'Blog', 'http://leechan.online', 100);
 
 INSERT INTO `setting` (`name`, `value`) VALUES
 ('image', '/static/uploads/2020021121190681.png'),
