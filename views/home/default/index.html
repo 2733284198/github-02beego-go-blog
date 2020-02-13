@@ -28,12 +28,11 @@
                             <div class="markdown">
 
                                 <p style="margin-top: 10px">下载安装</p>
-                                <pre lang="bash"><code>https://github.com/1920853199/go-blog.git</code></pre>
+                                <pre style="margin-top: 10px" lang="bash"><code>https://github.com/1920853199/go-blog.git</code></pre>
                                 <p style="margin-top: 10px">创建数据库，导入数据库文件</p>
-                                <p style="margin-top: 10px">修改配置</p>
-                                <pre lang="go">
-                                    <code>
-#conf/app.conf
+                                <p style="margin-top: 10px">修改配置 conf/app.conf</p>
+                                <pre style="margin-top: 10px" lang="go">
+                                    <code>#conf/app.conf
 appname = go-blog
 httpport = 8088
 runmode = dev
@@ -51,26 +50,23 @@ dbUser = root
 dbPass = root
 dbHost = 127.0.0.1
 dbPort = 3306
-dbName = blog
-
-[redis]
-rHost = 127.0.0.1
-rPort = 6379
-
-[wechat]
-AppID = xxxxxxx
-AppSecret = xxxxxxx
-Token = xxxxxxx
-EncodingAESKey = xxxxxxx
-                                    </code>
+dbName = blog</code>
                                 </pre>
-
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="markdown">
+                                <p>
+                                    <code>[redis]
+                                        rHost = 127.0.0.1
+                                        rPort = 6379
 
-                                <p>编译运行</p>
+                                        [wechat]
+                                        AppID = xxxxxxx
+                                        AppSecret = xxxxxxx
+                                        Token = xxxxxxx
+                                        EncodingAESKey = xxxxxxx</code>
+                                </p>
                                 <pre lang="bash"><code>go build -o hello hello.go<br>./hello</code></pre>
                                 <p>浏览效果</p>
                                 <p>打开浏览器并访问 <code>http://localhost:8080</code></p>
