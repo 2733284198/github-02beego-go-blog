@@ -83,14 +83,12 @@ EncodingAESKey = xxxxxxx</code>
                         <h2>延伸阅读</h2>
                         <div class="well markdown">
                             <ul class="list-unstyled">
-
-                                <li><i class="icon-angle-right"></i> <a
-                                        href="/docs/mvc/controller/router.md">控制器路由设置</a></li>
-                                <li><i class="icon-angle-right"></i> <a href="/docs/mvc/model/overview.md">ORM 入门</a>
+                                {{range $key ,$vlaue := $.Recommend}}
+                                <li>
+                                    <i class="icon-angle-right"></i>
+                                    <a href="/detail/{{$vlaue.Id}}.html" title="{{$vlaue.Title}}">{{$vlaue.Title}}</a>
                                 </li>
-                                <li><i class="icon-angle-right"></i> <a href="/docs/mvc/view/view.md">模板处理</a></li>
-                                <li><i class="icon-angle-right"></i> <a href="/docs/examples/">官方开发示例</a></li>
-                                <li><i class="icon-angle-right"></i> <a href="/docs/module/">可选高级模块</a></li>
+                                {{end}}
 
                             </ul>
                         </div>
