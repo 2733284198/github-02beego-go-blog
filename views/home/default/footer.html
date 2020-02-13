@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="/static/lib/layui/css/layui.css" />
 <footer id="footer">
     <div class="container">
         <div class="row footer-wrap">
@@ -8,21 +9,21 @@
                                     class="icon-github-sign"></i> Github</strong></a>
                 </p>
                 <p>
-                    <div style="margin-top: 10px">
+                    <span>此站首页使用了<a href="https://beego.me" target="_blank"> Beego 官网 </a>网站首页模板</span>
+                </p>
+                <p>
+                <div style="margin-top: 10px">
                         <span class="site-uv">
                             <i class="layui-icon">&#xe66f;</i> 本站访客数
                             <span class="busuanzi-value" id="busuanzi_value_site_uv">{{$.UV}}</span>人次
                         </span>
-                        |
-                        <span class="site-pv">
+                    |
+                    <span class="site-pv">
                             <i class="layui-icon">&#xe62c;</i> 本站总访问量
                             <span class="busuanzi-value" id="busuanzi_value_site_pv">{{$.PV}}</span>
                           次
                         </span>
-                    </div>
-                </p>
-                <p>
-                    <span>此站首页使用了<a href="https://beego.me" target="_blank"> Beego 官网 </a>网站首页模板</span>
+                </div>
                 </p>
             </div>
         </div>
