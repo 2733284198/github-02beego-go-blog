@@ -32,7 +32,7 @@
                                 <p style="margin-top: 10px">创建数据库，导入数据库文件</p>
                                 <p style="margin-top: 10px">修改配置 conf/app.conf</p>
                                 <pre style="margin-top: 10px" lang="go">
-                                    <code>#conf/app.conf
+<code>#conf/app.conf
 appname = go-blog
 httpport = 8088
 runmode = dev
@@ -50,22 +50,23 @@ dbUser = root
 dbPass = root
 dbHost = 127.0.0.1
 dbPort = 3306
-dbName = blog</code>
-                                </pre>
+dbName = blog</code></pre>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="markdown">
                                 <p>
-                                    <code>[redis]
-                                        rHost = 127.0.0.1
-                                        rPort = 6379
+                                    <pre style="margin-top: 10px" lang="go">
+<code>[redis]
+rHost = 127.0.0.1
+rPort = 6379
 
-                                        [wechat]
-                                        AppID = xxxxxxx
-                                        AppSecret = xxxxxxx
-                                        Token = xxxxxxx
-                                        EncodingAESKey = xxxxxxx</code>
+[wechat]
+AppID = xxxxxxx
+AppSecret = xxxxxxx
+Token = xxxxxxx
+EncodingAESKey = xxxxxxx</code>
+                                    </pre>
                                 </p>
                                 <pre lang="bash"><code>go build -o hello hello.go<br>./hello</code></pre>
                                 <p>浏览效果</p>
