@@ -138,6 +138,7 @@ func (c *ArticleController) List() {
 func (c *ArticleController) Detail() {
 
 	id := c.Ctx.Input.Param(":id")
+	viewType := c.GetString("type")
 	// 基础数据
 	o := orm.NewOrm()
 	article := new(admin.Article)
