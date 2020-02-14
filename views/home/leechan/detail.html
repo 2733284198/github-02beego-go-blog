@@ -4,10 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="referrer" content="never" />
-    <meta property="og:description" content="{{$.Data.Remark}}" />
     <meta http-equiv="Cache-Control" content="no-transform" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <title>{{$.Data.Title}} - {{config "String" "title" "LeeChan'Blog"}}</title>
+    <title>{{$.Data.Title}} - {{$.title}}</title>
+    <meta name="description" content="{{$.Data.Remark}}"/>
+    <meta name="keywords" content="{{$.Data.Tag}}">
     <link rel="stylesheet" href="/static/css/blog-common.min.css" />
     <link id="MainCss" rel="stylesheet" href="/static/css/bundle-codinglife.min.css" />
     <link rel="stylesheet" href="/static/md/css/editormd.preview.css" />

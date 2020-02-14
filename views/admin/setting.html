@@ -26,7 +26,6 @@
         <div class="layui-fluid">
             <div class="layui-row">
                 <form class="layui-form" id="form">
-
                     <div class="layui-form-item">
                         <label for="username" class="layui-form-label" style="font-size: 12px;">
                             <span class="x-red">*</span>站点名称</label>
@@ -50,6 +49,22 @@
                             <span class="x-red">*</span>个人简介</label>
                         <div class="layui-input-block">
                             <textarea style="width: 60%" required lay-verify="required" id="remark" name="remark" autocomplete="off" class="layui-textarea">{{$.remark}}</textarea>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label for="username" class="layui-form-label" style="font-size: 12px;">
+                            <span class="x-red">*</span>Keyword</label>
+                        <div class="layui-input-block">
+                            <textarea style="width: 60%" required lay-verify="required" id="keyword" name="keyword" autocomplete="off" class="layui-textarea">{{$.keyword}}</textarea>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label for="username" class="layui-form-label" style="font-size: 12px;">
+                            <span class="x-red">*</span>Description</label>
+                        <div class="layui-input-block">
+                            <textarea style="width: 60%" required lay-verify="required" id="description" name="description" autocomplete="off" class="layui-textarea">{{$.description}}</textarea>
                         </div>
                     </div>
 

@@ -4,11 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="referrer" content="never" />
-    <meta property="og:description" content="留言列表{{config "String" "title" "LeeChan'Blog"}}" />
     <meta http-equiv="Cache-Control" content="no-transform" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <title>留言 - {{config "String" "title" "LeeChan'Blog"}}</title>
-
+    <title>{{$.index}} - {{$.title}}</title>
+    <meta name="description" content="{{$.keyword}}"/>
+    <meta name="keywords" content="{{$.description}}">
     <link rel="stylesheet" href="/static/css/blog-common.min.css" />
     <link id="MainCss" rel="stylesheet" href="/static/css/bundle-codinglife.min.css" />
     <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/static/css/bundle-codinglife-mobile.min.css" />

@@ -131,6 +131,8 @@ func (c *ArticleController) List() {
 
 	// Menu
 	c.Log("article")
+	c.Data["index"] = "博客列表"
+
 	c.TplName = "home/" + beego.AppConfig.String("view") + "/list.html"
 }
 

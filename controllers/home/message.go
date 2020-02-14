@@ -49,6 +49,7 @@ func (c *MessageController) Get() {
 
 
 	c.Log("message")
+	c.Data["index"] = "留言"
 	c.TplName = "home/" + beego.AppConfig.String("view") + "/message.html"
 }
 

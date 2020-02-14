@@ -27,6 +27,8 @@ func (c *SettingController) Save() {
 	response := make(map[string]interface{})
 
 	title := c.GetString("title")
+	keyword := c.GetString("keyword")
+	description := c.GetString("description")
 	name := c.GetString("name")
 	tag := c.GetString("tag")
 	remark := c.GetString("remark")
@@ -42,6 +44,8 @@ func (c *SettingController) Save() {
 	_,err = o.Delete(&admin.Setting{Name: "tag"})
 	_,err = o.Delete(&admin.Setting{Name: "remark"})
 	_,err = o.Delete(&admin.Setting{Name: "image"})
+	_,err = o.Delete(&admin.Setting{Name: "keyword"})
+	_,err = o.Delete(&admin.Setting{Name: "description"})
 
 	settings := []admin.Setting{
 		{Name: "title", Value: title},
@@ -49,9 +53,11 @@ func (c *SettingController) Save() {
 		{Name: "tag",Value:tag},
 		{Name: "remark",Value:remark},
 		{Name: "image",Value:image},
+		{Name: "keyword",Value:keyword},
+		{Name: "description",Value:description},
 	}
 
-	num, err := o.InsertMulti(5, settings)
+	num, err := o.InsertMulti(7, settings)
 
 	if err != nil {
 		err = o.Rollback()
