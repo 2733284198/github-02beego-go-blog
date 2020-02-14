@@ -144,7 +144,7 @@ func (c *ArticleController) Detail() {
 	// 基础数据
 	o := orm.NewOrm()
 	article := new(admin.Article)
-	var articles *admin.Article
+	var articles []*admin.Article
 	qs := o.QueryTable(article)
 	err := qs.Filter("id", id).RelatedSel().One(&articles)
 	if err != nil {
@@ -155,7 +155,7 @@ func (c *ArticleController) Detail() {
 	c.ServeJSON()
 	c.StopRun()*/
 
-	c.Data["Data"] = &articles
+	c.Data["Data"] = &articles[0]
 
 
 	if  beego.AppConfig.String("view") == "default" {
@@ -176,7 +176,7 @@ func (c *ArticleController) Detail() {
 	}
 
 	c.Log("detail")
-	c.Data["index"] = &articles.Title
+	c.Data["index"] = &articles[0].Title
 
 	if viewType == "single"{
 		c.TplName = "home/" + beego.AppConfig.String("view") + "/doc.html"
