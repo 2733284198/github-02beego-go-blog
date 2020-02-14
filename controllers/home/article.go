@@ -176,7 +176,7 @@ func (c *ArticleController) Detail() {
 	}
 
 	c.Log("detail")
-	c.Data["index"] = articles.Title
+	c.Data["index"] = &articles.Title
 
 	if viewType == "single"{
 		c.TplName = "home/" + beego.AppConfig.String("view") + "/doc.html"
