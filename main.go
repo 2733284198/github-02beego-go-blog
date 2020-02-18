@@ -5,6 +5,7 @@ import (
 	"github.com/astaxie/beego/config"
 	"github.com/astaxie/beego/orm"
 	_ "github.com/go-sql-driver/mysql"
+	_ "github.com/lib/pq"
 	"github.com/sirupsen/logrus"
 	_ "go-blog/routers"
 	"go-blog/utils"
@@ -22,10 +23,11 @@ func init() {
 	dbHost := conf.String("db::dbHost")
 	dbPort := conf.String("db::dbPort")
 	dbName := conf.String("db::dbName")
-	dbStr := dbUser + ":" + dbPass + "@tcp(" + dbHost + ":" + dbPort + ")/" + dbName+ "?charset=utf8&loc=Asia%2FShanghai"
-	orm.RegisterDriver("mysql", orm.DRMySQL)
+//	dbStr := dbUser + ":" + dbPass + "@tcp(" + dbHost + ":" + dbPort + ")/" + dbName+ "?charset=utf8&loc=Asia%2FShanghai"
+  dbStr := "user="+dbUser+" host="+dbHost+" port="+dbPort+" password="+dbPass+" dbname="+dbName+" sslmode=disable"
+	orm.RegisterDriver("postgres", orm.DRPostgres)
 
-	orm.RegisterDataBase("default", "mysql", dbStr)
+	orm.RegisterDataBase("default", "postgres", dbStr)
 
 	beego.AddFuncMap("IndexForOne", utils.IndexForOne)
 	beego.AddFuncMap("IndexAddOne",utils.IndexAddOne)
