@@ -20,9 +20,7 @@ func init() {
 	}
 
 	database,_ := db.NewDataBase(conf.String("db::dbType"))
-
 	orm.RegisterDriver(database.GetDriverName(), database.GetDriver())
-
 	orm.RegisterDataBase(database.GetAliasName(), database.GetDriverName(), database.GetStr())
 
 	beego.AddFuncMap("IndexForOne", utils.IndexForOne)
