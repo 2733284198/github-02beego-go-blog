@@ -23,6 +23,9 @@ github.com/gopherjs/gopherjs/js
 github.com/jtolds/gls
 # github.com/konsorten/go-windows-terminal-sequences v1.0.1
 github.com/konsorten/go-windows-terminal-sequences
+# github.com/lib/pq v1.0.0
+github.com/lib/pq
+github.com/lib/pq/oid
 # github.com/shiena/ansicolor v0.0.0-20151119151921-a422bbe96644
 github.com/shiena/ansicolor
 # github.com/silenceper/wechat v2.0.1+incompatible

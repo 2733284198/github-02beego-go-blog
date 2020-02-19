@@ -53,6 +53,7 @@ title = Go Blog
 autograph = 如今的我，谈不上幸福，也谈不上不幸。
 
 [db]
+dbType = mysql
 dbUser = root
 dbPass = root
 dbHost = 127.0.0.1

@@ -8,6 +8,7 @@ import (
 	_ "github.com/lib/pq"
 	"github.com/sirupsen/logrus"
 	_ "go-blog/routers"
+	"go-blog/service/databsae"
 	"go-blog/utils"
 )
 
@@ -18,22 +19,16 @@ func init() {
 		logrus.Fatalf(err.Error())
 	}
 
-	dbUser := conf.String("db::dbUser")
-	dbPass := conf.String("db::dbPass")
-	dbHost := conf.String("db::dbHost")
-	dbPort := conf.String("db::dbPort")
-	dbName := conf.String("db::dbName")
-//	dbStr := dbUser + ":" + dbPass + "@tcp(" + dbHost + ":" + dbPort + ")/" + dbName+ "?charset=utf8&loc=Asia%2FShanghai"
-  dbStr := "user="+dbUser+" host="+dbHost+" port="+dbPort+" password="+dbPass+" dbname="+dbName+" sslmode=disable"
-	orm.RegisterDriver("postgres", orm.DRPostgres)
-
-	orm.RegisterDataBase("default", "postgres", dbStr)
+	database,_ := db.NewDataBase(conf.String("db::dbType"))
+	orm.RegisterDriver(database.GetDriverName(), database.GetDriver())
+	orm.RegisterDataBase(database.GetAliasName(), database.GetDriverName(), database.GetStr())
 
 	beego.AddFuncMap("IndexForOne", utils.IndexForOne)
 	beego.AddFuncMap("IndexAddOne",utils.IndexAddOne)
 	beego.AddFuncMap("IndexDecrOne",utils.IndexDecrOne)
 	beego.AddFuncMap("StringReplace",utils.StringReplace)
 	beego.AddFuncMap("TimeStampToTime",utils.TimeStampToTime)
+
 }
 
 func main() {
