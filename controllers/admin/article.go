@@ -28,13 +28,6 @@ func (c *ArticleController) List() {
 	c.Data["End"] = end
 	c.Data["Status"] = status
 	c.Data["Title"] = title
-	/*c.Ctx.WriteString(start)
-	c.Ctx.WriteString(end)
-	c.Ctx.WriteString(title)
-	c.StopRun()*/
-	/*c.Data["json"]= utils.GenPaginator(page,limit,count)
-	c.ServeJSON()
-	c.StopRun()*/
 
 	o := orm.NewOrm()
 	article := new(admin.Article)
@@ -72,21 +65,10 @@ func (c *ArticleController) List() {
 	qs = qs.SetCond(cond1)*/
 
 	// 获取数据
-	_, err := qs.OrderBy("-id","-pv").RelatedSel().Limit(limit).Offset(offset).All(&articles)
-
-	if err != nil {
-		c.Abort("404")
-	}
-
-	/*c.Data["json"]= &articles
-	c.ServeJSON()
-	c.StopRun()*/
+	qs.OrderBy("-id","-pv").RelatedSel().Limit(limit).Offset(offset).All(&articles)
 
 	// 统计
-	count, err := qs.Count()
-	if err != nil {
-		c.Abort("404")
-	}
+	count, _ := qs.Count()
 
 	c.Data["Data"] = &articles
 	c.Data["Paginator"] = utils.GenPaginator(page, limit, count)

@@ -21,7 +21,6 @@ func init() {
 			&admin.LinkController{},
 			),
 
-
 		beego.NSRouter("/user", &admin.UserController{}, "get:List;post:Save"),
 		beego.NSRouter("/user/edit", &admin.UserController{}, "get:Put"),
 		beego.NSRouter("/user/status", &admin.UserController{}, "Post:Delete"),
