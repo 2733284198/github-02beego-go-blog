@@ -10,7 +10,7 @@ type PostgresDataBase struct {
 }
 
 func NewPostgresDataBase() DataBase {
-	database := MysqlDataBase{}
+	database := PostgresDataBase{}
 	return &database
 }
 
