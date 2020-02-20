@@ -20,6 +20,14 @@ func init() {
 			&admin.MenuController{},
 			&admin.LinkController{},
 			),
+
+
+		beego.NSRouter("/user", &admin.UserController{}, "get:List;post:Save"),
+		beego.NSRouter("/user/edit", &admin.UserController{}, "get:Put"),
+		beego.NSRouter("/user/status", &admin.UserController{}, "Post:Delete"),
+		beego.NSRouter("/user/update", &admin.UserController{}, "Post:Update"),
+		beego.NSRouter("/user/add", &admin.UserController{}, "get:Add"),
+
 		// 站点设置
 		beego.NSRouter("/setting", &admin.SettingController{}, "get:Add"),
 		beego.NSRouter("/setting/save", &admin.SettingController{}, "post:Save"),
