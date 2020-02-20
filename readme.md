@@ -1,6 +1,10 @@
 ## Go Blog
 ### 一个快速创建个人博客，cms 的系统
 
+### 包含功能
+
+[查看](http://go-blog.cn "查看")
+
 > Go Blog 官网 http://go-blog.cn
 
 > 演示站点 http://leechan.online
