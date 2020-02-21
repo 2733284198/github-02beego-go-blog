@@ -68,6 +68,9 @@ func (c *BaseController) Menu()  {
 	var limit int64 = 10
 	var offset int64
 
+	sortby = append(sortby,"sort")
+	order = append(order,"asc")
+
 	menu , _  := admin.GetAllMenu(query,fields,sortby,order,offset,limit)
 	data := utils.MenuData(menu,0,0)
 	/*c.Data["json"] = data
