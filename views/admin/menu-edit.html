@@ -55,7 +55,7 @@
                             <span class="x-red">*</span>Target</label>
                         <div class="layui-input-inline" style="font-size: 12px;">
                             <select name="target">
-                                <option {{if eq "none" $.Data.Target}}selected{{end}} value="none">none</option>
+                                <option {{if eq "" $.Data.Target}}selected{{end}} value="">none</option>
                                 <option {{if eq "_blank" $.Data.Target}}selected{{end}} value="_blank">_blank</option>
                                 <option {{if eq "_parent" $.Data.Target}}selected{{end}} value="_parent">_parent</option>
                                 <option {{if eq "_self" $.Data.Target}}selected{{end}} value="_self">_self</option>
