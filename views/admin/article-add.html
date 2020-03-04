@@ -60,6 +60,7 @@
                         <label for="desc" class="layui-form-label"><span class="x-red">*</span>描述</label>
                         <div class="layui-input-block">
                             <input id="desc_content" name="desc_content" value="" type="hidden">
+                            <input id="desc_html" name="desc_html" value="" type="hidden">
                             <div id="desc"></div>
                         </div>
                     </div>
@@ -135,6 +136,7 @@
                         str += '&desc='+desc;*/
 
                         $("#desc_content").val(text);
+                        $("#desc_html").val(desc);
 
 
                         $.ajax({

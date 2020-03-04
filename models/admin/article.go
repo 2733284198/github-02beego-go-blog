@@ -19,6 +19,7 @@ type Article struct {
 	Tag      string
 	Remark   string
 	Desc     string    `orm:"type(text)"`
+	Html     string    `orm:"type(text)"`
 	Created  time.Time `orm:"auto_now_add;type(datetime)"`
 	Updated  time.Time `orm:"auto_now;type(datetime)"`
 	Status   	int       `orm:"default(1)"`

@@ -134,12 +134,14 @@ func (c *ArticleController) Save() {
 	cate, _ := c.GetInt("cate", 0)
 	remark := c.GetString("remark")
 	desc := c.GetString("desc_content")
+	html := c.GetString("desc_html")
 
 	o := orm.NewOrm()
 	article := admin.Article{
 		Title:    title,
 		Tag:      tag,
 		Desc:     desc,
+		Html:	  html,
 		Remark:   remark,
 		Status:   1,
 		User:     &admin.User{1, "", "", "", time.Now(), 0},
@@ -155,6 +157,7 @@ func (c *ArticleController) Save() {
 
 	valid := validation.Validation{}
 	valid.Required(article.Title, "Title")
+	valid.Required(article.Html, "Html")
 	valid.Required(article.Tag, "Tag")
 	valid.Required(article.Desc, "Desc")
 	valid.Required(article.Remark, "Remark")
@@ -198,7 +201,7 @@ func (c *ArticleController) Update() {
 	cate, _ := c.GetInt("cate", 0)
 	remark := c.GetString("remark")
 	desc := c.GetString("desc_content")
-
+	html := c.GetString("desc_html")
 	/*c.Data["json"] = c.Input()
 	c.ServeJSON()
 	c.StopRun()*/
@@ -212,12 +215,14 @@ func (c *ArticleController) Update() {
 		article.Title = title
 		article.Tag = tag
 		article.Desc = desc
+		article.Html = html
 		article.Remark = remark
 
 		valid := validation.Validation{}
 		valid.Required(article.Title, "Title")
 		valid.Required(article.Tag, "Tag")
 		valid.Required(article.Desc, "Desc")
+		valid.Required(article.Html, "Html")
 		valid.Required(article.Remark, "Remark")
 
 		if valid.HasErrors() {

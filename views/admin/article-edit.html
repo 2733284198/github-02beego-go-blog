@@ -60,6 +60,7 @@
                         <label for="desc" class="layui-form-label"><span class="x-red">*</span>描述</label>
                         <div class="layui-input-block">
                             <input id="desc_content" name="desc_content" value="{{.Data.Desc}}" type="hidden">
+                            <input id="desc_html" name="desc_html" value="{{.Data.Html}}" type="hidden">
                             <div id="desc"></div>
                         </div>
                     </div>
@@ -145,6 +146,7 @@
 
 
                         $("#desc_content").val(text);
+                        $("#desc_html").val(desc);
 
                         $.ajax({
                             url:'/admin/article/update',

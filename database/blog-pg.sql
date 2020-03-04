@@ -30,6 +30,8 @@ ALTER TABLE article ADD recommend int NOT NULL DEFAULT '0';
 COMMENT ON COLUMN article.recommend IS '是否顶置，0否；1是，默认否';
 ALTER TABLE article ADD COLUMN "like"  int NOT NULL DEFAULT 0 ;
 COMMENT ON COLUMN article."like" IS '点赞数量';
+ALTER TABLE article ADD COLUMN "html" text NOT NULL;
+COMMENT ON COLUMN article."html" IS 'html内容';
 -- --------------------------------------------------------
 
 --

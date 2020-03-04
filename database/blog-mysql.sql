@@ -15,6 +15,7 @@ CREATE TABLE `article` (
 
 ALTER TABLE `article` ADD `recommend` INT(4) NOT NULL DEFAULT '0' COMMENT '是否顶置，0否；1是，默认否';
 ALTER TABLE `article` ADD COLUMN `like`  int(11) NOT NULL DEFAULT 0 COMMENT '点赞数量' AFTER `recommend`;
+ALTER TABLE `article` ADD COLUMN `html`  longtext CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'html' AFTER `desc`;
 -- --------------------------------------------------------
 
 --
