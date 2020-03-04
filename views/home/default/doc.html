@@ -15,7 +15,6 @@
             <div class="col-md-12">
                 <div class="box">
                     <div id="markdown" class="cell slim page-box" style="padding-top: 20px">
-                        {{str2html $.Data.Html}}
                     </div>
                     {{template "home/default/review.html" .}}
                 </div>
@@ -37,7 +36,7 @@
 
 <script src="/static/md/editormd.js"></script>
 <script type="text/javascript">
-    /*$(function() {
+    $(function() {
         var testEditormdView2;
 
         testEditormdView2 = editormd.markdownToHTML("markdown", {
@@ -49,7 +48,7 @@
             flowChart       : true,  // 默认不解析
             sequenceDiagram : true,  // 默认不解析
         });
-    });*/
+    });
 </script>
 <script src="/static/js/jquery-2.2.0.min.js"></script>
 <script>
