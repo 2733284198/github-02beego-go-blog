@@ -131,7 +131,18 @@ func (c *ArticleController) List() {
 
 	// Menu
 	c.Log("article")
-	c.Data["index"] = "博客列表"
+
+	if categoryId == 0 {
+		c.Data["index"] = "博客列表"
+	}else{
+		categoryKey := admin.Category{Id:categoryId}
+		err = o.Read(&categoryKey)
+		if err == nil {
+			c.Data["index"] = categoryKey.Name
+		}else{
+			c.Data["index"] = "博客列表"
+		}
+	}
 
 	c.TplName = "home/" + beego.AppConfig.String("view") + "/list.html"
 }
