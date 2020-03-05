@@ -72,21 +72,6 @@
             </div>
         </div>
         <script type="text/javascript" src="/static/js/jquery.min.js"></script>
-        {{/*<script type="text/javascript" src="/static/js/wangEditor.min.js"></script>
-        <script type="text/javascript">
-            var E = window.wangEditor;
-            var editor = new E('#desc');
-            editor.customConfig.zIndex = 500;
-
-            // editor.customConfig.pasteFilterStyle = false
-            editor.customConfig.pasteTextHandle = function (content) {
-                console.log(content)
-                return content
-            }
-
-            editor.create()
-
-        </script>*/}}
         <link rel="stylesheet" href="/static/md/css/editormd.css" />
         <script src="/static/md/js/editormd.min.js"></script>
         <script type="text/javascript">
@@ -97,7 +82,8 @@
                     width   : "100%",
                     height  : 640,
                     syncScrolling : "single",
-                    saveHTMLToTextarea : true,
+                    saveHTMLToTextarea : false,
+                    watch:true,
                     path    : "/static/md/lib/",
                     imageUpload    : true,
                     imageFormats   : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
@@ -121,19 +107,12 @@
                 form.on('submit(add)',
                     function(data) {
 
-                        var desc = testEditor.getHTML();
+                        var desc = testEditor.getPreviewedHTML();
                         var text = testEditor.getMarkdown()
                         if(text == ''){
                             layer.msg('文章内容不能为空！',{icon: 5});
                             return false;
                         }
-
-
-                       /* var str = 'title='+data.field.title;
-                        str += '&cate='+data.field.cate;
-                        str += '&remark='+data.field.remark;
-                        str += '&tag='+data.field.tag;
-                        str += '&desc='+desc;*/
 
                         $("#desc_content").val(text);
                         $("#desc_html").val(desc);

@@ -84,7 +84,8 @@
                     width   : "100%",
                     height  : 640,
                     syncScrolling : "single",
-                    saveHTMLToTextarea : true,
+                    saveHTMLToTextarea : false,
+                    watch:true,
                     path    : "/static/md/lib/",
                     imageUpload    : true,
                     imageFormats   : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
@@ -96,30 +97,6 @@
             });
 
         </script>
-
-
-
-
-
-
-
-
-        {{/*<script type="text/javascript" src="/static/js/wangEditor.min.js"></script>
-        <script type="text/javascript">
-            var E = window.wangEditor;
-            var editor = new E('#desc');
-            editor.customConfig.zIndex = 500;
-
-            // editor.customConfig.pasteFilterStyle = false
-            editor.customConfig.pasteTextHandle = function (content) {
-                console.log(content)
-                return content
-            }
-
-            editor.create()
-            editor.txt.html('{{.Data.Desc}}')
-
-        </script>*/}}
         <script>
 
             layui.use(['form', 'layer'],
@@ -132,7 +109,7 @@
                 form.on('submit(add)',
                     function(data) {
 
-                        var desc = testEditor.getHTML();
+                        var desc = testEditor.getPreviewedHTML();
                         var text = testEditor.getMarkdown()
                         if(text == ''){
                             layer.msg('文章内容不能为空！',{icon: 5});

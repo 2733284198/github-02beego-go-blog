@@ -35,7 +35,8 @@
             <div class="col-md-9">
 
                 <div class="box">
-                    <div id="markdown" class="cell slim page-box" style="padding-top: 20px">
+                    <div id="markdown" class="cell slim page-box markdown-body editormd-html-preview" style="padding-top: 20px">
+                        {{str2html $.Data.Html}}
                     </div>
                     {{template "home/default/review.html" .}}
                 </div>
@@ -56,7 +57,7 @@
 <script src="/static/md/lib/jquery.flowchart.min.js"></script>
 
 <script src="/static/md/editormd.js"></script>
-<script type="text/javascript">
+{{/*<script type="text/javascript">
     $(function() {
         var testEditormdView2;
 
@@ -70,7 +71,7 @@
             sequenceDiagram : true,  // 默认不解析
         });
     });
-</script>
+</script>*/}}
 <script src="/static/js/jquery-2.2.0.min.js"></script>
 <script>
     $(function () {
