@@ -115,6 +115,9 @@ func (c *BaseController)Keywords()  {
 
 	var tag []*admin.Article
 
+	qs = qs.Filter("status", 1)
+	qs = qs.Filter("User__Name__isnull", false)
+	qs = qs.Filter("Category__Name__isnull", false)
 	qs.All(&tag,"tag")
 
 
