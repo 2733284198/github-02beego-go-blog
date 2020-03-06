@@ -5,6 +5,7 @@ import (
 	"github.com/astaxie/beego/orm"
 	"go-blog/models/admin"
 	"go-blog/utils"
+	"strings"
 	"time"
 )
 
@@ -103,14 +104,47 @@ func (c *BaseController) Prepare(){
 
 	c.Layout()
 	c.Menu()
+	c.Keywords()
 
 }
+
+func (c *BaseController)Keywords()  {
+
+	o := orm.NewOrm()
+	qs := o.QueryTable(new(admin.Article))
+
+	var tag []*admin.Article
+
+	qs.All(&tag,"tag")
+
+
+
+	var tags []string
+	for _,v := range tag{
+		tags = append(tags,strings.Split(strings.Replace(v.Tag, `，`, `,`, -1),`,`)...)
+	}
+
+	var tagsMap = make(map[string]int)
+
+	for _, v:= range tags{
+		tagsMap[v] += 1
+	}
+
+	for k , _:= range tagsMap{
+		tagsMap[k] = tagsMap[k] / 5 + 15
+	}
+
+	c.Data["Tag"] = tagsMap
+
+}
+
+
 
 /*********************** 日志 *********************************/
 
 type LogData struct {
 	Code		int   		`json:"code"`
-	Ip		Ip       	`json:"data"`
+	Ip			Ip       	`json:"data"`
 }
 
 type Ip struct {
@@ -119,26 +153,11 @@ type Ip struct {
 	Region			  string   `json:"region"`
 }
 
+
 func (c *BaseController) Log(page string)  {
 
 	ip := c.Ctx.Input.IP()
-	/*
-	resp, err := http.Get("http://ip.taobao.com/service/getIpInfo.php?ip="+ip)
 
-	var city string
-	if err == nil{
-
-		readAll, err := ioutil.ReadAll(resp.Body)
-		if err == nil{
-			var data LogData
-			json.Unmarshal(readAll, &data)
-			city = data.Ip.City
-		}
-
-	}
-
-	defer resp.Body.Close()
-	*/
 	userAgent := c.Ctx.Input.UserAgent()
 
 	url := c.Ctx.Input.URI()

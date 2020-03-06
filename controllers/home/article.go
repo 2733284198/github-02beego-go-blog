@@ -21,7 +21,6 @@ func (c *ArticleController) List() {
 	page, _ := c.GetInt64("page", 1)           // 页数
 	offset := (page - 1) * limit               // 偏移量
 	categoryId, _ := c.GetInt("c", 0)           // 页数
-
 	o := orm.NewOrm()
 	article := new(admin.Article)
 
@@ -110,14 +109,14 @@ func (c *ArticleController) List() {
 	}
 
 
+	tag := c.GetString("tag")
+	qs = qs.Filter("tag__iexact", "%"+tag+"%")
+
 	// 统计
 	count, err := qs.Count()
 	if err != nil {
 		c.Abort("404")
 	}
-	/*c.Data["json"] = count
-	c.ServeJSON()
-	c.StopRun()*/
 
 
 	// 获取数据

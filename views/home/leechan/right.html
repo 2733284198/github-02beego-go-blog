@@ -41,6 +41,22 @@
     <div id="sidebar_categories">
 
         <div id="sidebar_postarchive" class="catListPostArchive sidebar-block">
+            <h3 class="catListTitle diyBg">标签云</h3>
+            <div style="padding: 15px">
+            {{range $k,$v := $.Tag}}
+                <a style="display: block;float: left;padding: 5px;font-size: {{$v}}px" title="{{$k}}" href="/list.html?tag={{$k}}">
+                    {{$k}}
+                </a>
+            {{end}}
+            <div style="clear: both"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="sidebar_tags">
+
+        <div id="sidebar_tags" class="catListPostArchive sidebar-block">
             <h3 class="catListTitle diyBg">随笔档案({{$.DateCount}})</h3>
             <ul>
                 {{range $k,$v := $.DateTimeKey}}
@@ -56,6 +72,7 @@
         </div>
 
     </div>
+
     <div id="sidebar_topviewedposts" class="sidebar-block">
         <div class="catListView">
             <h3 class="catListTitle diyBg">阅读排行榜</h3>
