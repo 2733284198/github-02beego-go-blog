@@ -110,7 +110,9 @@ func (c *ArticleController) List() {
 
 
 	tag := c.GetString("tag")
-	qs = qs.Filter("tag__iexact", "%"+tag+"%")
+	if tag != "" {
+		qs = qs.Filter("tag__icontains", tag)
+	}
 
 	// 统计
 	count, err := qs.Count()
