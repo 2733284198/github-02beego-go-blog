@@ -6,6 +6,7 @@ import (
 	"github.com/astaxie/beego/validation"
 	"go-blog/models/admin"
 	"go-blog/utils"
+	"html/template"
 	"strconv"
 	"time"
 )
@@ -260,9 +261,9 @@ func (c *ArticleController) Review() {
 
 	o := orm.NewOrm()
 	reviewsMd := admin.Review{
-		Name:    	name,
-		Review:     review,
-		Site:    	site,
+		Name:    	template.HTMLEscapeString(name),
+		Review:     template.HTMLEscapeString(review),
+		Site:    	template.HTMLEscapeString(site),
 		ArticleId:	aid,
 		Status:   	1,
 	}
@@ -328,6 +329,7 @@ func (c *ArticleController) ReviewList()  {
 
 	// 获取数据
 	_, err := qs.OrderBy("-id").Limit(limit).Offset(offset).All(&reviews)
+
 	if err != nil {
 		response["msg"] = "Error."
 		response["code"] = 500

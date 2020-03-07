@@ -6,6 +6,7 @@ import (
 	"github.com/astaxie/beego/validation"
 	"go-blog/models/admin"
 	"go-blog/utils"
+	"html/template"
 )
 
 type MessageController struct {
@@ -62,9 +63,9 @@ func (c *MessageController) Save() {
 
 	o := orm.NewOrm()
 	message := admin.Message{
-		Name:    	name,
-		Review:     review,
-		Site:    	site,
+		Name:    	template.HTMLEscapeString(name),
+		Review:     template.HTMLEscapeString(review),
+		Site:    	template.HTMLEscapeString(site),
 		Status:   	1,
 	}
 
