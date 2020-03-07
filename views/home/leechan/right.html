@@ -95,8 +95,8 @@
                 <ul style="word-break:break-all">
                     {{range $k,$v := $.Review}}
                         <li>
-                            <a title="{{$v.Review}}" href="/detail/{{$v.ArticleId}}.html">
-                                {{$v.Review}}
+                            <a title="{{str2html $v.Review}}" href="/detail/{{$v.ArticleId}}.html">
+                                {{str2html $v.Review}}
                             </a>
                         </li>
                     {{end}}
