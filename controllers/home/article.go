@@ -361,14 +361,37 @@ func (c *ArticleController) ReviewList()  {
 
 func (c *ArticleController) Like()  {
 
-	id,_ := c.GetInt("id")
-	/*c.Data["json"] = c.Input()
-	c.ServeJSON()
-	c.StopRun()*/
-
 	response := make(map[string]interface{})
+	ip := c.Ctx.Input.IP()
+	id,_ := c.GetInt("id")
 
 	o := orm.NewOrm()
+	qs := o.QueryTable(new(admin.Log))
+
+	qs = qs.Filter("ip",ip)
+	qs = qs.Filter("create__gte",beego.Date(time.Now(),"Y-m-d 00:00:00"))
+	qs = qs.Filter("create__lte",beego.Date(time.Now(),"Y-m-d H:i:s"))
+	qs = qs.Filter("page","like" + strconv.Itoa(id))
+
+	count, e := qs.Count()
+	if e != nil {
+		response["msg"] = "Error."
+		response["code"] = 500
+		response["err"] = e.Error()
+		c.Data["json"] = response
+		c.ServeJSON()
+		c.StopRun()
+	}
+	if count >= 1 {
+		response["msg"] = "Error."
+		response["code"] = 500
+		response["err"] = "亲，点赞过了，明天再来哦！"
+		c.Data["json"] = response
+		c.ServeJSON()
+		c.StopRun()
+	}
+
+	c.Log("like" + strconv.Itoa(id))
 
 	article := admin.Article{Id: id}
 	if o.Read(&article) == nil {

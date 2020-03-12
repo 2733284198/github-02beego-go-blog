@@ -141,22 +141,6 @@ func (c *BaseController)Keywords()  {
 
 }
 
-
-
-/*********************** 日志 *********************************/
-
-type LogData struct {
-	Code		int   		`json:"code"`
-	Ip			Ip       	`json:"data"`
-}
-
-type Ip struct {
-	Area              string   `json:"area"`
-	City              string   `json:"city"`
-	Region			  string   `json:"region"`
-}
-
-
 func (c *BaseController) Log(page string)  {
 
 	ip := c.Ctx.Input.IP()
