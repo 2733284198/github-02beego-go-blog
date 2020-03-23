@@ -35,7 +35,7 @@ func Df() (map[string]interface{},error) {
 	}
 	res["allTotal"] = diskTotal / 1024
 	res["allUsed"] = diskUsed / 1024
-	res["ratio"] = diskUsed / diskTotal
+	res["ratio"] = float64(diskUsed) / float64(diskTotal)
 	return res,nil
 
 }
