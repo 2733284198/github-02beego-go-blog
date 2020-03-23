@@ -206,21 +206,12 @@
                     name: '硬盘使用量',
                     type: 'gauge',
                     detail: {formatter:'{value}%'},
-                    data: [{value: 88, name: '已使用'}]
+                    data: [{value: {{index .Df "ratio"}}, name: '已使用'}]
                 }
             ]
         };
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
     </script>
-    <script>
-        var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-          var s = document.getElementsByTagName("script")[0]; 
-          s.parentNode.insertBefore(hm, s);
-        })();
-        </script>
     </body>
 </html>

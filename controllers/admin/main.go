@@ -3,6 +3,7 @@ package admin
 import (
 	"github.com/astaxie/beego/orm"
 	"go-blog/utils"
+	"go-blog/utils/sys"
 	"time"
 )
 
@@ -86,6 +87,9 @@ func (c *MainController) Welcome() {
 	c.Data["Date"] = dateSlice
 	c.Data["Pv"] = pvSlice
 	c.Data["Uv"] = uvSlice
+
+	df,_:= sys.Df()
+	c.Data["Df"] = df
 
 	c.TplName = "admin/welcome.html"
 }
