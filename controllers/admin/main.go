@@ -30,7 +30,7 @@ func (c *MainController) Welcome() {
 	var log []orm.Params
 
 	// time.Now().AddDate(0,0,-7) 七天前
-	o.Raw("SELECT `id`,`ip`,`create` FROM `log` where `create` >= ? ORDER BY `create` ASC",time.Now().AddDate(0,0,-7)).Values(&log)
+	o.Raw("SELECT `id`,`ip`,`create` FROM `log` where `create` >= ? ORDER BY `create` ASC",time.Now().AddDate(0,0,-30)).Values(&log)
 
 	var pv = make(map[string]Log)
 	var uv = make(map[string]Log)
