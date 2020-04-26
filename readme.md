@@ -1,7 +1,7 @@
 ## Go Blog
 [![GitHub stars](https://img.shields.io/github/stars/1920853199/go-blog)](https://github.com/1920853199/go-blog/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/1920853199/go-blog)](https://github.com/1920853199/go-blog/network)
-
+[![GitHub license](https://img.shields.io/github/license/1920853199/go-blog)](https://github.com/1920853199/go-blog/master/LICENSE)
 
 一个快速创建个人博客，cms 的系统
 
