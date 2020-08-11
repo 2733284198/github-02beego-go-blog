@@ -129,6 +129,6 @@ server {
 该项目是利用业余时间进行开发的，开发思路主要是源于自己的项目积累及个人思考，如果您有更好的想法和建议请与我进行沟通，一起探讨，畅聊技术人生，相互学习，一起进步。我非常期待！下面是我的微信二维码（如果此项目对您提供了帮助也可以请作者喝杯咖啡 (*￣︶￣)，聊表心意，一起星巴克「续杯」~嘿嘿 ）：
 
 <div>
-<img src="http://go-blog.cn/static/uploads/20200811122125887.jpeg" width="256"alt="wechat" />
-<img src="http://go-blog.cn/static/uploads/2020081112202781.jpeg" width="256" alt="we-pay" />
+<img style="display: block;float: left;padding-right: 20px;" src="http://go-blog.cn/static/uploads/20200811122125887.jpeg" width="256"alt="wechat" />
+<img style="display: block;float: left;padding-right: 20px;" src="http://go-blog.cn/static/uploads/2020081112202781.jpeg" width="256" alt="we-pay" />
 </div>
