@@ -31,7 +31,9 @@ func (c *SettingController) Save() {
 	description := c.GetString("description")
 	name := c.GetString("name")
 	tag := c.GetString("tag")
-	remark := c.GetString("remark")
+	//remark := c.GetString("remark")
+	remark_markdown_doc := c.GetString("remark-markdown-doc")
+	remark_html_code := c.GetString("remark-markdown-doc")
 	image := c.GetString("image")
 
 
@@ -46,12 +48,15 @@ func (c *SettingController) Save() {
 	_,err = o.Delete(&admin.Setting{Name: "image"})
 	_,err = o.Delete(&admin.Setting{Name: "keyword"})
 	_,err = o.Delete(&admin.Setting{Name: "description"})
+	_,err = o.Delete(&admin.Setting{Name: "remark_markdown_doc"})
+	_,err = o.Delete(&admin.Setting{Name: "remark_html_code"})
 
 	settings := []admin.Setting{
 		{Name: "title", Value: title},
 		{Name: "name", Value: name},
 		{Name: "tag",Value:tag},
-		{Name: "remark",Value:remark},
+		{Name: "remark_markdown_doc",Value:remark_markdown_doc},
+		{Name: "remark_html_code",Value:remark_html_code},
 		{Name: "image",Value:image},
 		{Name: "keyword",Value:keyword},
 		{Name: "description",Value:description},

@@ -13,7 +13,7 @@
 
     </div>
 
-    <div id="sidebar_news" class="newsItem"><!--done-->
+    {{/*<div id="sidebar_news" class="newsItem"><!--done-->
         <h3 class="catListTitle diyBg">关于我</h3>
         <div id="blog-news">
             <div id="profile_block">
@@ -23,8 +23,8 @@
                 </a>
                 <br>
                 简介：
-                <a href="javascript:;" title="{{$.remark}}">
-                    {{$.remark}}
+                <a href="javascript:;" title="{{str2html $.remark_html_code}}" class="editormd-html-preview">
+                    {{str2html $.remark_html_code}}
                 </a>
                 <br>
                 <div style="text-align: center;margin-top: 20px">
@@ -38,6 +38,7 @@
         </div>
 
     </div>
+    */}}
     <div id="sidebar_categories">
 
         <div id="sidebar_postarchive" class="catListPostArchive sidebar-block">

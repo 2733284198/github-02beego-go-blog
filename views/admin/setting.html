@@ -44,14 +44,6 @@
                         <div class="layui-input-block">
                             <input required lay-verify="required" value="{{$.name}}" style="width: 60%;" type="text" id="name" name="name" autocomplete="off" class="layui-input"></div>
                     </div>
-                    <div class="layui-form-item" style="font-size: 12px;">
-                        <label for="phone" class="layui-form-label">
-                            <span class="x-red">*</span>个人简介</label>
-                        <div class="layui-input-block">
-                            <textarea style="width: 60%" required lay-verify="required" id="remark" name="remark" autocomplete="off" class="layui-textarea">{{$.remark}}</textarea>
-                        </div>
-                    </div>
-
                     <div class="layui-form-item">
                         <label for="username" class="layui-form-label" style="font-size: 12px;">
                             <span class="x-red">*</span>Keyword</label>
@@ -68,6 +60,16 @@
                         </div>
                     </div>
 
+                    <div class="layui-form-item" style="font-size: 12px;">
+                        <label for="phone" class="layui-form-label">
+                            <span class="x-red">*</span>个人简介</label>
+                        <div class="layui-input-block">
+                            <div id="remark" style="margin: unset;"></div>
+                           {{/* <input id="remark" name="remark" value="{{$.remark}}" type="hidden">*/}}
+{{/*                            <textarea style="width: 60%" required lay-verify="required" id="remark" name="remark" autocomplete="off" class="layui-textarea">{{$.remark}}</textarea>*/}}
+                        </div>
+                    </div>
+
                     <div class="layui-form-item layui-form-text" style="font-size: 12px;">
                         <label for="phone" class="layui-form-label">
                             <span class="x-red">*</span>图片上传</label>
@@ -81,6 +83,8 @@
                             </div>
                         </div>
                     </div>
+
+
                     <div class="layui-form-item">
                         <input type="hidden" name="image" id="image" value="{{$.image}}">
                         <label for="L_repass" class="layui-form-label"></label>
@@ -111,9 +115,9 @@
             var testEditor;
 
             $(function() {
-                testEditor = editormd("desc", {
-                    width   : "100%",
-                    height  : 640,
+                testEditor = editormd("remark", {
+                    width   : "80%",
+                    height  : 540,
                     syncScrolling : "single",
                     saveHTMLToTextarea : true,
                     path    : "/static/md/lib/",
@@ -121,7 +125,7 @@
                     imageFormats   : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
                     imageUploadURL : "/uploads.html",
                     onload : function() {
-                        this.setMarkdown({{.Data.Desc}});
+                        this.setMarkdown({{$.remark_markdown_doc}});
                     }
                 });
             });
@@ -139,8 +143,7 @@
                 form.on('submit(add)',
                     function(data) {
 
-                        console.log(data.field);
-
+                        //data.field.remark = text
                         $.ajax({
                             url:'/admin/setting/save',
                             type:'post',

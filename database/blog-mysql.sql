@@ -228,7 +228,10 @@ INSERT INTO `article` (`id`, `user_id`, `title`, `category_id`, `tag`, `remark`,
 INSERT INTO `menu` (`id`, `title`, `target`, `url`, `sort`, `pid`) VALUES
 (1, '首页', 'none', '/', 100, 0);
 INSERT INTO `menu` (`id`, `title`, `target`, `url`, `sort`, `pid`) VALUES
-(1, '留言', 'none', '/message.html', 100, 0);
+(2, '留言', 'none', '/message.html', 100, 0);
+INSERT INTO `menu` (`id`, `title`, `target`, `url`, `sort`, `pid`) VALUES
+(3, '关于我', 'none', '/about.html', 100, 0);
+
 
 INSERT INTO `link` (`id`, `title`, `url`, `sort`) VALUES
 (1, 'Go Blog', 'http://go-blog.cn', 100);
