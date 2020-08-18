@@ -1,6 +1,9 @@
 ## Go Blog
+[![GitHub stars](https://img.shields.io/github/stars/1920853199/go-blog)](https://github.com/1920853199/go-blog/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/1920853199/go-blog)](https://github.com/1920853199/go-blog/network)
+[![GitHub license](https://img.shields.io/github/license/1920853199/go-blog)](https://github.com/1920853199/go-blog/master/LICENSE)
 
-一个快速创建个人博客，cms 的系统
+一个基于Beego的，能快速创建个人博客，cms 的系统
 
 ### 包含功能
 
@@ -120,3 +123,15 @@ server {
 }
 
 ```
+
+### 互动交流
+#### 与作者对话
+该项目是利用业余时间进行开发的，开发思路主要是源于自己的项目积累及个人思考，如果您有更好的想法和建议请与我进行沟通，一起探讨，畅聊技术人生，相互学习，一起进步。我非常期待！下面是我的微信二维码（如果此项目对您提供了帮助也可以请作者喝杯咖啡 (*￣︶￣)，聊表心意，一起星巴克「续杯」~嘿嘿 ）：
+
+<div>
+<img style="display: block;float: left;padding-right: 20px;" src="http://go-blog.cn/static/uploads/20200811122125887.jpeg" width="256"alt="wechat" />
+<img style="display: block;float: left;padding-right: 20px;" src="http://go-blog.cn/static/uploads/20200811154212847.jpeg" width="256" alt="we-pay" />
+</div>
+
+## END
+感谢您关注此项目 : )，如果有好的想法欢迎 Issue or PR。
