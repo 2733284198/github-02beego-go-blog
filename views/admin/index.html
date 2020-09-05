@@ -140,8 +140,21 @@
                     </li>
                     <li>
                         <a href="javascript:;">
-                            <i class="iconfont left-nav-li" lay-tips="分类管理">&#xe723;</i>
-                            <cite>分类管理</cite>
+                            <i class="iconfont left-nav-li" lay-tips="文件管理">&#xe723;</i>
+                            <cite>文件管理</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a onclick="xadmin.add_tab('文件列表','{{urlfor "admin.FileController.GetAll"}}')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>文件列表</cite></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="类别管理">&#xe723;</i>
+                            <cite>类别管理</cite>
                             <i class="iconfont nav_right">&#xe697;</i></a>
                         <ul class="sub-menu">
                             <li>

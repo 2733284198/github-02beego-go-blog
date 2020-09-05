@@ -19,6 +19,7 @@ func init() {
 		beego.NSInclude(
 			&admin.MenuController{},
 			&admin.LinkController{},
+			&admin.FileController{},
 			),
 
 		beego.NSRouter("/user", &admin.UserController{}, "get:List;post:Save"),

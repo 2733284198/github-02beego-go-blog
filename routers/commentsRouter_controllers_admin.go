@@ -115,4 +115,58 @@ func init() {
             Filters: nil,
             Params: nil})
 
+    beego.GlobalControllerRouter["go-blog/controllers/admin:FileController"] = append(beego.GlobalControllerRouter["go-blog/controllers/admin:FileController"],
+        beego.ControllerComments{
+            Method: "GetAll",
+            Router: `/files`,
+            AllowHTTPMethods: []string{"get"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["go-blog/controllers/admin:FileController"] = append(beego.GlobalControllerRouter["go-blog/controllers/admin:FileController"],
+        beego.ControllerComments{
+            Method: "GetOne",
+            Router: `/file/:id`,
+            AllowHTTPMethods: []string{"get"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["go-blog/controllers/admin:FileController"] = append(beego.GlobalControllerRouter["go-blog/controllers/admin:FileController"],
+        beego.ControllerComments{
+            Method: "Put",
+            Router: `/file/:id`,
+            AllowHTTPMethods: []string{"put"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["go-blog/controllers/admin:FileController"] = append(beego.GlobalControllerRouter["go-blog/controllers/admin:FileController"],
+        beego.ControllerComments{
+            Method: "Delete",
+            Router: `/file/:id`,
+            AllowHTTPMethods: []string{"delete"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["go-blog/controllers/admin:FileController"] = append(beego.GlobalControllerRouter["go-blog/controllers/admin:FileController"],
+        beego.ControllerComments{
+            Method: "Add",
+            Router: `/file/add`,
+            AllowHTTPMethods: []string{"get"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["go-blog/controllers/admin:FileController"] = append(beego.GlobalControllerRouter["go-blog/controllers/admin:FileController"],
+        beego.ControllerComments{
+            Method: "Post",
+            Router: `/file/save`,
+            AllowHTTPMethods: []string{"post"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
 }
