@@ -1,27 +1,29 @@
 package home
 
 import (
-	"github.com/astaxie/beego"
-	"github.com/astaxie/beego/orm"
-	"github.com/astaxie/beego/validation"
+	"fmt"
 	"go-blog/models/admin"
 	"go-blog/utils"
 	"html/template"
 	"strconv"
 	"time"
+
+	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/orm"
+	"github.com/astaxie/beego/validation"
 )
 
 type ArticleController struct {
 	BaseController
 }
+
 // 类表
 func (c *ArticleController) List() {
-
 
 	limit, _ := beego.AppConfig.Int64("limit") // 一页的数量
 	page, _ := c.GetInt64("page", 1)           // 页数
 	offset := (page - 1) * limit               // 偏移量
-	categoryId, _ := c.GetInt("c", 0)           // 页数
+	categoryId, _ := c.GetInt("c", 0)          // 页数
 	o := orm.NewOrm()
 	article := new(admin.Article)
 
@@ -39,12 +41,12 @@ func (c *ArticleController) List() {
 		cqs = cqs.Filter("status", 1)
 		cqs.OrderBy("-sort").All(&categorys)
 
-		ids := utils.CategoryTreeR(categorys,categoryId,0)
+		ids := utils.CategoryTreeR(categorys, categoryId, 0)
 
 		var cids []int
-		cids = append(cids,categoryId)
-		for _,v := range ids{
-			cids = append(cids,v.Id)
+		cids = append(cids, categoryId)
+		for _, v := range ids {
+			cids = append(cids, v.Id)
 		}
 
 		/*c.Data["json"] = cids
@@ -52,7 +54,6 @@ func (c *ArticleController) List() {
 		c.StopRun()*/
 
 		qs = qs.Filter("Category__ID__in", cids)
-
 
 	}
 	c.Data["CategoryID"] = &categoryId
@@ -63,24 +64,24 @@ func (c *ArticleController) List() {
 		if len(date) == 7 {
 			start := ""
 			end := ""
-			dateNumStr := beego.Substr(date, len("2018-"),2)
-			yearNumStr := beego.Substr(date, len("20"),2)
-			dateNum,_:=strconv.Atoi(dateNumStr)
-			yearNum,_:=strconv.Atoi(yearNumStr)
+			dateNumStr := beego.Substr(date, len("2018-"), 2)
+			yearNumStr := beego.Substr(date, len("20"), 2)
+			dateNum, _ := strconv.Atoi(dateNumStr)
+			yearNum, _ := strconv.Atoi(yearNumStr)
 
-			start = utils.SubString(date, len("2018-01"))+"-01 00:00:00"
+			start = utils.SubString(date, len("2018-01")) + "-01 00:00:00"
 			if dateNum >= 12 {
-				endYearStr := strconv.Itoa(yearNum+1)
-				end = utils.SubString(date, len("20"))+endYearStr+"-01-01 00:00:00"
+				endYearStr := strconv.Itoa(yearNum + 1)
+				end = utils.SubString(date, len("20")) + endYearStr + "-01-01 00:00:00"
 			}
 
 			if dateNum < 9 {
-				endStr := strconv.Itoa(dateNum+1)
-				end = utils.SubString(date, len("2018-0"))+endStr+"-01 00:00:00"
+				endStr := strconv.Itoa(dateNum + 1)
+				end = utils.SubString(date, len("2018-0")) + endStr + "-01 00:00:00"
 			}
 			if dateNum >= 9 && dateNum < 12 {
-				endStr := strconv.Itoa(dateNum+1)
-				end = utils.SubString(date, len("2018-"))+endStr+"-01 00:00:00"
+				endStr := strconv.Itoa(dateNum + 1)
+				end = utils.SubString(date, len("2018-")) + endStr + "-01 00:00:00"
 			}
 
 			/*c.Data["json"] = []string{start,end}
@@ -91,7 +92,7 @@ func (c *ArticleController) List() {
 			qs = qs.Filter("created__lte", end)
 			c.Data["Date"] = utils.SubString(start, len("2018-01"))
 
-		}else {
+		} else {
 			date = utils.SubString(date, len("2018-01-01"))
 			tm, _ := time.Parse("2006-01-02", date)
 			unix := tm.Unix() //1566432000
@@ -109,7 +110,6 @@ func (c *ArticleController) List() {
 		}
 	}
 
-
 	tag := c.GetString("tag")
 	if tag != "" {
 		qs = qs.Filter("tag__icontains", tag)
@@ -121,30 +121,30 @@ func (c *ArticleController) List() {
 		c.Abort("404")
 	}
 
-
 	// 获取数据
-	_, err = qs.OrderBy("-recommend","-id","-pv").RelatedSel().Limit(limit).Offset(offset).All(&articles)
+	_, err = qs.OrderBy("-recommend", "-id", "-pv").RelatedSel().Limit(limit).Offset(offset).All(&articles)
 	if err != nil {
 		panic(err)
 	}
 	c.Data["Data"] = &articles
 	c.Data["Paginator"] = utils.GenPaginator(page, limit, count)
 
-
 	// Menu
 	c.Log("article")
 
 	if categoryId == 0 {
 		c.Data["index"] = "博客列表"
-	}else{
-		categoryKey := admin.Category{Id:categoryId}
+	} else {
+		categoryKey := admin.Category{Id: categoryId}
 		err = o.Read(&categoryKey)
 		if err == nil {
 			c.Data["index"] = categoryKey.Name
-		}else{
+		} else {
 			c.Data["index"] = "博客列表"
 		}
 	}
+
+	fmt.Println(&articles)
 
 	c.TplName = "home/" + beego.AppConfig.String("view") + "/list.html"
 }
@@ -170,14 +170,13 @@ func (c *ArticleController) Detail() {
 
 	c.Data["Data"] = &articles[0]
 
-
-	if  beego.AppConfig.String("view") == "default" {
+	if beego.AppConfig.String("view") == "default" {
 		var listData = make(map[string][]*admin.Article)
 		var list []*admin.Article
 		_, err = o.QueryTable(article).Filter("status", 1).Filter("User__Name__isnull", false).Filter("Category__Name__isnull", false).OrderBy("id").RelatedSel().All(&list, "id", "title")
 
-		for _,v := range list{
-			listData[v.Category.Name] = append(listData[v.Category.Name],v)
+		for _, v := range list {
+			listData[v.Category.Name] = append(listData[v.Category.Name], v)
 		}
 		c.Data["List"] = &listData
 		articleId, _ := strconv.Atoi(id)
@@ -191,18 +190,18 @@ func (c *ArticleController) Detail() {
 	c.Log("detail")
 	c.Data["index"] = &articles[0].Title
 
-	if viewType == "single"{
+	if viewType == "single" {
 		c.TplName = "home/" + beego.AppConfig.String("view") + "/doc.html"
-	}else {
+	} else {
 		c.TplName = "home/" + beego.AppConfig.String("view") + "/detail.html"
 	}
 }
 
 // 统计访问量
-func (c *ArticleController) Pv()  {
+func (c *ArticleController) Pv() {
 
 	ids := c.Ctx.Input.Param(":id")
-	id,_:=strconv.Atoi(ids)
+	id, _ := strconv.Atoi(ids)
 	/*c.Data["json"] = c.Input()
 	c.ServeJSON()
 	c.StopRun()*/
@@ -257,15 +256,15 @@ func (c *ArticleController) Review() {
 	aid, _ := c.GetInt("aid")
 	name := c.GetString("name")
 	review := c.GetString("review")
-	site := c.GetString("site","")
+	site := c.GetString("site", "")
 
 	o := orm.NewOrm()
 	reviewsMd := admin.Review{
-		Name:    	template.HTMLEscapeString(name),
-		Review:     template.HTMLEscapeString(review),
-		Site:    	template.HTMLEscapeString(site),
-		ArticleId:	aid,
-		Status:   	1,
+		Name:      template.HTMLEscapeString(name),
+		Review:    template.HTMLEscapeString(review),
+		Site:      template.HTMLEscapeString(site),
+		ArticleId: aid,
+		Status:    1,
 	}
 
 	response := make(map[string]interface{})
@@ -290,11 +289,10 @@ func (c *ArticleController) Review() {
 	}
 
 	// 更新评论数量
-	article:= admin.Article{Id: aid}
+	article := admin.Article{Id: aid}
 	o.Read(&article)
 	article.Review = article.Review + 1
 	o.Update(&article)
-
 
 	if id, err := o.Insert(&reviewsMd); err == nil {
 		response["msg"] = "新增成功！"
@@ -311,7 +309,7 @@ func (c *ArticleController) Review() {
 	c.StopRun()
 }
 
-func (c *ArticleController) ReviewList()  {
+func (c *ArticleController) ReviewList() {
 
 	id := c.Ctx.Input.Param(":id")
 	limit, _ := beego.AppConfig.Int64("limit") // 一页的数量
@@ -359,19 +357,19 @@ func (c *ArticleController) ReviewList()  {
 
 }
 
-func (c *ArticleController) Like()  {
+func (c *ArticleController) Like() {
 
 	response := make(map[string]interface{})
 	ip := c.Ctx.Input.IP()
-	id,_ := c.GetInt("id")
+	id, _ := c.GetInt("id")
 
 	o := orm.NewOrm()
 	qs := o.QueryTable(new(admin.Log))
 
-	qs = qs.Filter("ip",ip)
-	qs = qs.Filter("create__gte",beego.Date(time.Now(),"Y-m-d 00:00:00"))
-	qs = qs.Filter("create__lte",beego.Date(time.Now(),"Y-m-d H:i:s"))
-	qs = qs.Filter("page","like" + strconv.Itoa(id))
+	qs = qs.Filter("ip", ip)
+	qs = qs.Filter("create__gte", beego.Date(time.Now(), "Y-m-d 00:00:00"))
+	qs = qs.Filter("create__lte", beego.Date(time.Now(), "Y-m-d H:i:s"))
+	qs = qs.Filter("page", "like"+strconv.Itoa(id))
 
 	count, e := qs.Count()
 	if e != nil {
