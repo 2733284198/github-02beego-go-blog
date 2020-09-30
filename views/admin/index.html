@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html class="x-admin-sm">
     <head>
         <meta charset="UTF-8">
@@ -127,17 +127,26 @@
                             <i class="iconfont nav_right">&#xe697;</i></a>
                         <ul class="sub-menu">
                             <li>
+                                <a onclick="xadmin.add_tab('文章抓取','{{urlfor "admin.ArticleResourcesController.GetArticleList"}}')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>文章抓取</cite>
+                                </a>
+                            </li>
+                            <li>
                                 <a onclick="xadmin.add_tab('文章列表','{{urlfor "admin.ArticleController.List"}}')">
                                     <i class="iconfont">&#xe6a7;</i>
-                                    <cite>文章列表</cite></a>
+                                    <cite>文章列表</cite>
+                                </a>
                             </li>
                             <li>
                                 <a onclick="xadmin.add_tab('评论列表','{{urlfor "admin.ReviewController.List"}}')">
                                     <i class="iconfont">&#xe6a7;</i>
-                                    <cite>评论列表</cite></a>
+                                    <cite>评论列表</cite>
+                                </a>
                             </li>
                         </ul>
                     </li>
+
                     <li>
                         <a href="javascript:;">
                             <i class="iconfont left-nav-li" lay-tips="文件管理">&#xe723;</i>

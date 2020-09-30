@@ -43,7 +43,8 @@ func init() {
 		beego.NSRouter("/article/update", &admin.ArticleController{}, "Post:Update"),
 		beego.NSRouter("/article/add", &admin.ArticleController{}, "get:Add"),
 		beego.NSRouter("/article/top", &admin.ArticleController{}, "Post:Top"),
-
+		beego.NSRouter("/article/get-list", &admin.ArticleResourcesController{}, "Get:GetArticleList"),
+		beego.NSRouter("/article/get", &admin.ArticleResourcesController{}, "Post:GetArticle"),
 		// 后台分类模块
 		beego.NSRouter("/cate", &admin.CateController{}, "get:List;post:Save"),
 		beego.NSRouter("/cate/add", &admin.CateController{}, "get:Add"),
