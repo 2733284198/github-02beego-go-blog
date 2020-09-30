@@ -48,12 +48,8 @@
                                     </div>
                                 </form>
                                     <div style="width:100%;padding-top:20px">
-                                        <div class="layui-form-item" style="width: 60%;margin:auto;text-align:center">
-                                            抓取结果：<span style="color:red">
-                                                抓取成功，查看<a href="" target="_blank"> 测试 </a>
-                                                <br />
-                                                抓取失败：Error:0018 Failed to open file on 'C:/Users/GUAPO陈湘/Desktop/go-blog/controllers/admin/base.go': open C:/Users/GUAPO陈湘/Desktop/go-blog/controllers/admin/base.go: The system cannot find the file specified.
-                                            </span>
+                                        <div id="layui-form-item-res" class="layui-form-item" style="width: 60%;margin:auto;text-align:center">
+                                            
                                         </div>
                                     </div>
                             </div>
@@ -77,17 +73,11 @@ layui.use(['form', 'layer'], function() {
         success:function (data) {
             console.log(data);
             if (data.code == 200){
-                layer.alert(data.msg, {
-                    icon: 6
-                },function () {
-                    var index= parent.layer.getFrameIndex(window.name); //获取当前窗口的name
-                    parent.layer.close(index);
-                    parent.location.reload();
-                });
+
+                $("#layui-form-item-res").html('抓取结果：<span style="color:red">抓取成功，用时：' + data.elapsed + '，查看<a style="color: #002af9;" href="/detail/' + data.id + '.html" target="_blank"> ' + data.title + ' </a></span>')
+               
             }else{
-                layer.alert(data.msg, {
-                    icon: 5
-                });
+                $("#layui-form-item-res").html('抓取结果：<span style="color:red">抓取失败，Error：' + data.err + '</span>')
             }
 
         }
