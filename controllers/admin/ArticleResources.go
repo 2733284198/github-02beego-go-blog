@@ -64,7 +64,7 @@ func(c *ArticleResourcesController)GetArticle(){
 		Remark:   "",
 		Status:   1,
 		User:     &admin.User{1, "", "", "", time.Now(), 0},
-		Category: &admin.Category{13, "", 0, 0, 0},
+		Category: &admin.Category{30, "", 0, 0, 0},
 	}
 
 	if id, err := o.Insert(&article); err == nil {
