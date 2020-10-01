@@ -53,7 +53,67 @@
                                         </div>
                                     </div>
                             </div>
-                            <div class="layui-tab-item">内容2</div>
+                            <div class="layui-tab-item">
+                                <div class="layui-fluid">
+                                    <div class="layui-row layui-col-space15">
+                                        <div class="layui-col-md12">
+                                            <div class="layui-card">
+                                                <div class="layui-card-header">
+                                                    <button class="layui-btn" onclick="xadmin.open('添加定时任务','{{urlfor "admin.ArticleResourcesController.GetCron"}}','600','400')">
+                                                        <i class="layui-icon"></i>添加
+                                                    </button>
+
+                                                </div>
+                                                <div class="layui-card-body ">
+                                                    <table class="layui-table layui-form">
+                                                        <thead>
+                                                            <tr>
+                                                                <th width="70">ID</th>
+                                                                <th>标题</th>
+                                                                <th>命令</th>
+                                                                <th>链接</th>
+                                                                <th>创建时间</th>
+                                                                <th>更新时间</th>
+                                                                <th width="250">操作</th>
+</thead>
+                                                        <tbody class="x-cate">
+                                                            {{range $key ,$value := $.Data}}
+                                                            <tr>
+                                                                <td>{{$value.Id}}</td>
+                                                                <td>
+                                                                    {{$value.Title}}
+                                                                </td>
+                                                                <td>{{$value.Cron}}</td>
+                                                                <td>
+                                                                    {{$value.Url}}
+                                                                </td>
+                                                                <td>
+                                                                    {{$value.Created}}
+                                                                </td>
+                                                                <td>
+                                                                    {{$value.Updated}}
+                                                                </td>
+                                                                <td class="td-manage">
+                                                                    <button class="layui-btn layui-btn layui-btn-xs" onclick="member_stop(this,'{{$value.Id}}')">
+                                                                        {{if eq $value.Status 1}}
+                                                                        停止
+                                                                        {{else}}
+                                                                        开始
+                                                                        {{end}}
+                                                                    </button>
+                                                                    <button class="layui-btn-danger layui-btn layui-btn-xs" onclick="member_del(this,'{{$value.Id}}')" href="javascript:;"><i class="layui-icon">&#xe640;</i>删除</button>
+                                                                </td>
+                                                            </tr>
+                                                            {{end}}
+                                                        </tbody>
+                                                    </table>
+                                                </div>                                        
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -65,6 +125,8 @@
 <script>
 layui.use(['form', 'layer'], function() {
     $ = layui.jquery;
+
+
     $("#layui-btn-manual").click(function(){
         $.ajax({
         url:'/admin/article/get',
@@ -84,4 +146,44 @@ layui.use(['form', 'layer'], function() {
     });
     });
  })
+
+        function member_stop(obj, id) {
+              layer.confirm('确认要删除吗(将同步删除下级分类)？',
+                  function(index){
+                      $.ajax({
+                          url:'/admin/cron/'+id,
+                          type:'put',
+                          success:function (data) {
+                              //发异步删除数据
+                              //$(obj).parents("tr").remove();
+                              layer.msg('已删除!', {
+                                  icon: 1,
+                                  time: 1000
+                              });
+                              window.location.reload();
+                    
+                          }
+                      });
+                  });
+          }
+    function member_del(obj, id) {
+              layer.confirm('确认要删除吗(将同步删除下级分类)？',
+                  function(index) {
+                      $.ajax({
+                          url:'/admin/cron/'+id,
+                          type:'delete',
+                          //data:'id='+id,
+                          success:function (data) {
+                              //发异步删除数据
+                              $(obj).parents("tr").remove();
+                              layer.msg('已删除!', {
+                                  icon: 1,
+                                  time: 1000
+                              });
+                              window.location.reload();
+
+                          }
+                      });
+                  });
+          }
 </script>

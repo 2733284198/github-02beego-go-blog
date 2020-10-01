@@ -20,7 +20,9 @@ func init() {
 			&admin.MenuController{},
 			&admin.LinkController{},
 			&admin.FileController{},
+			&admin.CronController{},
 			),
+	
 
 		beego.NSRouter("/user", &admin.UserController{}, "get:List;post:Save"),
 		beego.NSRouter("/user/edit", &admin.UserController{}, "get:Put"),
@@ -43,8 +45,10 @@ func init() {
 		beego.NSRouter("/article/update", &admin.ArticleController{}, "Post:Update"),
 		beego.NSRouter("/article/add", &admin.ArticleController{}, "get:Add"),
 		beego.NSRouter("/article/top", &admin.ArticleController{}, "Post:Top"),
-		beego.NSRouter("/article/get-list", &admin.ArticleResourcesController{}, "Get:GetArticleList"),
 		beego.NSRouter("/article/get", &admin.ArticleResourcesController{}, "Post:GetArticle"),
+
+		beego.NSRouter("/article/cron/get", &admin.ArticleResourcesController{}, "Get:GetCron"),
+	
 		// 后台分类模块
 		beego.NSRouter("/cate", &admin.CateController{}, "get:List;post:Save"),
 		beego.NSRouter("/cate/add", &admin.CateController{}, "get:Add"),

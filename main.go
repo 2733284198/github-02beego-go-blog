@@ -32,5 +32,6 @@ func init() {
 }
 
 func main() {
+	//bee generate appcode -tables="cron" -driver=mysql -conn="root:root@tcp(127.0.0.1:3306)/blog" -level=3
 	beego.Run()
 }
