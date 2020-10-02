@@ -45,7 +45,7 @@
             <h3 class="catListTitle diyBg">标签云</h3>
             <div style="padding: 15px">
             {{range $k,$v := $.Tag}}
-                <a style="display: block;float: left;padding: 5px;font-size: {{$v}}px" title="{{$k}}" href="/list.html?tag={{$k}}">
+                <a style="display: block;float: left;padding: 5px;color:#279d59;margin: 8px 12px 8px 0;background: #f6f6f1;<!--font-size: {{$v}}px-->" title="{{$k}}" href="/list.html?tag={{$k}}">
                     {{$k}}
                 </a>
             {{end}}
