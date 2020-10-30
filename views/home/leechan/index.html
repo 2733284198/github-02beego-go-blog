@@ -12,16 +12,37 @@
     <link rel="stylesheet" type="text/css" href="/static/css/index.css">
 
 </head>
+<style>
+    #ul li{
+        float: left;
+        padding: 20px 10px;
+    }
+    #ul li a{
+        color: #fff;
+    }
+</style>
 <body>
 <!-- 页面主体 -->
 <div  class="slidePage-container"  id="slidePage-container">
 	<div class="item page5 banner banner5">
+        <div style="position: absolute;top: 0px;right: 40px;">
+            <ul id="ul">
+                {{range $k ,$v := $.Menu}}
+                    <li>
+                        <a target="{{$v.Target}}" href="{{$v.Url}}">
+                            {{$v.Title}}
+                        </a>
+                    </li>
+                {{end}}
+                <li><a target="_blank" title="站点地图" href="/sitemap.xml">站点地图</a></li>
+            </ul>
+        </div>
 		<div class="chushu-con step step1 slideDown" data-delay="100">
 			<h1 style="font-size: 42px;text-shadow: 0px 1px 2px #ddd;">Welcome to {{$.title}}</h1>
 			<p style="font-size: 16px;">{{$.tag}}</p>
-			<button><a class="j-create-book" href="/list.html">进入博客</a></button>
-		</div>
-	</div>
+            <button><a class="j-create-book" href="/list.html">进入博客</a></button>
+        </div>
+    </div>
 </div>
 <script src="/static/js/jquery-2.2.0.min.js"></script>
 <script>
