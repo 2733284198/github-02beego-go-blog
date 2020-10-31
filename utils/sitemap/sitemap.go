@@ -51,6 +51,7 @@ func write(url map[string]bool, path string) {
 
 	for k := range url {
 		index := strings.Index(k, "?")
+
 		if index != -1 {
 			k = k[:index]
 		}
@@ -60,6 +61,8 @@ func write(url map[string]bool, path string) {
 		}
 
 	}
+
+	fmt.Println(uniqurl)
 
 	path += "/sitemap.xml"
 
@@ -84,7 +87,7 @@ func write(url map[string]bool, path string) {
 	str += `
 </urlset>
 `
-	outputFile, outputError := os.OpenFile(path, os.O_WRONLY|os.O_CREATE, 0666)
+	outputFile, outputError := os.OpenFile(path, os.O_WRONLY|os.O_TRUNC|os.O_CREATE, 0666)
 	if outputError != nil {
 		fmt.Printf("An error occurred with file opening or creation，%s\n", outputError.Error())
 		return
