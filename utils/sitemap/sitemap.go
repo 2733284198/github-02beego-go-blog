@@ -62,7 +62,7 @@ func write(url map[string]bool, path string) {
 
 	}
 
-	fmt.Println(uniqurl)
+	//fmt.Println(uniqurl)
 
 	path += "/sitemap.xml"
 

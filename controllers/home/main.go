@@ -1,10 +1,11 @@
 package home
 
-
 import (
+	"go-blog/models/admin"
+	"unsafe"
+
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
-	"go-blog/models/admin"
 )
 
 type MainController struct {
@@ -22,7 +23,9 @@ func (c *MainController) Get() {
 
 	c.Data["index"] = "首页"
 
+	if beego.AppConfig.String("view") == "nihongdengxia" {
+		((*ArticleController)(unsafe.Pointer(c))).List()
+	}
+
 	c.TplName = "home/" + beego.AppConfig.String("view") + "/index.html"
 }
-
-

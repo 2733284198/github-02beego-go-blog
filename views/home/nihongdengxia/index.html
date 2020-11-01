@@ -1,3 +1,7 @@
+<title>麦田音乐网-用音乐和文字温暖生活</title>
+<meta name="keywords" content="小众音乐,小清新,民谣,最好听的歌" />
+<meta name="description" content="用音乐和文字温暖生活，微信公众号“麦音乐”。小众音乐、有声电台、独立音乐、民谣、摇滚、爵士、欧美音乐、轻音乐。推荐最好的音乐，不管它是什么类型。" />
+
 {{template "home/nihongdengxia/header.html" .}}
 <div id="wrap" class="container clearfix">
 	
@@ -5,258 +9,111 @@
 		
 				 
 				
-	<article id="post-24106" class="content-excerpt post-24106 post type-post status-publish format-standard sticky hentry category-nomusic tag-t">
+	{{range $key ,$vlaue := $.Data}}
+	<article class="content-excerpt post type-post status-publish format-standard hentry category-feizhuliuyinyue">
 		
-		<h2 class="post-title entry-title"><a href="https://www.mtyyw.com/24106/" rel="bookmark">迟到的2020麦田T恤上新（05-01 更新）</a></h2>
+		<h2 class="post-title entry-title"><a href="/detail/{{$vlaue.Id}}.html" rel="bookmark">{{$vlaue.Title}}</a></h2>
 		
-		<div class="postmeta">2020-5-1</div>
+		<div class="postmeta">{{dateformat $vlaue.Created "2006-01-02 15:04:05"}} </div>
 
 				
 		<div class="entry clearfix">
-			<p><img class="alignnone size-full wp-image-24157" src="static/picture/madisi-music.jpg" width="400" height="394" /></p>
-<p>往年，我们的T恤都是三四月份上新的。<br />
-今年，我自己虽穿上了新款样衣T恤，<br />
-但却还没有上架。<br />
-过几天就要立夏了，很惭愧。<br />
-作为商家，对赚钱这么没动力是不对的。<br />
-趁着五一劳动节狠狠劳动一下，T恤上个新。<br />
-T恤价格依然在 69 元 - 79 元区间。</p>
-			<a href="https://www.mtyyw.com/24106/" class="more-link">查看全部</a>
+		
+			{{$vlaue.Remark}}
+			<!--
+			<blockquote>
+				<p>离开伊斯坦布尔仅仅四年之后，我发现我已渐渐淡忘了留在伊斯坦布尔的小恋人的面容。惊恐中，我努力地试图记起她。但终究发现，无论你多么爱她，人是会渐渐忘却那久未见面的面孔的。——奥尔罕·帕慕克《我的名字叫红》</p>
+			</blockquote>
+			<p>
+				<a href="https://www.mtyyw.com/wp-content/uploads/2020/10/109951163424547835.jpg">
+					<img src="static/picture/109951163424547835.jpg" alt="" width="400" height="400" class="alignnone size-full wp-image-24592" />
+				</a>
+				<br />
+				曲名：Set for Life（此生无憾）<br />
+				歌手：Trent Dabbs<br />
+				所属专辑：Set for Life<br />
+				发行年代：2017
+			</p>
+			-->
+			<br>
+			<a href="/detail/{{$vlaue.Id}}.html" class="more-link">查看全部</a>
 		</div>
 		
 		<div class="postinfo clearfix">
-		<span class="meta-category">
-			<ul class="post-categories">
-	<li><a href="https://www.mtyyw.com/nomusic/" rel="category tag">无关音乐</a></li></ul>		</span>
-
-	</div>
-
-	</article>		
-	<article id="post-24567" class="content-excerpt post-24567 post type-post status-publish format-standard hentry category-feizhuliuyinyue category-qingyinyue tag-alborada-del-inka tag-3152 tag-2574">
-		
-		<h2 class="post-title entry-title"><a href="https://www.mtyyw.com/24567/" rel="bookmark">从我们身上脱落的，都交给秋风吧</a></h2>
-		
-		<div class="postmeta">2020-10-29</div>
-
-				
-		<div class="entry clearfix">
-			<blockquote><p>我不知道是什么引导我，于是往回看， 越过如此的深渊。——安娜·阿赫玛托娃《没有英雄的叙事诗》</p></blockquote>
-<p><img class="alignnone size-full wp-image-24594" src="static/picture/733374255770777.jpg" width="400" height="400" /><br />
-曲名：Flying Condor<br />
-歌手：Alborada Del Inka<br />
-所属专辑：Alborada Del Inka<br />
-发行年代：2006<br />
-风格：印第安音乐，世界音乐<br />
-介绍：Alborada Del Inka，这是一支秘鲁乐队，演奏印第安部落风格的音乐。他们的音乐中充满了纯正的印第安长笛和鼓。“Alborada Del Inka”的中文意思是“印加黎明”。</p>
-			<a href="https://www.mtyyw.com/24567/" class="more-link">查看全部</a>
+			<span class="meta-category">
+				<ul class="post-categories">
+					<li><a href="javascript:;" rel="category tag">{{$vlaue.Tag}}</a></li>
+					<li><a href="javascript:;" rel="category tag">{{$vlaue.Category.Name}}</a>
+					</li>
+				</ul>
+			</span>
 		</div>
-		
-		<div class="postinfo clearfix">
-		<span class="meta-category">
-			<ul class="post-categories">
-	<li><a href="https://www.mtyyw.com/feizhuliuyinyue/" rel="category tag">小众音乐</a></li>
-	<li><a href="https://www.mtyyw.com/qingyinyue/" rel="category tag">轻音乐</a></li></ul>		</span>
 
+	</article>			
+	{{end}}
+
+	<div class="post-pagination clearfix">
+		{{if gt .Paginator.CurrentPage 1}}
+            <a class="current" href="{{urlfor "home.MainController.Get"}}?page={{IndexDecrOne $.Paginator.CurrentPage}}{{if $.Date}}&date={{$.Date}}{{end}}{{if $.CategoryID}}&c={{$.CategoryID}}{{end}}">上一页</a>
+        {{end}}
+        {{if lt .Paginator.CurrentPage .Paginator.TotalPage}}
+            <a class="current" href="{{urlfor "home.MainController.Get"}}?page={{IndexAddOne $.Paginator.CurrentPage}}{{if $.Date}}&date={{$.Date}}{{end}}{{if $.CategoryID}}&c={{$.CategoryID}}{{end}}">下一页</a>
+        {{end}}
+        {{if gt .Paginator.TotalPage 0}}
+            <span>第 {{.Paginator.CurrentPage}} 页 </span>
+            <span>总 {{.Paginator.TotalPage}} 页</span>
+        {{end}}
+		
 	</div>
-
-	</article>		
-	<article id="post-24586" class="content-excerpt post-24586 post type-post status-publish format-standard hentry category-feizhuliuyinyue category-wenzi tag-trent-dabbs tag-3941 tag-2142">
 		
-		<h2 class="post-title entry-title"><a href="https://www.mtyyw.com/24586/" rel="bookmark">无论你多么爱她，人是会渐渐忘却那久未见面的面孔的</a></h2>
+	</section>
 		
-		<div class="postmeta">2020-10-26</div>
-
-				
-		<div class="entry clearfix">
-			<blockquote><p>离开伊斯坦布尔仅仅四年之后，我发现我已渐渐淡忘了留在伊斯坦布尔的小恋人的面容。惊恐中，我努力地试图记起她。但终究发现，无论你多么爱她，人是会渐渐忘却那久未见面的面孔的。——奥尔罕·帕慕克《我的名字叫红》</p></blockquote>
-<p><a href="https://www.mtyyw.com/wp-content/uploads/2020/10/109951163424547835.jpg"><img src="static/picture/109951163424547835.jpg" alt="" width="400" height="400" class="alignnone size-full wp-image-24592" /></a><br />
-曲名：Set for Life（此生无憾）<br />
-歌手：Trent Dabbs<br />
-所属专辑：Set for Life<br />
-发行年代：2017</p>
-			<a href="https://www.mtyyw.com/24586/" class="more-link">查看全部</a>
-		</div>
-		
-		<div class="postinfo clearfix">
-		<span class="meta-category">
-			<ul class="post-categories">
-	<li><a href="https://www.mtyyw.com/feizhuliuyinyue/" rel="category tag">小众音乐</a></li>
-	<li><a href="https://www.mtyyw.com/wenzi/" rel="category tag">文字</a></li></ul>		</span>
-
-	</div>
-
-	</article>		
-	<article id="post-24589" class="content-excerpt post-24589 post type-post status-publish format-standard hentry category-wenzi category-popmusic tag-carla-bruni tag-3083">
-		
-		<h2 class="post-title entry-title"><a href="https://www.mtyyw.com/24589/" rel="bookmark">女士，哭泣在十字路口，你已经尽力了</a></h2>
-		
-		<div class="postmeta">2020-10-24</div>
-
-				
-		<div class="entry clearfix">
-			<blockquote><p>假如我们分手的话，绝不是出于我的意思。要知道，树是不愿离开花的，是花离开树。——亚历山大·仲马《基督山伯爵》</p></blockquote>
-<p><img class="alignnone size-full wp-image-24590" src="static/picture/727876697595816.jpg" width="400" height="400" /><br />
-曲名：Lady Weeping At The Crossroads<br />
-歌手：Carla Bruni<br />
-所属专辑：No Promises<br />
-发行年代：2009<br />
-风格：民谣流行 Folk Pop<br />
-介绍：法国女歌手、超模、前法国夫人 Carla Bruni 吟唱英国诗人奥登的诗作《Lady Weeping At The Crossroads》。这首诗其实是奥登为哥伦比亚广播公司广播剧《黑谷》插曲撰写的歌词。</p>
-			<a href="https://www.mtyyw.com/24589/" class="more-link">查看全部</a>
-		</div>
-		
-		<div class="postinfo clearfix">
-		<span class="meta-category">
-			<ul class="post-categories">
-	<li><a href="https://www.mtyyw.com/wenzi/" rel="category tag">文字</a></li>
-	<li><a href="https://www.mtyyw.com/popmusic/" rel="category tag">流行音乐</a></li></ul>		</span>
-
-	</div>
-
-	</article>		
-	<article id="post-24584" class="content-excerpt post-24584 post type-post status-publish format-standard hentry category-wenzi category-popmusic tag-cliff-richard-the-shadows tag-oumeiliuxing tag-2171">
-		
-		<h2 class="post-title entry-title"><a href="https://www.mtyyw.com/24584/" rel="bookmark">没有人能够拿走任何东西</a></h2>
-		
-		<div class="postmeta">2020-10-20</div>
-
-				
-		<div class="entry clearfix">
-			<blockquote><p>我想，爱情本身无尺度。只有爱，或是不爱。——多甫拉托夫《手提箱》</p></blockquote>
-<p><img class="alignnone size-full wp-image-24585" src="static/picture/2537672837876987.jpg" width="400" height="400" /><br />
-曲名：Theme For A Dream<br />
-歌手：Cliff Richard &amp; the Shadows<br />
-所属专辑：20 Original Greats<br />
-发行年代：2008<br />
-风格：欧美流行</p>
-			<a href="https://www.mtyyw.com/24584/" class="more-link">查看全部</a>
-		</div>
-		
-		<div class="postinfo clearfix">
-		<span class="meta-category">
-			<ul class="post-categories">
-	<li><a href="https://www.mtyyw.com/wenzi/" rel="category tag">文字</a></li>
-	<li><a href="https://www.mtyyw.com/popmusic/" rel="category tag">流行音乐</a></li></ul>		</span>
-
-	</div>
-
-	</article>		
-	<article id="post-24553" class="content-excerpt post-24553 post type-post status-publish format-standard hentry category-wenzi category-qingyinyue tag-dire-straits tag-rock tag-2851 tag-hermann-hesse-poems">
-		
-		<h2 class="post-title entry-title"><a href="https://www.mtyyw.com/24553/" rel="bookmark">深秋独步</a></h2>
-		
-		<div class="postmeta">2020-10-18</div>
-
-				
-		<div class="entry clearfix">
-			<blockquote><p>我们都是寂寞的猎人，无家可归，孤独地放逐在荒野中。时而吹吹口哨，然而也只有风声响应我。正因为如此，我们渴求同类。正因为如此，我们苦苦追求人与人之间的温存。——宫部美雪《寂寞猎人》</p></blockquote>
-<p><a href="https://www.mtyyw.com/wp-content/uploads/2020/10/dire-straits-encores-.jpg"><img src="static/picture/dire-straits-encores--400x400.jpg" alt="" width="400" height="400" class="alignnone size-medium wp-image-24583" /></a><br />
-曲名：Local Hero (Wild Theme)<br />
-歌手：Dire Straits<br />
-所属专辑：Encores<br />
-发行年代：1993<br />
-风格：摇滚<br />
-介绍：昨晚戴着耳机，私人FM传来这首歌，并不知道歌手是谁，好听得让我怔住了，被它带入到了另一个世界。好奇地点开播放器，看歌手是“Dire Straits”，原来是老马的吉他啊，弹得这么好听也不奇怪了。</p>
-			<a href="https://www.mtyyw.com/24553/" class="more-link">查看全部</a>
-		</div>
-		
-		<div class="postinfo clearfix">
-		<span class="meta-category">
-			<ul class="post-categories">
-	<li><a href="https://www.mtyyw.com/wenzi/" rel="category tag">文字</a></li>
-	<li><a href="https://www.mtyyw.com/qingyinyue/" rel="category tag">轻音乐</a></li></ul>		</span>
-
-	</div>
-
-	</article>		
-	<article id="post-24579" class="content-excerpt post-24579 post type-post status-publish format-standard hentry category-feizhuliuyinyue category-wenzi tag-ivan-alysosha tag-2439 tag-3937 tag-1844">
-		
-		<h2 class="post-title entry-title"><a href="https://www.mtyyw.com/24579/" rel="bookmark">要允许痛苦不请自来</a></h2>
-		
-		<div class="postmeta">2020-10-16</div>
-
-				
-		<div class="entry clearfix">
-			<blockquote><p>陌生阻止你认识陌生的事物，熟悉妨碍你理解熟悉的事物。——霍夫曼斯塔尔《风景中的少年 》</p></blockquote>
-<p><img class="alignnone size-full wp-image-24581" src="static/picture/19236419361423641936.jpeg" width="390" height="390" /><br />
-曲名：It's All Just Pretend<br />
-歌手：Ivan &amp; Alyosha<br />
-词曲：Ivan &#038; Alysosha<br />
-所属专辑：It's All Just Pretend (Deluxe Edition)<br />
-发行年代：2015<br />
-风格：独立流行，另类摇滚</p>
-			<a href="https://www.mtyyw.com/24579/" class="more-link">查看全部</a>
-		</div>
-		
-		<div class="postinfo clearfix">
-		<span class="meta-category">
-			<ul class="post-categories">
-	<li><a href="https://www.mtyyw.com/feizhuliuyinyue/" rel="category tag">小众音乐</a></li>
-	<li><a href="https://www.mtyyw.com/wenzi/" rel="category tag">文字</a></li></ul>		</span>
-
-	</div>
-
-	</article>				
-			<div class="post-pagination clearfix">
-				<span aria-current="page" class="page-numbers current">1</span>
-<a class="page-numbers" href="https://www.mtyyw.com/page/2/">2</a>
-<a class="page-numbers" href="https://www.mtyyw.com/page/3/">3</a>
-<span class="page-numbers dots">&hellip;</span>
-<a class="page-numbers" href="https://www.mtyyw.com/page/636/">636</a>
-<a class="next page-numbers" href="https://www.mtyyw.com/page/2/">&raquo;</a>			</div>
-		
-					
-		</section>
-		
-			<section id="sidebar" class="secondary clearfix" role="complementary">
-
-		<aside id="nav_menu-6" class="widget widget_nav_menu clearfix"><h3 class="widgettitle"><span>音乐推荐</span></h3><div class="menu-%e9%9f%b3%e4%b9%90%e6%8e%a8%e8%8d%90-container"><ul id="menu-%e9%9f%b3%e4%b9%90%e6%8e%a8%e8%8d%90" class="menu"><li id="menu-item-20981" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-20981"><a href="https://www.mtyyw.com/9452/">李志所有音乐专辑下载</a></li>
-<li id="menu-item-20982" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-20982"><a href="https://www.mtyyw.com/20082/">可能否 – 木小雅</a></li>
-<li id="menu-item-20983" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-20983"><a href="https://www.mtyyw.com/19445/">往后余生 &#8211; 王贰浪</a></li>
-</ul></div></aside><aside id="search-8" class="widget widget_search clearfix"><h3 class="widgettitle"><span>搜索</span></h3>
-	<form role="search" method="get" class="search-form" action="https://www.mtyyw.com/">
-		<label>
-			<span class="screen-reader-text">Search for:</span>
-			<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s">
-		</label>
-		<button type="submit" class="search-submit">
-			<span class="genericon-search"></span>
-		</button>
-	</form>
-
-</aside><aside id="text-8" class="widget widget_text clearfix"><h3 class="widgettitle"><span>梵高的向日葵T恤</span></h3>			<div class="textwidget"><a href="https://www.mtyyw.com/24106/" rel="nofollow noopener noreferrer" target="_blank"><img src="static/picture/xiangrikui-2020.jpg" alt="梵高的向日葵T恤" width="400" height="400" class="alignnone size-full wp-image-11045" /></a></div>
-		</aside>		<aside id="recent-posts-4" class="widget widget_recent_entries clearfix">		<h3 class="widgettitle"><span>近期文章</span></h3>		<ul>
-											<li>
-					<a href="https://www.mtyyw.com/24567/">从我们身上脱落的，都交给秋风吧</a>
-									</li>
-											<li>
-					<a href="https://www.mtyyw.com/24586/">无论你多么爱她，人是会渐渐忘却那久未见面的面孔的</a>
-									</li>
-											<li>
-					<a href="https://www.mtyyw.com/24589/">女士，哭泣在十字路口，你已经尽力了</a>
-									</li>
-											<li>
-					<a href="https://www.mtyyw.com/24584/">没有人能够拿走任何东西</a>
-									</li>
-											<li>
-					<a href="https://www.mtyyw.com/24553/">深秋独步</a>
-									</li>
-											<li>
-					<a href="https://www.mtyyw.com/24579/">要允许痛苦不请自来</a>
-									</li>
-											<li>
-					<a href="https://www.mtyyw.com/24573/">苍茫时刻</a>
-									</li>
-											<li>
-					<a href="https://www.mtyyw.com/24569/">这温暖的光，都是你给我的啊</a>
-									</li>
-											<li>
-					<a href="https://www.mtyyw.com/24563/">我们听着狂风里的暴雨</a>
-									</li>
-											<li>
-					<a href="https://www.mtyyw.com/24561/">长时间沉默以后讲话了</a>
-									</li>
-					</ul>
+	<section id="sidebar" class="secondary clearfix" role="complementary">
+		{{/*<!--
+		<aside id="nav_menu-6" class="widget widget_nav_menu clearfix">
+			<h3 class="widgettitle"><span>推荐</span></h3>
+			<div class="menu-%e9%9f%b3%e4%b9%90%e6%8e%a8%e8%8d%90-container">
+				<ul id="menu-%e9%9f%b3%e4%b9%90%e6%8e%a8%e8%8d%90" class="menu">
+					{{range $key ,$vlaue := $.Data}}
+						{{if eq $vlaue.Recommend 1}}
+						<li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/detail/{{$vlaue.Id}}.html">{{$vlaue.Title}}</a></li>
+						{{end}}
+					{{end}}
+				</ul>
+			</div>
+		</aside>
+		-->*/}}
+		<aside id="search-8" class="widget widget_search clearfix">
+			<h3 class="widgettitle"><span>搜索</span></h3>
+			<form role="search" method="get" class="search-form" action="/">
+				<label>
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s">
+				</label>
+				<button type="submit" class="search-submit">
+					<span class="genericon-search"></span>
+				</button>
+			</form>
+		</aside>
+		<aside id="text-8" class="widget widget_text clearfix">
+			<h3 class="widgettitle"><span>梵高的向日葵T恤</span></h3>
+			<div class="textwidget">
+				<a href="https://www.mtyyw.com/24106/" rel="nofollow noopener noreferrer" target="_blank">
+					<img src="/static/nihongdengxia/picture/xiangrikui-2020.jpg" alt="广告" width="400" height="400" class="alignnone size-full wp-image-11045" />
+				</a>
+			</div>
+		</aside>
+		<aside id="recent-posts-4" class="widget widget_recent_entries clearfix">
+			<h3 class="widgettitle"><span>热门文章</span></h3>
+			<ul>
+				{{range $k,$v := $.ArticlesReadSort}}
+                     <li>
+                        <a title="{{$v.Title}}" href="/detail/{{$v.Id}}.html">
+                            {{IndexForOne $k 1 1}}. {{$v.Title}}({{$v.Pv}})
+                        </a>
+                    </li>
+                {{end}}	
+			</ul>
 		</aside>
 	</section>
 </div>
