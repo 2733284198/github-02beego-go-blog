@@ -1,9 +1,9 @@
-package common
+package admin
 
 import (
-	":/go-blog/models"
 	"encoding/json"
 	"errors"
+	models "go-blog/models/admin"
 	"strconv"
 	"strings"
 
@@ -30,7 +30,7 @@ func (c *CustomerController) URLMapping() {
 // @Param	body		body 	models.Customer	true		"body for Customer content"
 // @Success 201 {int} models.Customer
 // @Failure 403 body is empty
-// @router / [post]
+// @router /customer [post]
 func (c *CustomerController) Post() {
 	var v models.Customer
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
@@ -52,7 +52,7 @@ func (c *CustomerController) Post() {
 // @Param	id		path 	string	true		"The key for staticblock"
 // @Success 200 {object} models.Customer
 // @Failure 403 :id is empty
-// @router /:id [get]
+// @router /customer/:id [get]
 func (c *CustomerController) GetOne() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
@@ -76,7 +76,7 @@ func (c *CustomerController) GetOne() {
 // @Param	offset	query	string	false	"Start position of result set. Must be an integer"
 // @Success 200 {object} models.Customer
 // @Failure 403
-// @router / [get]
+// @router /customer/ [get]
 func (c *CustomerController) GetAll() {
 	var fields []string
 	var sortby []string
@@ -135,7 +135,7 @@ func (c *CustomerController) GetAll() {
 // @Param	body		body 	models.Customer	true		"body for Customer content"
 // @Success 200 {object} models.Customer
 // @Failure 403 :id is not int
-// @router /:id [put]
+// @router /customer/:id [put]
 func (c *CustomerController) Put() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
@@ -158,7 +158,7 @@ func (c *CustomerController) Put() {
 // @Param	id		path 	string	true		"The id you want to delete"
 // @Success 200 {string} delete success!
 // @Failure 403 id is empty
-// @router /:id [delete]
+// @router /customer/:id [delete]
 func (c *CustomerController) Delete() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)

@@ -10,12 +10,16 @@ CREATE TABLE `article` (
   `created` datetime DEFAULT NULL COMMENT '创建时间',
   `updated` datetime DEFAULT NULL COMMENT '更新时间',
   `status` int(11) DEFAULT '1' COMMENT '1可用，2禁用，3删除',
-  `review` int(11) DEFAULT '0' COMMENT '评论'
+  `review` int(11) DEFAULT '0' COMMENT '评论',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `article` ADD `recommend` INT(4) NOT NULL DEFAULT '0' COMMENT '是否顶置，0否；1是，默认否';
 ALTER TABLE `article` ADD COLUMN `like`  int(11) NOT NULL DEFAULT 0 COMMENT '点赞数量' AFTER `recommend`;
 ALTER TABLE `article` ADD COLUMN `html`  longtext CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'html' AFTER `desc`;
+ALTER TABLE `article` ADD COLUMN `cover` varchar(255) DEFAULT NULL;
+ALTER TABLE `article` ADD COLUMN `url` varchar(255) DEFAULT NULL;
+ALTER TABLE `article` ADD COLUMN `other` longtext DEFAULT NULL;
 -- --------------------------------------------------------
 
 --
@@ -70,7 +74,7 @@ CREATE TABLE `message` (
 --
 
 CREATE TABLE `review` (
-  `id` int(11) NOT NULL COMMENT 'ID',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `name` varchar(255) NOT NULL DEFAULT '' COMMENT '名字',
   `review` varchar(500) NOT NULL DEFAULT '' COMMENT '评论',
   `reply` varchar(500) NOT NULL COMMENT '回复',
@@ -78,7 +82,11 @@ CREATE TABLE `review` (
   `created` datetime DEFAULT NULL COMMENT '创建时间',
   `updated` datetime DEFAULT NULL COMMENT '回复时间',
   `status` int(11) DEFAULT '1' COMMENT '1可用，2禁用',
-  `article_id` int(11) DEFAULT '1' COMMENT '文章ID'
+  `article_id` int(11) DEFAULT '1' COMMENT '文章ID',
+  `customer_id` int(11) DEFAULT '1' COMMENT '用户ID',
+  `like`  int(11) NOT NULL DEFAULT 0 COMMENT '点赞数量',
+  `star` int(11) DEFAULT '0' COMMENT '评分',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -255,3 +263,33 @@ INSERT INTO `setting` (`name`, `value`) VALUES
 ('title', 'Go Blog'),
 ('keyword', 'Go,Go Blog,Go Blog社区,社区,博客系统'),
 ('description', 'Go Blog 一个使用 Beego 开发的博客系统');
+
+
+CREATE TABLE `customer` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `uid` varchar(50) NOT NULL COMMENT '用户ID',
+  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '用户名',
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '密码',
+  `nickname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '昵称',
+  `image` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '头像',
+  `url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '博客地址',
+  `signature` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '个性签名',
+  `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '邮箱',
+  `phone` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '电话',
+  `wishlist` int(11) DEFAULT '0' COMMENT '收藏',
+  `review` int(11) DEFAULT '0' COMMENT '评论',
+  `like` int(11) DEFAULT '0' COMMENT '点赞',
+  `status` int(11) DEFAULT '1' COMMENT '1可用，2禁用，0删除',
+  `created` datetime DEFAULT NULL COMMENT '创建时间',
+  `updated` datetime DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `ad` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '名称',
+  `url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT 'URL',
+  `location` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '位置',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

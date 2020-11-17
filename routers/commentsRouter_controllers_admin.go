@@ -52,6 +52,51 @@ func init() {
             Filters: nil,
             Params: nil})
 
+    beego.GlobalControllerRouter["go-blog/controllers/admin:CustomerController"] = append(beego.GlobalControllerRouter["go-blog/controllers/admin:CustomerController"],
+        beego.ControllerComments{
+            Method: "Post",
+            Router: "/customer",
+            AllowHTTPMethods: []string{"post"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["go-blog/controllers/admin:CustomerController"] = append(beego.GlobalControllerRouter["go-blog/controllers/admin:CustomerController"],
+        beego.ControllerComments{
+            Method: "GetAll",
+            Router: "/customer/",
+            AllowHTTPMethods: []string{"get"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["go-blog/controllers/admin:CustomerController"] = append(beego.GlobalControllerRouter["go-blog/controllers/admin:CustomerController"],
+        beego.ControllerComments{
+            Method: "GetOne",
+            Router: "/customer/:id",
+            AllowHTTPMethods: []string{"get"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["go-blog/controllers/admin:CustomerController"] = append(beego.GlobalControllerRouter["go-blog/controllers/admin:CustomerController"],
+        beego.ControllerComments{
+            Method: "Put",
+            Router: "/customer/:id",
+            AllowHTTPMethods: []string{"put"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["go-blog/controllers/admin:CustomerController"] = append(beego.GlobalControllerRouter["go-blog/controllers/admin:CustomerController"],
+        beego.ControllerComments{
+            Method: "Delete",
+            Router: "/customer/:id",
+            AllowHTTPMethods: []string{"delete"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
     beego.GlobalControllerRouter["go-blog/controllers/admin:FileController"] = append(beego.GlobalControllerRouter["go-blog/controllers/admin:FileController"],
         beego.ControllerComments{
             Method: "GetOne",

@@ -1,4 +1,4 @@
-package models
+package admin
 
 import (
 	"errors"
@@ -164,12 +164,11 @@ func DeleteCustomer(id int) (err error) {
 	return
 }
 
-
-func CustomerLogin(username,password string) (*Customer,bool) {
+func CustomerLogin(username, password string) (*Customer, bool) {
 	o := orm.NewOrm()
 	var (
 		customer Customer
-		err  error
+		err      error
 	)
 	ok := false
 	o.Using("default")
@@ -182,5 +181,5 @@ func CustomerLogin(username,password string) (*Customer,bool) {
 			ok = true
 		}
 	}
-	return &customer,ok
+	return &customer, ok
 }

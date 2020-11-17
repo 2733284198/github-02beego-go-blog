@@ -1,12 +1,13 @@
 package admin
 
 import (
-	"github.com/astaxie/beego"
-	"github.com/astaxie/beego/orm"
-	"github.com/astaxie/beego/validation"
 	"go-blog/models/admin"
 	"go-blog/utils"
 	"time"
+
+	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/orm"
+	"github.com/astaxie/beego/validation"
 )
 
 type ReviewController struct {
@@ -14,16 +15,18 @@ type ReviewController struct {
 }
 
 type Item struct {
-	Id       	int
-	Name    	string
-	Review   	string
-	Reply     	string
-	Site   		string
-	Created  	time.Time
-	Updated  	time.Time
-	Status   	int
-	Title	 	string
-	Aid	 		int
+	Id      int
+	Name    string
+	Review  string
+	Reply   string
+	Site    string
+	Created time.Time
+	Updated time.Time
+	Status  int
+	Title   string
+	Aid     int
+	Star    int
+	Like    int
 }
 
 func (c *ReviewController) List() {
@@ -45,11 +48,11 @@ func (c *ReviewController) List() {
 
 	if status != 0 {
 		qs = qs.Filter("status", status)
-	}else{
+	} else {
 		qs = qs.Filter("status__lt", 3)
 	}
 	// 获取数据
-	_, err := qs.OrderBy("-id").Limit(limit).Offset(offset).All(&reviews)
+	_, err := qs.OrderBy("-id").RelatedSel().Limit(limit).Offset(offset).All(&reviews)
 	if err != nil {
 		response["msg"] = "Error."
 		response["code"] = 500
@@ -58,19 +61,18 @@ func (c *ReviewController) List() {
 		c.StopRun()
 	}
 
-
 	var item []Item
 
-	for  _,v := range reviews{
+	for _, v := range reviews {
 
 		article := new(admin.Article)
 		var articles []*admin.Article
 		qs := o.QueryTable(article)
-		err = qs.Filter("id", v.ArticleId).One(&articles,"Title","Id")
+		err = qs.Filter("id", v.ArticleId).One(&articles, "Title", "Id")
 
-		item = append(item,Item{
+		item = append(item, Item{
 			v.Id,
-			v.Name,
+			v.Customer.Username,
 			v.Review,
 			v.Reply,
 			v.Site,
@@ -79,6 +81,8 @@ func (c *ReviewController) List() {
 			v.Status,
 			articles[0].Title,
 			articles[0].Id,
+			v.Star,
+			v.Like,
 		})
 
 	}
@@ -93,13 +97,11 @@ func (c *ReviewController) List() {
 		c.StopRun()
 	}
 
-
 	c.Data["Data"] = &item
 	c.Data["Paginator"] = utils.GenPaginator(page, limit, count)
 	c.Data["StatusText"] = admin.Status
 	c.TplName = "admin/review-list.html"
 }
-
 
 func (c *ReviewController) Put() {
 	id, err := c.GetInt("id", 0)
@@ -126,7 +128,6 @@ func (c *ReviewController) Update() {
 
 	id, _ := c.GetInt("id", 0)
 	reply := c.GetString("reply")
-
 
 	/*c.Data["json"] = c.Input()
 	c.ServeJSON()

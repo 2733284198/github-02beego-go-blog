@@ -1,12 +1,12 @@
 package admin
 
 import (
-	"github.com/astaxie/beego"
-	"github.com/astaxie/beego/orm"
-	"github.com/astaxie/beego/validation"
 	"go-blog/models/admin"
 	"go-blog/utils"
 	"time"
+
+	"github.com/astaxie/beego/orm"
+	"github.com/astaxie/beego/validation"
 )
 
 type ArticleController struct {
@@ -15,9 +15,12 @@ type ArticleController struct {
 
 func (c *ArticleController) List() {
 
-	limit, _ := beego.AppConfig.Int64("limit") // 一页的数量
-	page, _ := c.GetInt64("page", 1)           // 页数
-	offset := (page - 1) * limit               // 偏移量
+	//limit, _ := beego.AppConfig.Int64("limit") // 一页的数量
+	o := orm.NewOrm()
+
+	limit := int64(15)
+	page, _ := c.GetInt64("page", 1) // 页数
+	offset := (page - 1) * limit     // 偏移量
 
 	start := c.GetString("start")
 	end := c.GetString("end")
@@ -29,7 +32,7 @@ func (c *ArticleController) List() {
 	c.Data["Status"] = status
 	c.Data["Title"] = title
 
-	o := orm.NewOrm()
+	//o := orm.NewOrm()
 	article := new(admin.Article)
 
 	var articles []*admin.Article
@@ -40,7 +43,7 @@ func (c *ArticleController) List() {
 	// 状态
 	if status != 0 {
 		qs = qs.Filter("status", status)
-	}else{
+	} else {
 		qs = qs.Filter("status__lt", 3)
 	}
 
@@ -65,7 +68,7 @@ func (c *ArticleController) List() {
 	qs = qs.SetCond(cond1)*/
 
 	// 获取数据
-	qs.OrderBy("-id","-pv").RelatedSel().Limit(limit).Offset(offset).All(&articles)
+	qs.OrderBy("-id", "-pv").RelatedSel().Limit(limit).Offset(offset).All(&articles)
 
 	// 统计
 	count, _ := qs.Count()
@@ -135,19 +138,22 @@ func (c *ArticleController) Save() {
 	remark := c.GetString("remark")
 	desc := c.GetString("desc_content")
 	html := c.GetString("desc_html")
+	url := c.GetString("url")
+	cover := c.GetString("cover")
 
 	o := orm.NewOrm()
 	article := admin.Article{
 		Title:    title,
 		Tag:      tag,
 		Desc:     desc,
-		Html:	  html,
+		Html:     html,
 		Remark:   remark,
+		Url:      url,
+		Cover:    cover,
 		Status:   1,
 		User:     &admin.User{1, "", "", "", time.Now(), 0},
 		Category: &admin.Category{cate, "", 0, 0, 0},
 	}
-
 
 	/*c.Data["json"] = &article
 	c.ServeJSON()
@@ -160,7 +166,7 @@ func (c *ArticleController) Save() {
 	valid.Required(article.Html, "Html")
 	valid.Required(article.Tag, "Tag")
 	valid.Required(article.Desc, "Desc")
-	valid.Required(article.Remark, "Remark")
+	//valid.Required(article.Remark, "Remark")
 
 	if valid.HasErrors() {
 		// 如果有错误信息，证明验证没通过
@@ -175,8 +181,6 @@ func (c *ArticleController) Save() {
 			c.StopRun()
 		}
 	}
-
-
 
 	if id, err := o.Insert(&article); err == nil {
 		response["msg"] = "新增成功！"
@@ -202,6 +206,8 @@ func (c *ArticleController) Update() {
 	remark := c.GetString("remark")
 	desc := c.GetString("desc_content")
 	html := c.GetString("desc_html")
+	url := c.GetString("url")
+	cover := c.GetString("cover")
 	/*c.Data["json"] = c.Input()
 	c.ServeJSON()
 	c.StopRun()*/
@@ -217,13 +223,14 @@ func (c *ArticleController) Update() {
 		article.Desc = desc
 		article.Html = html
 		article.Remark = remark
-
+		article.Url = url
+		article.Cover = cover
 		valid := validation.Validation{}
 		valid.Required(article.Title, "Title")
 		valid.Required(article.Tag, "Tag")
 		valid.Required(article.Desc, "Desc")
 		valid.Required(article.Html, "Html")
-		valid.Required(article.Remark, "Remark")
+		//valid.Required(article.Remark, "Remark")
 
 		if valid.HasErrors() {
 			// 如果有错误信息，证明验证没通过
@@ -291,12 +298,10 @@ func (c *ArticleController) Delete() {
 	c.StopRun()
 }
 
-
 func (c *ArticleController) Top() {
 	id, _ := c.GetInt("id", 0)
 
 	response := make(map[string]interface{})
-
 
 	o := orm.NewOrm()
 	article := admin.Article{Id: id}
@@ -305,7 +310,7 @@ func (c *ArticleController) Top() {
 		recommend := article.Recommend
 		if recommend == 0 {
 			article.Recommend = 1
-		}else{
+		} else {
 			article.Recommend = 0
 		}
 

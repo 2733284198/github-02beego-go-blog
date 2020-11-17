@@ -1,11 +1,13 @@
 package home
 
 import (
+	"encoding/json"
 	"fmt"
 	"go-blog/models/admin"
 	"go-blog/utils"
 	"html/template"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/astaxie/beego"
@@ -20,11 +22,22 @@ type ArticleController struct {
 // 类表
 func (c *ArticleController) List() {
 
-	limit, _ := beego.AppConfig.Int64("limit") // 一页的数量
-	page, _ := c.GetInt64("page", 1)           // 页数
-	offset := (page - 1) * limit               // 偏移量
-	categoryId, _ := c.GetInt("c", 0)          // 页数
 	o := orm.NewOrm()
+	var setting admin.Setting
+	o.QueryTable(new(admin.Setting)).Filter("name", "limit").One(&setting)
+	l := setting.Value
+	limit, err := strconv.ParseInt(l, 10, 64)
+	fmt.Println(limit)
+	if err != nil || limit == 0 {
+		li, _ := beego.AppConfig.Int64("limit")
+		limit = li
+	}
+
+	//limit, _ := beego.AppConfig.Int64("limit") // 一页的数量
+	page, _ := c.GetInt64("page", 1)  // 页数
+	offset := (page - 1) * limit      // 偏移量
+	categoryId, _ := c.GetInt("c", 0) // 页数
+	//o := orm.NewOrm()
 	article := new(admin.Article)
 
 	var articles []*admin.Article
@@ -187,14 +200,23 @@ func (c *ArticleController) Detail() {
 
 	}
 
+	var other admin.Other
+
+	if &articles[0].Other != nil {
+		json.Unmarshal([]byte(articles[0].Other), &other)
+	}
+
+	other.SubjectInfo = strings.Replace(other.SubjectInfo, "\n", "<br>", -1)
 	c.Log("detail")
 	c.Data["index"] = &articles[0].Title
+	c.Data["Other"] = other
 
 	if viewType == "single" {
 		c.TplName = "home/" + beego.AppConfig.String("view") + "/doc.html"
 	} else {
 		c.TplName = "home/" + beego.AppConfig.String("view") + "/detail.html"
 	}
+	//c.TplName = "home/nihongdengxia/review.html"
 }
 
 // 统计访问量
@@ -312,9 +334,10 @@ func (c *ArticleController) Review() {
 func (c *ArticleController) ReviewList() {
 
 	id := c.Ctx.Input.Param(":id")
-	limit, _ := beego.AppConfig.Int64("limit") // 一页的数量
-	page, _ := c.GetInt64("page", 1)           // 页数
-	offset := (page - 1) * limit               // 偏移量
+	//limit, _ := beego.AppConfig.Int64("limit") // 一页的数量
+	limit := int64(20)
+	page, _ := c.GetInt64("page", 1) // 页数
+	offset := (page - 1) * limit     // 偏移量
 	response := make(map[string]interface{})
 
 	o := orm.NewOrm()
@@ -326,7 +349,7 @@ func (c *ArticleController) ReviewList() {
 	qs = qs.Filter("article_id", id)
 
 	// 获取数据
-	_, err := qs.OrderBy("-id").Limit(limit).Offset(offset).All(&reviews)
+	_, err := qs.OrderBy("-id").RelatedSel().Limit(limit).Offset(offset).All(&reviews)
 
 	if err != nil {
 		response["msg"] = "Error."

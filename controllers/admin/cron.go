@@ -1,7 +1,6 @@
 package admin
 
 import (
-
 	"errors"
 	"go-blog/models/admin"
 	"strconv"
@@ -37,7 +36,7 @@ func (c *CronController) Post() {
 
 	if _, err := admin.AddCron(&admin.Cron{
 		Title:  c.GetString("title"),
-		Cron: c.GetString("cron"),
+		Cron:   c.GetString("cron"),
 		Url:    c.GetString("url"),
 		Status: 1,
 	}); err == nil {
@@ -131,7 +130,7 @@ func (c *CronController) GetAll() {
 	l, _ := admin.GetAllCron(query, fields, sortby, order, offset, limit)
 	c.Data["Data"] = l
 	c.TplName = "admin/article-get.html"
-	
+
 }
 
 // Put ...
@@ -148,19 +147,18 @@ func (c *CronController) Put() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
 	v := admin.Cron{Id: id}
-	
 
 	cron, err := admin.GetCronById(id)
-	if err != nil{
+	if err != nil {
 		response["msg"] = "field"
 		response["code"] = 500
 		response["err"] = err.Error()
 		c.Data["json"] = response
 		c.ServeJSON()
 	}
-	if cron.Status == 1{
+	if cron.Status == 1 {
 		v.Status = 2
-	}else{
+	} else {
 		v.Status = 1
 	}
 
@@ -198,4 +196,8 @@ func (c *CronController) Delete() {
 		c.Data["json"] = err.Error()
 	}
 	c.ServeJSON()
+}
+
+func (c *CronController) GetReview() {
+	c.TplName = "admin/review-get.html"
 }

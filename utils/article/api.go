@@ -1,5 +1,5 @@
 package article
 
 type Article interface {
-	Get(url string) (string,string)
+	Get(url string) map[string]interface{}
 }

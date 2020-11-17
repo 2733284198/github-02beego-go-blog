@@ -1,12 +1,13 @@
 package routers
 
 import (
-	"github.com/astaxie/beego"
 	"go-blog/controllers/admin"
 	"go-blog/controllers/common"
 	"go-blog/controllers/home"
 	"go-blog/controllers/installer"
 	"go-blog/controllers/wechat"
+
+	"github.com/astaxie/beego"
 )
 
 func init() {
@@ -14,15 +15,16 @@ func init() {
 	// 安装功能
 	// beego.InsertFilter("*",beego.BeforeExec,filter.Installer)
 
-
 	adminNs := beego.NewNamespace("/admin",
 		beego.NSInclude(
 			&admin.MenuController{},
 			&admin.LinkController{},
 			&admin.FileController{},
 			&admin.CronController{},
-			),
-	
+			&admin.CustomerController{},
+		),
+
+		beego.NSRouter("/get-review", &admin.CronController{}, "get:GetReview"),
 
 		beego.NSRouter("/user", &admin.UserController{}, "get:List;post:Save"),
 		beego.NSRouter("/user/edit", &admin.UserController{}, "get:Put"),
@@ -35,7 +37,8 @@ func init() {
 		beego.NSRouter("/setting/save", &admin.SettingController{}, "post:Save"),
 		beego.NSRouter("/notice", &admin.SettingController{}, "get:Notice"),
 		beego.NSRouter("/notice/save", &admin.SettingController{}, "post:NoticeSave"),
-
+		beego.NSRouter("/about", &admin.SettingController{}, "get:About"),
+		beego.NSRouter("/about/save", &admin.SettingController{}, "post:AboutSave"),
 
 		// 后台文章模块
 		beego.NSRouter("/welcome", &admin.MainController{}, "get:Welcome"),
@@ -48,7 +51,7 @@ func init() {
 		beego.NSRouter("/article/get", &admin.ArticleResourcesController{}, "Post:GetArticle"),
 
 		beego.NSRouter("/article/cron/get", &admin.ArticleResourcesController{}, "Get:GetCron"),
-	
+
 		// 后台分类模块
 		beego.NSRouter("/cate", &admin.CateController{}, "get:List;post:Save"),
 		beego.NSRouter("/cate/add", &admin.CateController{}, "get:Add"),
@@ -71,16 +74,15 @@ func init() {
 		beego.NSRouter("/message/update", &admin.MessageController{}, "Post:Update"),
 		beego.NSRouter("/message/edit", &admin.MessageController{}, "Get:Put"),
 		beego.NSRouter("/message/delete", &admin.MessageController{}, "Post:Delete"),
-
 	)
 
 	beego.AddNamespace(adminNs)
 	// 公众号
-	beego.Router("/wechat", &wechat.MainController{},"Get:CheckToken;Post:Hello")
-	beego.Router("/wechat/create/menu", &wechat.MenuController{},"Get:CreateMenu;Post:CreateMenu")
-	beego.Router("/wechat/user/get", &wechat.UserController{},"Get:GetUser")
-	beego.Router("/wechat/user/list", &wechat.UserController{},"Get:List")
-	beego.Router("/wechat/addnews", &wechat.MaterialController{},"Get:AddNews")
+	beego.Router("/wechat", &wechat.MainController{}, "Get:CheckToken;Post:Hello")
+	beego.Router("/wechat/create/menu", &wechat.MenuController{}, "Get:CreateMenu;Post:CreateMenu")
+	beego.Router("/wechat/user/get", &wechat.UserController{}, "Get:GetUser")
+	beego.Router("/wechat/user/list", &wechat.UserController{}, "Get:List")
+	beego.Router("/wechat/addnews", &wechat.MaterialController{}, "Get:AddNews")
 
 	beego.Router("/", &home.MainController{})
 	beego.Router("/admin", &admin.MainController{}, "get:Index")
@@ -104,7 +106,7 @@ func init() {
 	beego.Router("/uploads.html", &common.UploadsController{}, "Post:Uploads")
 
 	// 安装
-	beego.Router("/installer", &installer.InstallController{},"Get:CheckEnv")
-	beego.Router("/installer/create", &installer.InstallController{},"Get:Install")
+	beego.Router("/installer", &installer.InstallController{}, "Get:CheckEnv")
+	beego.Router("/installer/create", &installer.InstallController{}, "Get:Install")
 
 }

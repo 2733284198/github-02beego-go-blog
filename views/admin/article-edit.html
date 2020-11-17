@@ -49,11 +49,30 @@
                         <div class="layui-input-block">
                             <input value="{{.Data.Tag}}" type="text" style="width: 60%;" id="tag" name="tag" required lay-verify="required" autocomplete="off" class="layui-input"></div>
                     </div>
+                    <div class="layui-form-item">
+                        <label for="username" class="layui-form-label" style="font-size: 12px;">
+                            <span class="x-red"></span>Url</label>
+                        <div class="layui-input-block">
+                            <input value="{{.Data.Url}}" type="text" style="width: 60%;" id="url" name="url" required lay-verify="required" autocomplete="off" class="layui-input"></div>
+                    </div>
                     <div class="layui-form-item" style="font-size: 12px;">
                         <label for="phone" class="layui-form-label">
-                            <span class="x-red">*</span>摘要</label>
+                            <span class="x-red"></span>摘要</label>
                         <div class="layui-input-block">
                             <textarea  required lay-verify="required" id="remark" name="remark" autocomplete="off" class="layui-textarea">{{.Data.Remark}}</textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text" style="font-size: 12px;">
+                        <label for="phone" class="layui-form-label">
+                            <span class="x-red"></span>图片上传</label>
+                        <div class="layui-input-block">
+                            <div class="layui-upload">
+                                <button type="button" class="layui-btn" id="test1">上传图片</button>
+                                <div class="layui-upload-list">
+                                    <img height="200px" class="layui-upload-img" src="{{.Data.Cover}}" id="demo1">
+                                    <p id="demoText"></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="layui-form-item layui-form-text" style="font-size: 12px;">
@@ -66,6 +85,7 @@
                     </div>
                     <div class="layui-form-item">
                         <label for="L_repass" class="layui-form-label"></label>
+                        <input type="hidden" name="cover" id="image" value="{{.Data.Cover}}">
                         <button class="layui-btn" lay-filter="add" lay-submit="save">增加</button>
                     </div>
                 </form>
@@ -157,7 +177,41 @@
                     }
                 );
 
-            });</script>
+            });
+            layui.use('upload', function(){
+                var $ = layui.jquery
+                    ,upload = layui.upload;
+
+                //普通图片上传
+                var uploadInst = upload.render({
+                    elem: '#test1'
+                    ,url: '/uploads.html' //改成您自己的上传接口
+                    ,field:'editormd-image-file'
+                    ,before: function(obj){
+                        //预读本地文件示例，不支持ie8
+                        obj.preview(function(index, file, result){
+                            $('#demo1').attr('src', result); //图片链接（base64）
+                        });
+                    }
+                    ,done: function(res){
+                        //如果上传失败
+                        if(res.success = 0){
+                            return layer.msg('上传失败');
+                        }
+                        //上传成功
+                        $('#image').val(res.url);
+                    }
+                    ,error: function(){
+                        //演示失败状态，并实现重传
+                        var demoText = $('#demoText');
+                        demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                        demoText.find('.demo-reload').on('click', function(){
+                            uploadInst.upload();
+                        });
+                    }
+                });
+            });
+            </script>
     </body>
 
 </html>
