@@ -5,6 +5,7 @@ import "github.com/toolkits/pkg/nux"
 func Df() (map[string]interface{},error) {
 
 	var res = make(map[string]interface{})
+	return res,nil
 	mountPoints, err := nux.ListMountPoint()
 	if err != nil{
 		return nil,err
