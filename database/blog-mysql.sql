@@ -27,12 +27,12 @@ ALTER TABLE `article` ADD COLUMN `other` longtext DEFAULT NULL;
 --
 
 CREATE TABLE `category` (
-  `id` int(11) NOT NULL  AUTO_INCREMENT COMMENT '主键',
+  `id` int(11) NOT NULL COMMENT '主键',
   `name` varchar(255) DEFAULT NULL,
   `pid` int(11) DEFAULT '0' COMMENT '父ID',
   `sort` int(11) DEFAULT '0' COMMENT '排序',
   `status` int(11) DEFAULT '1' COMMENT '状态1正常，2删除'
-) ENGINE=InnoDB   AUTO_INCREMENT=1  DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -41,7 +41,7 @@ CREATE TABLE `category` (
 --
 
 CREATE TABLE `log` (
-  `id` int(11) NOT NULL  AUTO_INCREMENT COMMENT 'ID',
+  `id` int(11) NOT NULL COMMENT 'ID',
   `ip` varchar(50) NOT NULL,
   `city` varchar(50) NOT NULL,
   `create` datetime NOT NULL,
@@ -57,7 +57,7 @@ CREATE TABLE `log` (
 --
 
 CREATE TABLE `message` (
-  `id` int(11) NOT NULL  AUTO_INCREMENT COMMENT 'ID',
+  `id` int(11) NOT NULL COMMENT 'ID',
   `name` varchar(255) NOT NULL DEFAULT '' COMMENT '名字',
   `review` varchar(500) NOT NULL DEFAULT '' COMMENT '评论',
   `reply` varchar(500) NOT NULL COMMENT '回复',
@@ -175,12 +175,6 @@ ALTER TABLE `message`
   ADD PRIMARY KEY (`id`);
 
 --
--- 表的索引 `review`
---
-ALTER TABLE `review`
-  ADD PRIMARY KEY (`id`);
-
---
 -- 表的索引 `user`
 --
 ALTER TABLE `user`
@@ -232,8 +226,8 @@ INSERT INTO `user` VALUES (1, 'user', '5c0b8081c10ad236fa004adfe685867f', '49112
 INSERT INTO `category` (`id`, `name`, `pid`, `sort`, `status`) VALUES
 (1, '随笔', 0, 100, 1);
 
-INSERT INTO `article` (`id`, `user_id`, `title`, `category_id`, `tag`, `remark`, `desc`, `pv`, `created`, `updated`, `status`, `review`, `recommend`, `like`) VALUES
-(1, 1, '这是我的第一篇博客', 1, '博客，Go Blog', '这是我的第一篇博客', '## 这是我的第一篇博客', 1, '2020-02-12 23:07:52', '2020-02-13 05:03:22', 1, 0, 0, 0);
+INSERT INTO `article` (`id`, `user_id`, `title`, `category_id`, `tag`, `remark`, `desc`, `pv`, `created`, `updated`, `status`, `review`, `recommend`, `like`,`html`) VALUES
+(1, 1, '这是我的第一篇博客', 1, '博客，Go Blog', '这是我的第一篇博客', '## 这是我的第一篇博客', 1, '2020-02-12 23:07:52', '2020-02-13 05:03:22', 1, 0, 0, 0,'<h2>这是我的第一篇博客</h2>');
 
 INSERT INTO `menu` (`id`, `title`, `target`, `url`, `sort`, `pid`) VALUES
 (1, '首页', 'none', '/', 100, 0);
