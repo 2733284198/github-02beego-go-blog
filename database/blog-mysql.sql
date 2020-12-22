@@ -12,7 +12,7 @@ CREATE TABLE `article` (
   `status` int(11) DEFAULT '1' COMMENT '1可用，2禁用，3删除',
   `review` int(11) DEFAULT '0' COMMENT '评论',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  AUTO_INCREMENT=1  DEFAULT CHARSET=utf8;
 
 ALTER TABLE `article` ADD `recommend` INT(4) NOT NULL DEFAULT '0' COMMENT '是否顶置，0否；1是，默认否';
 ALTER TABLE `article` ADD COLUMN `like`  int(11) NOT NULL DEFAULT 0 COMMENT '点赞数量' AFTER `recommend`;
@@ -32,7 +32,7 @@ CREATE TABLE `category` (
   `pid` int(11) DEFAULT '0' COMMENT '父ID',
   `sort` int(11) DEFAULT '0' COMMENT '排序',
   `status` int(11) DEFAULT '1' COMMENT '状态1正常，2删除'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB   AUTO_INCREMENT=1  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -155,12 +155,6 @@ CREATE TABLE `file` (
 --
 -- 转储表的索引
 --
-
---
--- 表的索引 `article`
---
-ALTER TABLE `article`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- 表的索引 `category`
