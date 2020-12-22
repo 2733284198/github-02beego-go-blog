@@ -1,5 +1,5 @@
 CREATE TABLE `article` (
-  `id` int(11) NOT NULL COMMENT 'ID',
+  `id` int(11) NOT NULL  AUTO_INCREMENT COMMENT 'ID',
   `user_id` int(11) DEFAULT '0' COMMENT '用户ID',
   `title` varchar(255) NOT NULL DEFAULT '' COMMENT '标题',
   `category_id` int(11) NOT NULL COMMENT '分类ID',
@@ -27,7 +27,7 @@ ALTER TABLE `article` ADD COLUMN `other` longtext DEFAULT NULL;
 --
 
 CREATE TABLE `category` (
-  `id` int(11) NOT NULL COMMENT '主键',
+  `id` int(11) NOT NULL  AUTO_INCREMENT COMMENT '主键',
   `name` varchar(255) DEFAULT NULL,
   `pid` int(11) DEFAULT '0' COMMENT '父ID',
   `sort` int(11) DEFAULT '0' COMMENT '排序',
@@ -41,7 +41,7 @@ CREATE TABLE `category` (
 --
 
 CREATE TABLE `log` (
-  `id` int(11) NOT NULL COMMENT 'ID',
+  `id` int(11) NOT NULL  AUTO_INCREMENT COMMENT 'ID',
   `ip` varchar(50) NOT NULL,
   `city` varchar(50) NOT NULL,
   `create` datetime NOT NULL,
@@ -57,7 +57,7 @@ CREATE TABLE `log` (
 --
 
 CREATE TABLE `message` (
-  `id` int(11) NOT NULL COMMENT 'ID',
+  `id` int(11) NOT NULL  AUTO_INCREMENT COMMENT 'ID',
   `name` varchar(255) NOT NULL DEFAULT '' COMMENT '名字',
   `review` varchar(500) NOT NULL DEFAULT '' COMMENT '评论',
   `reply` varchar(500) NOT NULL COMMENT '回复',
