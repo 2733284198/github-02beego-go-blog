@@ -1,6 +1,6 @@
 package sys
 
-import "github.com/toolkits/pkg/nux"
+//import "github.com/toolkits/pkg/nux"
 // 磁盘
 func Df() (map[string]interface{},error) {
 
