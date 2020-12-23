@@ -255,25 +255,25 @@ INSERT INTO `setting` VALUES
 ('template','leechen'),
 ('title','Go Blog 一个使用 Beego 开发的博客系统');
 
-Go Blog 一个使用 Beego 开发的博客系统
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+CREATE TABLE `customer` (
+  `id` int NOT NULL AUTO_INCREMENT COMMENT '主键',
   `uid` varchar(50) NOT NULL COMMENT '用户ID',
-  `nickname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '真实姓名',
+  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '用户名',
   `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '密码',
-  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '昵称',
+  `nickname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '昵称',
   `image` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '头像',
   `url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '博客地址',
   `signature` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '个性签名',
   `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '邮箱',
   `phone` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '电话',
-  `wishlist` int(11) DEFAULT '0' COMMENT '收藏',
-  `review` int(11) DEFAULT '0' COMMENT '评论',
-  `like` int(11) DEFAULT '0' COMMENT '点赞',
-  `status` int(11) DEFAULT '1' COMMENT '1可用，2禁用，0删除',
+  `wishlist` int DEFAULT '0' COMMENT '收藏',
+  `review` int DEFAULT '0' COMMENT '评论',
+  `like` int DEFAULT '0' COMMENT '点赞',
+  `status` int DEFAULT '1' COMMENT '1可用，2禁用，0删除',
   `created` datetime DEFAULT NULL COMMENT '创建时间',
   `updated` datetime DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1146 DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE `ad` (
