@@ -242,18 +242,20 @@ INSERT INTO `link` (`id`, `title`, `url`, `sort`) VALUES
 INSERT INTO `link` (`id`, `title`, `url`, `sort`) VALUES
 (2, 'LeeChan\'Blog', 'http://leechan.online', 100);
 
-INSERT INTO `setting` (`name`, `value`) VALUES
-('image', '/static/uploads/2020021121190681.png'),
-('name', 'Go Blog'),
-('notice', '欢迎来到使用 Go Blog 。'),
-('remark', '一个使用 Beego 开发的博客系统'),
-('tag', '一个使用 Beego 开发的博客系统'),
-('title', 'Go Blog'),
-('keyword', 'Go,Go Blog,Go Blog社区,社区,博客系统'),
-('description', 'Go Blog 一个使用 Beego 开发的博客系统');
+INSERT INTO `setting` VALUES 
+('about_html_code','<h2>欢迎来到Go Blog!<h2>'),
+('about_markdown_doc','## 欢迎来到Go Blog!'),
+('description','Go Blog 一个使用 Beego 开发的博客系统'),
+('image','/static/uploads/2020021121190681.png'),('keyword','Go Blog 一个使用 Beego 开发的博客系统'),
+('limit','20'),('name','123'),
+('notice','欢迎来到使用 Go Blog 。'),
+('remark_html_code','欢迎来到使用 Go Blog '),
+('remark_markdown_doc','欢迎来到使用 Go Blog '),
+('tag','欢迎来到使用 Go Blog '),
+('template','leechen'),
+('title','Go Blog 一个使用 Beego 开发的博客系统');
 
-
-CREATE TABLE `customer` (
+Go Blog 一个使用 Beego 开发的博客系统
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `uid` varchar(50) NOT NULL COMMENT '用户ID',
   `nickname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '真实姓名',
