@@ -4,7 +4,7 @@ runmode = dev
 EnableAdmin = true
 sessionon = true
 url = http://127.0.0.1:8088
-view = default
+view = nihongdengxia
 
 limit = 1
 title = Go Blog
@@ -16,7 +16,7 @@ dbUser = root
 dbPass = root
 dbHost = 127.0.0.1
 dbPort = 3306
-dbName = go-blog
+dbName = blog
 
 [redis]
 rHost = 127.0.0.1

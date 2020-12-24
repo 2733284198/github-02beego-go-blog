@@ -2,3 +2,4 @@
 ./installed
 ./conf/app.conf
 ./vendor
+/vendor/

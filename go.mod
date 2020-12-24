@@ -33,7 +33,7 @@ require (
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/spf13/viper v1.7.1 // indirect
 	github.com/temoto/robotstxt v1.1.1 // indirect
-	github.com/toolkits/pkg v1.1.3
+	github.com/toolkits/pkg v1.1.3 // indirect
 	go.starlark.net v0.0.0-20201014215153-dff0ae5b4820 // indirect
 	golang.org/x/arch v0.0.0-20201008161808-52c3e6f60cff // indirect
 	golang.org/x/sys v0.0.0-20201101102859-da207088b7d1 // indirect
